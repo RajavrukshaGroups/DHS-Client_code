@@ -7,6 +7,7 @@ import three from '../Project_Images/four.jpg'
 import four from '../Project_Images/five.jpg';
 import five from '../Project_Images/DSC04739.jpg';
 import six from '../Project_Images/six.jpg';
+// import seven
 
 // import five from '../Project_Images'
 // import six from '../Project_Images'
@@ -42,6 +43,17 @@ function Gallery() {
         </div>
         <div className='img-container'>
           <img src={three} alt="img-three" />
+        </div>
+      </div>
+      <div className='containers'>
+        <div className='img-container'>
+          <img src={six} alt="img-one" />
+        </div>
+        <div className='img-container'>
+          <img src={two} alt="img-two" />
+        </div>
+        <div className='img-container'>
+          <img src={four} alt="img-three" />
         </div>
       </div>
       <div className='containers'>
