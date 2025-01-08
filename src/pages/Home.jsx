@@ -241,7 +241,11 @@ const Home = () => {
                           alt="Defence Habitat Tapasihalli"
                           className="project-image"
                         />
-                        <img src={Tapasihalli_seal} alt="Seal" className="project-seal" />
+                        <img
+                          src={Tapasihalli_seal}
+                          alt="Seal"
+                          className="project-seal"
+                        />
                       </figure>
                       <div className="batch">
                         <i className="icon-11"></i>
@@ -257,7 +261,7 @@ const Home = () => {
                             Defence Habitat Tapasihalli{" "}
                             <span className="squarefit">
                               <span style={{ fontSize: "16px" }}>Rs.</span>
-                              949
+                              1099
                               <span style={{ fontSize: "16px" }}>/-sqft*</span>
                             </span>
                             <p className="booking-text blink">
@@ -298,7 +302,11 @@ const Home = () => {
                           alt="Defence Habitat Tapasihalli"
                           className="project-image"
                         />
-                        <img src={Marasandra_seal} alt="Seal" className="project-seal" />
+                        <img
+                          src={Marasandra_seal}
+                          alt="Seal"
+                          className="project-seal"
+                        />
                       </figure>
                       <div className="batch">
                         <i className="icon-11"></i>
@@ -381,10 +389,20 @@ const Home = () => {
             </div>
             <div className="col-md-6">
               <div className="video-box">
-                <video controls className="mostvideo">
+                {/* <video controls className="mostvideo">
                   <source src={Video} type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/060g2WazuXo?si=Huu6pEskdKxO9TH8"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
               </div>
             </div>
           </div>
