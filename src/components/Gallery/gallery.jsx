@@ -7,6 +7,7 @@ import three from '../Project_Images/four.jpg'
 import four from '../Project_Images/five.jpg';
 import five from '../Project_Images/DSC04739.jpg';
 import six from '../Project_Images/six.jpg';
+
 import seven from "../Project_Images/seven.JPG";
 import eight from '../Project_Images/eight.JPG';
 import nine from '../Project_Images/nine.JPG';
@@ -14,6 +15,7 @@ import ten from '../Project_Images/ten.JPG';
 import eleven from '../Project_Images/eleven.JPG';
 import twelve from "../Project_Images/twelve.JPG";
 import thirteen from "../Project_Images/thirteen.JPG";
+
 
 function Gallery() {
   //new galleryy
@@ -69,6 +71,17 @@ function Gallery() {
         </div>
         <div className='img-container'>
           <img src={twelve} alt="img-three" />
+        </div>
+      </div>
+      <div className='containers'>
+        <div className='img-container'>
+          <img src={six} alt="img-one" />
+        </div>
+        <div className='img-container'>
+          <img src={two} alt="img-two" />
+        </div>
+        <div className='img-container'>
+          <img src={four} alt="img-three" />
         </div>
       </div>
     </div>
