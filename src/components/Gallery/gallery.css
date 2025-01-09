@@ -1,16 +1,16 @@
 .containers {
   display: flex;
   flex-wrap: wrap; 
-  padding-left: 171px;
-  padding-right: 171px;
+  padding-left: 110px;
+  padding-right: 110px;
   justify-content: center; 
   gap: 16px; 
 }
 
 .img-container {
   padding: 18px;
-  width: 30%;
-  height: auto; 
+  width: 32%;
+  height: 310px; 
   box-sizing: border-box;
 }
 
