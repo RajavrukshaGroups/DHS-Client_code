@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {toast,ToastContainer} from "react-toastify";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -241,16 +242,20 @@ const FAQ = () => {
 
       if (response.ok) {
         setSubmitStatus("success");
-        alert("Form submitted successfully!");
+        // alert("Form submitted successfully!");
+        toast.success("Form submitted successfully!");
         reset();
       } else {
         setSubmitStatus("error");
-        alert("Error submitting form. Please try again.");
+        // alert("Error submitting form. Please try again.");
+        toast.error("Error Submitting the form. Please try again.");
+        reset();
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
-      alert("Error submitting form. Please try again.");
+      // alert("Error submitting form. Please try again.");
+      toast.error("Error Submitting the form. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -259,6 +264,7 @@ const FAQ = () => {
   return (
     <Container fluid className="faq">
       {isLoading && <Loader />}
+      <ToastContainer position="top-center"/>
       <div className="banner2">
         <div className="banner-content1">
           <h1 style={{ color: "white", fontWeight: "900" }}>

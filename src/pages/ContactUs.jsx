@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +40,7 @@ const ContactUs = () => {
       });
     }
   };
-  
+
   const onSubmit = async (data) => {
     console.log("data", data);
     // if (
@@ -55,7 +56,7 @@ const ContactUs = () => {
     setIsLoading(true);
     try {
       // Send form data to the backend API
-        // const response = await fetch("http://localhost:5000/contact", {
+      // const response = await fetch("http://localhost:5000/contact", {
       const response = await fetch(
         "https://memberpanel.defencehousingsociety.com/contact",
         {
@@ -70,16 +71,20 @@ const ContactUs = () => {
 
       if (response.ok) {
         setSubmitStatus("success");
-        alert("Form submitted successfully!");
+        // alert("Form submitted successfully!");
+        toast.success("form submitted successfully!");
         reset();
       } else {
         setSubmitStatus("error");
-        alert("Error submitting form. Please try again.");
+        toast.error("Error submitting the form.Please try again.");
+        reset();
+        // alert("Error submitting form. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
-      alert("Error submitting form. Please try again.");
+      toast.error("Error submitting contact form.please try later.");
+      // alert("Error submitting form. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -89,6 +94,9 @@ const ContactUs = () => {
 
   return (
     <Container fluid className="contactus">
+      <div className="toast-msg">
+        <ToastContainer position="top-center" />
+      </div>
       {isLoading && <Loader />}
       <div className="banner-contact">
         <div className="banner-content-contact">

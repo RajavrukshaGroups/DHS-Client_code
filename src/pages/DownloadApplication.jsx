@@ -1,36 +1,47 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { saveAs } from "file-saver";
+import Loader from "../utils/loader";
 import axios from "axios"; // Make sure you have axios installed
 import "./styles/DownloadBrochure.css";
 
 const DownloadApplication = () => {
   const [isReadMore, setIsReadMore] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       // Save data to the database
       await axios.post(
         "https://memberpanel.defencehousingsociety.com/submitApplication",
+        // "http://localhost:5000/submitApplication",
         data
       );
       // await axios.post('http://localhost:5000/submitApplication', data);
 
       // Trigger the PDF download
       handleDownload();
-
-      alert("Form submitted and data saved successfully!");
+      toast.success("Form submitted and data saved successfully!");
+      // alert("Form submitted and data saved successfully!");
+      reset();
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Error submitting form. Please try again.");
+      toast.error("Error submitting form. Please try again.");
+      // alert("Error submitting form. Please try again.");
+      reset();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,6 +55,8 @@ const DownloadApplication = () => {
       className="d-flex justify-content-center"
       style={{ marginBottom: "2rem", marginTop: "3rem" }}
     >
+      <ToastContainer position="top-center" />
+      {isLoading && <Loader />}
       <Card className="download-brochure-card">
         <Card.Body>
           <h1>Download Application</h1>

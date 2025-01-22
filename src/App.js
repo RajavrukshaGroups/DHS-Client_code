@@ -42,7 +42,7 @@ import PopupAdmin from "./pages/PopupButton";
 import Toast from "./utils/toastify";
 import Error from "./components/404";
 import Gallery from "./components/Gallery/gallery.jsx";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
@@ -145,7 +145,6 @@ function HeaderSelector() {
     "/view-project-status",
     "/reset-password",
     "/ContactAdmin",
-
   ];
 
   const isMemberRoute = memberRoutes.includes(location.pathname);
