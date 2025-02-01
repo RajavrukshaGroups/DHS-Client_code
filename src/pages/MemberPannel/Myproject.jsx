@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import axios from 'axios';
-import './MemberPannel_Styles/MyProject.css'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from "axios";
+import "./MemberPannel_Styles/MyProject.css";
 
 const MyProject = () => {
   const navigate = useNavigate();
@@ -17,19 +17,22 @@ const MyProject = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const seniorityId = sessionStorage.getItem('seniority_id');
+      const seniorityId = sessionStorage.getItem("seniority_id");
       if (!seniorityId) {
-        setError('No seniority ID found in session');
+        setError("No seniority ID found in session");
         setLoading(false);
         return;
       }
 
       try {
         // https://memberpanel.defencehousingsociety.com/fetchUserData
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchUserData', {
-        // const response = await axios.get('http://localhost:5000/fetchUserData', {
-          params: { seniority_id: seniorityId }
-        });
+        const response = await axios.get(
+          "https://memberpanel.defencehousingsociety.com/fetchUserData",
+          {
+            // const response = await axios.get('http://localhost:5000/fetchUserData', {
+            params: { seniority_id: seniorityId },
+          }
+        );
         setUserData(response.data);
       } catch (error) {
         setError(error.message);
@@ -49,17 +52,16 @@ const MyProject = () => {
       <div className="header">
         <i
           className="bi bi-arrow-left-circle back-icon"
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate("/dashboard")}
           title="Back to Dashboard"
         ></i>
         <h1 className="ptitle">My Project</h1>
-
       </div>
       <div className="separator"></div>
       <div className="separator"></div>
       <div className="table-responsive">
         <table className="project-table">
-          <thead >
+          <thead>
             <tr>
               <th>Sl. No</th>
               <th>Project Name</th>
@@ -85,7 +87,6 @@ const MyProject = () => {
           </tbody>
         </table>
       </div>
-
     </div>
   );
 };

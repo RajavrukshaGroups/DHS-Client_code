@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './MemberPannel_Styles/ProjectStatus.css'
+import "./MemberPannel_Styles/ProjectStatus.css";
 
 const ProjectStatus = () => {
   const navigate = useNavigate();
   const [transferData, setTransferData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-//ssss
+  //ssss
   useEffect(() => {
     const fetchTransferData = async () => {
-      const seniorityId = sessionStorage.getItem('seniority_id');
+      const seniorityId = sessionStorage.getItem("seniority_id");
 
       if (!seniorityId) {
-        setError('No seniority ID found in session');
+        setError("No seniority ID found in session");
         setLoading(false);
         return;
       }
 
       try {
         // https://memberpanel.defencehousingsociety.com/projectstatus
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/projectstatus/projectstatus', {
-          params: { seniority_id: seniorityId }
-        });
+        const response = await axios.get('https://memberpanel.defencehousingsociety.com/projectstatus', {
+        // const response = await axios.get(
+        //   "http://localhost:5000/projectstatus",
+        //   {
+            params: { seniority_id: seniorityId },
+          }
+        );
         setTransferData(response.data);
       } catch (error) {
         setError(error.message);
@@ -40,8 +44,8 @@ const ProjectStatus = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
     const year = date.getUTCFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -49,13 +53,15 @@ const ProjectStatus = () => {
   return (
     <div className="container">
       <div className="header">
-        <i className="bi bi-arrow-left-circle psback-icon" onClick={() => navigate('/dashboard')}></i>
+        <i
+          className="bi bi-arrow-left-circle psback-icon"
+          onClick={() => navigate("/dashboard")}
+        ></i>
         <h1 className="pstitle">Project Status History</h1>
       </div>
       <div className="psseparator"></div>
       <div className="psseparator"></div>
       <div className="table-responsive">
-
         <table className="extra-table">
           <thead>
             <tr>
@@ -90,6 +96,6 @@ const ProjectStatus = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ProjectStatus
+export default ProjectStatus;
