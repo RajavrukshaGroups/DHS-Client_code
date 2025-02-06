@@ -11,8 +11,8 @@ const MemberLogin = () => {
     event.preventDefault();
 
     try {
-      const response=await axios.post('https://memberpanel.defencehousingsociety.com/mlogin',{
-      // const response = await axios.post('http://localhost:5000/mlogin', {
+      // const response=await axios.post('https://memberpanel.defencehousingsociety.com/mlogin',{
+      const response = await axios.post('http://localhost:5000/mlogin', {
         seniority_id: seniorityId,
         password: password
       });

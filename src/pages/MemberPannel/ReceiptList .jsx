@@ -31,6 +31,8 @@ const ReceiptList = () => {
       try {
         // https://memberpanel.defencehousingsociety.com/fetchReceipts
         const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchReceipts', {
+
+        // const response = await axios.get('http://localhost:5000/fetchReceipts', {
           params: { seniority_id: seniorityId }
         });
         setReceipts(response.data);
@@ -59,6 +61,8 @@ const ReceiptList = () => {
     console.log("receiptId",receiptId);
     // http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}
     window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}`;
+    // window.location.href = `http://localhost:4000/viewonlyrec?receiptId=${receiptId}`;
+
   };
 
   return (
@@ -91,7 +95,8 @@ const ReceiptList = () => {
           <tbody>
             {receipts.map((receipt, index) => (
               <tr key={index}>
-                <td>{formatDate(receipt.receipt_date)}</td>
+                {/* <td>{formatDate(receipt.created_date)}</td> */}
+                <td>{receipt.created_date}</td>
                 <td>{receipt.receipt_no}</td>
                 <td>{receipt.payment_mode}</td>
                 <td>{receipt.cheque_dd_transaction_id}</td>
