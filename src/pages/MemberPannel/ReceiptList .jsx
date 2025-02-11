@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import axios from 'axios';
-import './MemberPannel_Styles/Receipt.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from "axios";
+import "./MemberPannel_Styles/Receipt.css";
 
 const ReceiptList = () => {
   const navigate = useNavigate();
@@ -15,26 +15,28 @@ const ReceiptList = () => {
     return formatter.format(number);
   };
 
-  console.log("receipts",receipts);
-
+  console.log("receipts", receipts);
 
   useEffect(() => {
     const fetchReceipts = async () => {
-      const seniorityId = sessionStorage.getItem('seniority_id');
+      const seniorityId = sessionStorage.getItem("seniority_id");
 
       if (!seniorityId) {
-        setError('No seniority ID found in session');
+        setError("No seniority ID found in session");
         setLoading(false);
         return;
       }
 
       try {
         // https://memberpanel.defencehousingsociety.com/fetchReceipts
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchReceipts', {
+        // const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchReceipts', {
 
-        // const response = await axios.get('http://localhost:5000/fetchReceipts', {
-          params: { seniority_id: seniorityId }
-        });
+        const response = await axios.get(
+          "http://localhost:5000/fetchReceipts",
+          {
+            params: { seniority_id: seniorityId },
+          }
+        );
         setReceipts(response.data);
       } catch (error) {
         setError(error.message);
@@ -48,8 +50,8 @@ const ReceiptList = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
     const year = date.getUTCFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -58,29 +60,26 @@ const ReceiptList = () => {
   if (error) return <p>Error: {error}</p>;
 
   const handleViewReceipt = (receiptId) => {
-    console.log("receiptId",receiptId);
+    console.log("receiptId", receiptId);
     // http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}
-    window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}`;
-    // window.location.href = `http://localhost:4000/viewonlyrec?receiptId=${receiptId}`;
-
+    // window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}`;
+    window.location.href = `http://localhost:4000/viewonlyrec?receiptId=${receiptId}`;
   };
 
   return (
     <div className="container">
-      <div className='header'>
+      <div className="header">
         <i
           className="bi bi-arrow-left-circle rback-icon"
-          onClick={() => navigate('/dashboard')}
+          onClick={() => navigate("/dashboard")}
           title="Back to Dashboard"
         ></i>
         <h1 className="title">Receipt Details</h1>
-
       </div>
 
       <div className="separator"></div>
       <div className="separator"></div>
       <div className="table-responsive">
-
         <table className="receipt-table">
           <thead>
             <tr>

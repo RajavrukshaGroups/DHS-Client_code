@@ -227,10 +227,10 @@ const FAQ = () => {
     setIsLoading(true);
     try {
       // Send form data to the backend API
-      // const response = await fetch("http://localhost:5000/contact", {
-        const response = await fetch(
-          "https://memberpanel.defencehousingsociety.com/contact",
-          {
+      const response = await fetch("http://localhost:5000/contact", {
+        // const response = await fetch(
+        //   "https://memberpanel.defencehousingsociety.com/contact",
+        //   {
         // Adjust the endpoint URL as needed
         method: "POST",
         headers: {

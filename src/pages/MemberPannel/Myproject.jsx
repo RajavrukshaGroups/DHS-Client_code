@@ -26,8 +26,8 @@ const MyProject = () => {
 
       try {
         // https://memberpanel.defencehousingsociety.com/fetchUserData
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchUserData', {
-        // const response = await axios.get('http://localhost:5000/fetchUserData', {
+        // const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchUserData', {
+        const response = await axios.get('http://localhost:5000/fetchUserData', {
           params: { seniority_id: seniorityId }
         });
         setUserData(response.data);

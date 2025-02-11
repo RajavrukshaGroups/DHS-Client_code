@@ -42,8 +42,8 @@ const ResetPassword = () => {
       }
 
       try {
-        // const response = await axios.post('http://localhost:5000/resetpassword', fromData);
-        const response = await axios.post('https://memberpanel.defencehousingsociety.com/resetpassword', fromData);
+        const response = await axios.post('http://localhost:5000/resetpassword', fromData);
+        // const response = await axios.post('https://memberpanel.defencehousingsociety.com/resetpassword', fromData);
 
         console.log(response.data);
         alert('Form submitted successfully');

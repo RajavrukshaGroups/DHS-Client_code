@@ -25,8 +25,8 @@ const Dashboard = () => {
       }
 
       try {
-        // const response = await axios.get('http://localhost:5000/dashboard', {
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/dashboard', {
+        const response = await axios.get('http://localhost:5000/dashboard', {
+        // const response = await axios.get('https://memberpanel.defencehousingsociety.com/dashboard', {
           params: { seniority_id: seniorityId }
         });
         const userData = response.data;
