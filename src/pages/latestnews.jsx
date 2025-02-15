@@ -44,6 +44,15 @@ const LatestNews = () => {
             {" "}
             Defence Habitat Tapasihalli - Rs.949/- sqft (Booking Closed)
           </h5>
+          <h5
+            className="custom-bullet"
+            style={{ marginTop: "15px", fontSize: "1rem" }}
+          >
+            {" "}
+            Good News..!!! Applications for new membership are open now, Hurry
+            Up contact us for more information.
+            <span className="latest-badge">New</span>
+          </h5>
           {/* <h5
             className="custom-bullet"
             style={{ marginTop: "15px", fontSize: "1rem" }}
