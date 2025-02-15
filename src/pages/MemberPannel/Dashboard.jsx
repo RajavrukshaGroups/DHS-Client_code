@@ -61,10 +61,14 @@ const Dashboard = () => {
   }, [navigate]);
   const handleViewConfirmation = (userId) => {
     window.location.href = `http://adminpanel.defencehousingsociety.com/confirmationletterviewonly?user_pk=${userId}`;
+    // window.location.href = `http://localhost:4000/confirmationletterviewonly?user_pk=${userId}`;
+
   };
 
   const handleViewShareCert = (userId) => {
     window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlysharecer?user_pk=${userId}`;
+    // window.location.href = `http://localhost:4000/viewonlysharecer?user_pk=${userId}`;
+
   };
 
 

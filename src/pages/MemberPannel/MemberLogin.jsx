@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Container } from 'react-bootstrap';
-import './MemberPannel_Styles/MemberLogin.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { Container } from "react-bootstrap";
+import "./MemberPannel_Styles/MemberLogin.css";
 
 const MemberLogin = () => {
-  const [seniorityId, setSeniorityId] = useState('');
-  const [password, setPassword] = useState('');
+  const [seniorityId, setSeniorityId] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // const response=await axios.post('https://memberpanel.defencehousingsociety.com/mlogin',{
-      const response = await axios.post('http://localhost:5000/mlogin', {
-        seniority_id: seniorityId,
-        password: password
-      });
+      const response = await axios.post(
+        "https://memberpanel.defencehousingsociety.com/mlogin",
+        {
+          // const response = await axios.post('http://localhost:5000/mlogin', {
+          seniority_id: seniorityId,
+          password: password,
+        }
+      );
 
       if (response.data.seniority_id) {
         // Store seniority_id in session storage
-        sessionStorage.setItem('seniority_id', response.data.seniority_id);
+        sessionStorage.setItem("seniority_id", response.data.seniority_id);
 
         // Redirect to the dashboard
         window.location.href = response.data.redirectUrl;
@@ -28,17 +31,16 @@ const MemberLogin = () => {
         alert(response.data.error);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
-
 
   return (
     <Container fluid className="memberlogin">
       <div className="banner-member">
         <div className="banner-content-member">
-          <h1 style={{ color: 'white' }}>Member Login</h1>
+          <h1 style={{ color: "white" }}>Member Login</h1>
         </div>
       </div>
       <div className="tabs-content">
