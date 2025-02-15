@@ -42,6 +42,22 @@ const Footer = () => {
               </a>
             </p>
             <p style={{ marginTop: "1rem", color: "white" }}>
+              <FontAwesomeIcon icon={faPhone} />{" "}
+              <a href="tel:+918884735735" style={{ color: "white" }}>
+                {" "}
+                +91 8188 992 266{" "}
+              </a>
+            </p>
+            <p style={{ marginTop: "1rem", color: "white" }}>
+              <FontAwesomeIcon icon={faEnvelope} />{" "}
+              <a
+                href="mailto:mail@defencehabitat.com"
+                style={{ color: "white" }}
+              >
+                mail@defencehousingsociety.com
+              </a>
+            </p>
+            <p style={{ marginTop: "1rem", color: "white" }}>
               <FontAwesomeIcon icon={faEnvelope} />{" "}
               <a
                 href="mailto:info@defencehabitat.com"

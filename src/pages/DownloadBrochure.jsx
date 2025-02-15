@@ -19,8 +19,8 @@ const DownloadBrochure = () => {
     try {
       // Save data to the database
       await axios.post(
-        // "https://memberpanel.defencehousingsociety.com/brochure",
-        "http://localhost:5000/brochure",
+        "https://memberpanel.defencehousingsociety.com/brochure",
+        // "http://localhost:5000/brochure",
         data
       );
 

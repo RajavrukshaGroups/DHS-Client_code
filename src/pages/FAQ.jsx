@@ -227,17 +227,18 @@ const FAQ = () => {
     setIsLoading(true);
     try {
       // Send form data to the backend API
-      const response = await fetch("http://localhost:5000/contact", {
-        // const response = await fetch(
-        //   "https://memberpanel.defencehousingsociety.com/contact",
-        //   {
-        // Adjust the endpoint URL as needed
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      // const response = await fetch("http://localhost:5000/contact", {
+      const response = await fetch(
+        "https://memberpanel.defencehousingsociety.com/contact",
+        {
+          // Adjust the endpoint URL as needed
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (response.ok) {
         setSubmitStatus("success");

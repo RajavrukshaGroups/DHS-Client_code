@@ -55,10 +55,10 @@ const ContactUs = () => {
     setIsLoading(true);
     try {
       // Send form data to the backend API
-      const response = await fetch("http://localhost:5000/contact", {
-      // const response = await fetch(
-      //   "https://memberpanel.defencehousingsociety.com/contact",
-      //   {
+      // const response = await fetch("http://localhost:5010/contact", {
+      const response = await fetch(
+        "https://memberpanel.defencehousingsociety.com/contact",
+        {
           // Adjust the endpoint URL as needed
           method: "POST",
           headers: {
@@ -312,7 +312,7 @@ const ContactUs = () => {
                       href="mailto:info@defencehousingsociety.com"
                       className="fontemail"
                     >
-                      info@defencehousingsociety.com
+                      mail@defencehousingsociety.com
                     </a>
                   </p>
                 </div>

@@ -25,8 +25,8 @@ const Dashboard = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:5000/dashboard', {
-        // const response = await axios.get('https://memberpanel.defencehousingsociety.com/dashboard', {
+        // const response = await axios.get('http://localhost:5000/dashboard', {
+        const response = await axios.get('https://memberpanel.defencehousingsociety.com/dashboard', {
           params: { seniority_id: seniorityId }
         });
         const userData = response.data;
@@ -61,10 +61,14 @@ const Dashboard = () => {
   }, [navigate]);
   const handleViewConfirmation = (userId) => {
     window.location.href = `http://adminpanel.defencehousingsociety.com/confirmationletterviewonly?user_pk=${userId}`;
+    // window.location.href = `http://localhost:4000/confirmationletterviewonly?user_pk=${userId}`;
+
   };
 
   const handleViewShareCert = (userId) => {
     window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlysharecer?user_pk=${userId}`;
+    // window.location.href = `http://localhost:4000/viewonlysharecer?user_pk=${userId}`;
+
   };
 
 

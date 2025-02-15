@@ -18,11 +18,11 @@ const DownloadApplication = () => {
   const onSubmit = async (data) => {
     try {
       // Save data to the database
-      // await axios.post(
-      //   "https://memberpanel.defencehousingsociety.com/submitApplication",
-      //   data
-      // );
-      await axios.post('http://localhost:5000/submitApplication', data);
+      await axios.post(
+        "https://memberpanel.defencehousingsociety.com/submitApplication",
+        data
+      );
+      // await axios.post('http://localhost:5000/submitApplication', data);
 
       // Trigger the PDF download
       handleDownload();

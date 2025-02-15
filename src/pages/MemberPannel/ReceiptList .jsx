@@ -29,11 +29,11 @@ const ReceiptList = () => {
 
       try {
         // https://memberpanel.defencehousingsociety.com/fetchReceipts
-        // const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchReceipts', {
+        const response = await axios.get('https://memberpanel.defencehousingsociety.com/fetchReceipts', {
 
-        const response = await axios.get(
-          "http://localhost:5000/fetchReceipts",
-          {
+        // const response = await axios.get(
+        //   "http://localhost:5000/fetchReceipts",
+        //   {
             params: { seniority_id: seniorityId },
           }
         );
@@ -62,8 +62,8 @@ const ReceiptList = () => {
   const handleViewReceipt = (receiptId) => {
     console.log("receiptId", receiptId);
     // http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}
-    // window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}`;
-    window.location.href = `http://localhost:4000/viewonlyrec?receiptId=${receiptId}`;
+    window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlyrec?receiptId=${receiptId}`;
+    // window.location.href = `http://localhost:4000/viewonlyrec?receiptId=${receiptId}`;
   };
 
   return (
@@ -92,6 +92,7 @@ const ReceiptList = () => {
             </tr>
           </thead>
           <tbody>
+            {console.log("fetchReceipts", receipts)}
             {receipts.map((receipt, index) => (
               <tr key={index}>
                 {/* <td>{formatDate(receipt.created_date)}</td> */}
@@ -102,7 +103,7 @@ const ReceiptList = () => {
                 <td>{formatNumber(receipt.payment_amnt)}/-</td>
                 <td>
                   <button
-                    onClick={() => handleViewReceipt(receipt.receipt_pk)}
+                    onClick={() => handleViewReceipt(receipt?.receipt_pk)}
                     className="view-receipt-button"
                   >
                     View Receipt

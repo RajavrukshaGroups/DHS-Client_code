@@ -20,10 +20,10 @@ const TransferProject = () => {
       }
 
       try {
-        // const response = await axios.get(
-        //   "https://memberpanel.defencehousingsociety.com/transferproject",
-        //   {
-            const response = await axios.get('http://localhost:5000/transferproject', {
+        const response = await axios.get(
+          "https://memberpanel.defencehousingsociety.com/transferproject",
+          {
+            // const response = await axios.get('http://localhost:5000/transferproject', {
 
             params: { seniority_id: seniorityId },
           }

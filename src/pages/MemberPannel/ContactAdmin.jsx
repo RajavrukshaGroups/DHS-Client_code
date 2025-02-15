@@ -24,8 +24,8 @@ const ContactAdmin = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:5000/contactadmin`, {
-      // const response = await axios.post(`https://memberpanel.defencehousingsociety.com/contactadmin`, {
+      // const response = await axios.post(`http://localhost:5000/contactadmin`, {
+      const response = await axios.post(`https://memberpanel.defencehousingsociety.com/contactadmin`, {
         seniorityId,
         subject,
         message,
