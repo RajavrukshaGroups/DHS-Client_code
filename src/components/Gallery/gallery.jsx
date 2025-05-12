@@ -13,13 +13,21 @@ import Nine from "../Project_Images/nine.JPG";
 import thirteen from "../Project_Images/thirteen.JPG";
 import ten from '../Project_Images/ten.JPG';
 import twelve from "../Project_Images/twelve.JPG";
+import RecentImgfirst from "../../images/galleryImages/first_image.jpg"
+import RecentImgSecond from "../../images/galleryImages/second_image.jpg"
+import RecentImgThird from "../../images/galleryImages/thirdImage.jpg"
+import RecentImgFourth from "../../images/galleryImages/forthImage.jpg"
+import RecentImgFifth from "../../images/galleryImages/fifthImage.jpg"
+import RecentImgSixth from "../../images/galleryImages/imageSix.jpg"
+
+
 function Gallery() {
-  const allImages = [One, Five, Three, Six, Two, thirteen, Seven, ten, twelve];
+  const allImages = [RecentImgfirst,RecentImgSecond,RecentImgThird,RecentImgFourth,RecentImgFifth,RecentImgSixth,One, Five, Three, Six, Two, thirteen, Seven, ten, twelve];
   const [visibleImages, setVisibleImages] = useState(6);
 
   const loadMore = () => {
     if (visibleImages === 6) {
-      setVisibleImages(9);
+      setVisibleImages(allImages.length); // Show all images
     } else {
       setVisibleImages(6);
     }
