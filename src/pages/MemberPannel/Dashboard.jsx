@@ -4,18 +4,22 @@ import axios from 'axios';
 import './MemberPannel_Styles/dashboard.css';
 
 const Dashboard = () => {
-  const [name, setName] = useState('');
-  const [sid, setId] = useState('');
-  const [img, setImg] = useState('');
+  // const [name, setName] = useState('');
+  // const [sid, setId] = useState('');
+  // const [img, setImg] = useState('');
   const [userId, setUserid] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [memberData,setMemberdata]=useState([])
   const navigate = useNavigate();
-
+ 
+  console.log(memberData,'mathed member');
+  
   useEffect(() => {
     const fetchData = async () => {
       const seniorityId = sessionStorage.getItem('seniority_id');
-
+      console.log(seniorityId,'seniority id which is added to the session storage')
+     console.log(seniorityId,'this is the data')
       if (!seniorityId) {
         setError('No seniority ID found in session');
         alert('Please login');
@@ -25,33 +29,17 @@ const Dashboard = () => {
       }
 
       try {
-        // const response = await axios.get('http://localhost:5000/dashboard', {
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/dashboard', {
-          params: { seniority_id: seniorityId }
-        });
-        const userData = response.data;
+         const response = await axios.get(
+            `http://localhost:4000/defenceWebsiteRoutes/dashboard/${seniorityId}`
+          );
+          console.log("Member Data:", response.data.data);
+         if(response){
+          setMemberdata(response.data.data)
+         }
+        const userData = response.data.data;
         console.log("userdata",userData);
-        if (userData.length > 0) {
-          setName(userData[0].username);
-          setId(userData[0].senior_id);
-          const imageBase64 = userData[0].user_photo;
-          setImg(imageBase64)
-          setUserid(userData[0].user_pk)
-
-          // Log base64 data to console for debugging
-          console.log('Base64 Image Data:', imageBase64);
-
-          // Validate base64 data
-          // if (imageBase64.startsWith('data:image/jpeg;base64,')) {
-          //   setImg(imageBase64);
-          // } else {
-          //   setImg(`data:image/jpeg;base64,${imageBase64}`);
-          // }
-        } else {
-          setError('User data not found');
-        }
       } catch (error) {
-        setError(error.message);
+        setError(error.data.message);
       } finally {
         setLoading(false);
       }
@@ -104,21 +92,29 @@ const Dashboard = () => {
           </ul>
         </div>
       </div>
-      <div className="dashboard-right">
-        <div className="user-card">
-          {img ? (
-            <img src={img} alt="User Photo" className="user-photo" />
-          ) : (
-            <p>No photo available</p>
-          )}
-          <p><strong>Name:</strong> {name}</p>
-          <p><strong>Seniority ID:</strong> {sid}</p>
 
-          {/* . <button className="user-button">View Your Application</button> */}
-          <button className="user-button" onClick={handleResetPasswordClick} >Reset Password</button>
-          <button className="user-button" onClick={handleContactAdminClick}>Contact Admin</button>
-        </div>
-      </div>
+   <div className="dashboard-right">
+ {memberData && (
+  <div className="user-card">
+    {memberData.MemberPhoto ? (
+      <img src={memberData.MemberPhoto} alt="User Photo" className="user-photo" />
+    ) : (
+      <p>No photo available</p>
+    )}
+
+    <p><strong>Name:</strong> {memberData.name}</p>
+    <p><strong>Seniority ID:</strong> {memberData.SeniorityID}</p>
+
+    <button className="user-button" onClick={handleResetPasswordClick}>
+      Reset Password
+    </button>
+    <button className="user-button" onClick={handleContactAdminClick}>
+      Contact Admin
+    </button>
+  </div>
+)}
+</div>
+       
     </div>
   );
 };

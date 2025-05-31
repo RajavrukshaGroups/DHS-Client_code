@@ -51,6 +51,19 @@ function App() {
         <PopupAdminSelector />
         <HeaderSelector />
         <NavBarSelector />
+                <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -81,7 +94,6 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/ContactAdmin" element={<ContactAdmin />} />
           <Route path="/gallery" element={<Gallery />} />
-          <Route path="/toast" element={<Toast />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

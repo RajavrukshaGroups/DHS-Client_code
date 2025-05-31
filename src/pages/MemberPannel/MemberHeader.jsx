@@ -7,47 +7,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faPhone, faUser, faDesktop } from '@fortawesome/free-solid-svg-icons';
 
 const MemberHeader = () => {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [memberData,setMembersdata]= useState([])
   const navigate = useNavigate(); // Initialize useNavigate
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const seniorityId = sessionStorage.getItem('seniority_id');
-
       if (!seniorityId) {
         setError('No seniority ID found in session');
         alert('Please login');
-        navigate('/memberlogin'); // Navigate to login page
+        navigate('/memberlogin');
         setLoading(false);
         return;
       }
-
       try {
-        // const response = await axios.get('http://localhost:5000/mheader', {
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/mheader', {
-          params: { seniority_id: seniorityId }
-        });
-        const userData = response.data;
-        if (userData.length > 0) {
-          setEmail(userData[0].user_email);
-        } else {
-          setError('User data not found');
-        }
-      } catch (error) {
-        setError(error.message);
+        const response = await axios.get(
+          `http://localhost:4000/defenceWebsiteRoutes/dashboard/${seniorityId}`
+        );
+        console.log('Member Data in header:', response.data.data);
+        setMembersdata(response.data.data);
+      } catch (err) {
+        console.error('Error fetching member data:', err);
+        setError('Failed to fetch member data');
       } finally {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [navigate]);
+     }, [navigate]);
+
 
   const handleLogout = async () => {
     try {
-
       sessionStorage.removeItem('seniority_id');
       window.location.href = '/memberlogin'; // Redirect to login page or any other page
       console.log("logout succesfull")
@@ -69,7 +63,7 @@ const MemberHeader = () => {
           </div>
           <div className="right-column pull-rights-login">
             <div className="sign-box1" >
-              <a href="/memberlogin"><FontAwesomeIcon icon={faUser} /> {email}</a>
+              <a href="/memberlogin"><FontAwesomeIcon icon={faUser} /> {memberData.email}</a>
             </div>
             <div className="sign-box2" style={{ paddingLeft: '15px' }}>
               <a onClick={handleLogout}><FontAwesomeIcon icon={faDesktop} /> Logout</a>

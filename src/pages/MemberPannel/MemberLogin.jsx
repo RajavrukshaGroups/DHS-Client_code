@@ -1,40 +1,46 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+// import Toast from "../../utils/toastify";
 import "./MemberPannel_Styles/MemberLogin.css";
+import { toast } from "react-toastify";
+
 
 const MemberLogin = () => {
   const [seniorityId, setSeniorityId] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const response = await axios.post(
-        "https://memberpanel.defencehousingsociety.com/mlogin",
-        {
-          // const response = await axios.post('http://localhost:5000/mlogin', {
-          seniority_id: seniorityId,
-          password: password,
-        }
-      );
-
-      if (response.data.seniority_id) {
-        // Store seniority_id in session storage
-        sessionStorage.setItem("seniority_id", response.data.seniority_id);
-
-        // Redirect to the dashboard
-        window.location.href = response.data.redirectUrl;
-      } else {
-        // Handle validation errors
-        alert(response.data.error);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again.");
+  event.preventDefault();
+try {
+  const response = await axios.post(
+    "http://localhost:4000/defenceWebsiteRoutes/memberLogin",
+    {
+      seniority_id: seniorityId,
+      password: password,
     }
-  };
+  );
+  console.log("Incoming data while submitting:", response.data);
+  if (response.data.success) {
+    sessionStorage.setItem("seniority_id", response.data.seniority_id);
+    navigate("/dashboard");
+    toast.success(response.data.message)
+    // Toast.success(response.data.message)
+  } else {
+    alert(response.data.message); 
+  }
+} catch (error) {
+  console.error("Login error:", error);
+  if (error.response && error.response.data && error.response.data.message) {
+    alert(error.response.data.message);
+  } else {
+    alert("An error occurred. Please try again.");
+  }
+}
+};
+
 
   return (
     <Container fluid className="memberlogin">
