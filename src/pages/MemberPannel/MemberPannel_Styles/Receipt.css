@@ -33,11 +33,22 @@
   margin-bottom: 0px;
 }
 
+.table-cols{
+  align-items: center;
+}
+
 .rseparator {
   width: 100%;
   height: 2px;
   background-color: black;
   margin: 5px auto;
+}
+.payment-mode{
+  text-transform: capitalize;
+}
+
+.table-col{
+  text-align: center;
 }
 
 .table-responsive {
@@ -58,7 +69,7 @@
 .receipt-table th,
 .receipt-table td {
   padding: 12px;
-  text-align: left;
+  text-align: center;
   border: 1px solid #333;
 }
 

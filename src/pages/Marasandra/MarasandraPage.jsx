@@ -15,7 +15,7 @@ import parkImage from "../../images/park.svg";
 import ContactForm from "../ContactForm";
 import seal from "../../images/msTAMP.png";
 import Marasandra_seal from "../../images/Marasandra_seal.png";
-import aboutVideo from "../../videos/Defence Habitat.mp4";
+// import aboutVideo from "../../videos/Defence Habitat.mp4";
 import BankDetails from "./BankDetails";
 import BookingDetails from "./BookingDetails";
 import Process from "./Process";

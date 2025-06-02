@@ -10,8 +10,10 @@ const MyProject = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  console.log("users data", userData);
+
   const formatNumber = (number) => {
-    const formatter = new Intl.NumberFormat("en-US");
+    const formatter = new Intl.NumberFormat("en-IN");
     return formatter.format(number);
   };
 
@@ -26,10 +28,12 @@ const MyProject = () => {
 
       try {
         // https://memberpanel.defencehousingsociety.com/fetchUserData
+        // const response = await axios.get(
+        //   "https://memberpanel.defencehousingsociety.com/fetchUserData",
+        //   {
         const response = await axios.get(
-          "https://memberpanel.defencehousingsociety.com/fetchUserData",
+          "http://localhost:4000/defenceWebsiteRoutes/fetchUserData",
           {
-            // const response = await axios.get('http://localhost:5000/fetchUserData', {
             params: { seniority_id: seniorityId },
           }
         );
@@ -67,21 +71,42 @@ const MyProject = () => {
               <th>Project Name</th>
               <th>Seniority Id</th>
               <th>Plot Size</th>
-              <th>Sq Ft </th>
+              <th>Sq Ft Price </th>
               <th>Project Amount</th>
               <th>Project Paid Amount</th>
             </tr>
           </thead>
+          {/* <tbody>
+            {userData.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td className="project-name">
+                  {user.propertyDetails?.projectName}
+                </td>
+                <td>{user.SeniorityID}</td>
+                <td>
+                  {user.propertyDetails?.length}X{user.propertyDetails?.breadth}
+                </td>
+                <td>{formatNumber(user.propertyDetails?.pricePerSqft)}/-</td>
+                <td>{formatNumber(user.propertyDetails?.propertyCost)}/-</td>
+                <td>{formatNumber(user.propertyDetails?.paidAmount)}/-</td>
+              </tr>
+            ))}
+          </tbody> */}
           <tbody>
             {userData.map((user, index) => (
-              <tr key={user.user_pk}>
+              <tr key={user._id}>
                 <td>{index + 1}</td> {/* Sequential Sl. No */}
-                <td>{user.pro_name}</td>
-                <td>{user.senior_id}</td>
-                <td>{user.prop_dimension}</td>
-                <td>{formatNumber(user.sqft_rate)}/-</td>
-                <td>{formatNumber(user.property_price)}/-</td>
-                <td>{formatNumber(user.paid_amount)}/-</td>
+                <td className="project-name">
+                  {user.propertyDetails?.projectName}
+                </td>
+                <td>{user.SeniorityID}</td>
+                <td>
+                  {user.propertyDetails?.length}X{user.propertyDetails?.breadth}
+                </td>
+                <td>₹{formatNumber(user.propertyDetails?.pricePerSqft)}/-</td>
+                <td>₹{formatNumber(user.propertyDetails?.propertyCost)}/-</td>
+                <td>₹{formatNumber(user.propertyDetails?.paidAmount)}/-</td>
               </tr>
             ))}
           </tbody>

@@ -10,7 +10,7 @@ import HR12 from "../images/HR-12.jpeg";
 import house from "../images/house (4).png";
 import houseinhand from "../images/hand (1).png";
 import "animate.css/animate.min.css";
-import aboutVideo from "../videos/Defence Habitat.mp4";
+// import aboutVideo from "../videos/Defence Habitat.mp4";
 import "./styles/AboutUs.css";
 
 const AboutUs = () => {
