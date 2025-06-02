@@ -14,7 +14,7 @@ import Tapasihalli_seal from "../images/Tapasihalli_seal.png";
 import Seal from "../images/Seal.png";
 import Seal1 from "../images/msTAMP.png";
 import Logo from "../images/logo.png";
-import Video from "../videos/most.mp4";
+// import Video from "../videos/most.mp4";
 import Marquee from "react-fast-marquee";
 
 import "./styles/Home.css";

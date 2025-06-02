@@ -40,8 +40,6 @@
   margin: 5px auto;
 }
 
-
-
 /* Table styling */
 .table-responsive {
   width: 100%;
@@ -55,12 +53,15 @@
   text-align: center;
 }
 
+.project-name {
+  text-transform: capitalize;
+}
+
 .project-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 85px;
   margin-top: 25px;
-
 }
 
 .project-table td {
@@ -68,7 +69,7 @@
 }
 
 .project-table th {
-  background-color: #20283E;
+  background-color: #20283e;
   color: white;
   font-weight: bold;
   border: 1px solid whitesmoke;
