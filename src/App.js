@@ -8,6 +8,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx"
+import  NewOnlineApplication from "./pages/newOnlineApplication.jsx"
 import TapasihalliPage from "./pages/Tapasihalli/TapasihalliPage";
 import MarasandraPage from "./pages/Marasandra/MarasandraPage";
 import CustomNavbar from "./components/Header/header";
@@ -51,7 +53,7 @@ function App() {
         <PopupAdminSelector />
         <HeaderSelector />
         <NavBarSelector />
-                <ToastContainer 
+        <ToastContainer 
           position="top-right"
           autoClose={3000}
           hideProgressBar={false}
@@ -66,6 +68,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/memberformwrapper" element={<MemberFormWrapper />} />
+          <Route path="/newonline_application" element={<NewOnlineApplication />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/projects/tapasihalli" element={<TapasihalliPage />} />
           <Route path="/projects/marasandra" element={<MarasandraPage />} />

@@ -1,0 +1,104 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import axiosInstance from '../../api/interceptors';
+
+function SeniorityDetails({ handleChange, formData, formErrors }) {
+  const [duplicateFields, setDuplicateFields] = useState({});
+  // Map frontend field names to backend response keys
+  const fieldKeyMap = {
+    seniorityId: 'SeniorityID',
+    membershipNo: 'MembershipNo',
+    cunfirmationLetterNo: 'ConfirmationLetterNo',
+    shareCertificateNo: 'ShareCertificateNumber'
+  };
+
+  useEffect(() => {
+    const delay = setTimeout(() => {  
+      const { seniorityId, membershipNo, cunfirmationLetterNo, shareCertificateNo } = formData;
+      if (seniorityId || membershipNo || cunfirmationLetterNo || shareCertificateNo) {
+        
+        console.log('Checking for duplicates...');
+        axiosInstance
+          .get('/member/check-duplicates', {
+            params: {
+              SeniorityID:seniorityId,
+              MembershipNo: membershipNo,
+              ConfirmationLetterNo: cunfirmationLetterNo,
+              ShareCertificateNumber: shareCertificateNo
+            }
+          })
+          .then((res) => {
+            console.log("Duplicate fields response:", res);
+            setDuplicateFields(res.fields || {});
+          })
+          .catch((err) => console.error('Error checking duplicates:', err));
+      }
+    }, 500);
+
+    return () => clearTimeout(delay);
+  }, [formData]);
+
+  const isDuplicate = (field) => duplicateFields[fieldKeyMap[field]];
+
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-md mb-6">
+      <h2 className="text-xl font-bold mb-4">MEMBERSHIP PAYMENT DETAILS :</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        {/* Seniority ID */}
+        
+
+        {/* Membership No */}
+        <div>
+          <label className="block font-medium mb-1">Membership No</label>
+          <input
+            type="number"
+            name="membershipNo"
+            placeholder="Membership No"
+            value={formData?.membershipNo}
+            onChange={handleChange}
+            className={`w-full border px-4 py-2 rounded-md ${isDuplicate("membershipNo") ? 'border-red-500' : ''}`}
+          />
+          {isDuplicate("membershipNo") && (
+            <p className="text-red-600 text-sm">This Membership No is already used.</p>
+          )}
+        </div>
+
+        {/* Confirmation Letter No */}
+        <div>
+          <label className="block font-medium mb-1">Confirmation Letter No</label>
+          <input
+            type="number"
+            name="cunfirmationLetterNo"
+            placeholder="Confirmation Letter No"
+            value={formData?.cunfirmationLetterNo}
+            onChange={handleChange}
+            className={`w-full border px-4 py-2 rounded-md ${isDuplicate("cunfirmationLetterNo") ? 'border-red-500' : ''}`}
+          />
+          {isDuplicate("cunfirmationLetterNo") && (
+            <p className="text-red-600 text-sm">This Confirmation Letter No is already used.</p>
+          )}
+        </div>
+
+        {/* Share Certificate Number */}
+        <div>
+          <label className="block font-medium mb-1">Share Certificate Number</label>
+          <input
+            type="number"
+            name="shareCertificateNo"
+            placeholder="Share Certificate Number"
+            value={formData?.shareCertificateNo}
+            onChange={handleChange}
+            className={`w-full border px-4 py-2 rounded-md ${isDuplicate("shareCertificateNo") ? 'border-red-500' : ''}`}
+          />
+          {isDuplicate("shareCertificateNo") && (
+            <p className="text-red-600 text-sm">This Share Certificate Number is already used.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SeniorityDetails;
+
