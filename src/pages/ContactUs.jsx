@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import toast, { Toaster } from "react-hot-toast";
 import {
   faMapMarkerAlt,
   faEnvelope,
@@ -57,7 +58,9 @@ const ContactUs = () => {
       // Send form data to the backend API
       // const response = await fetch("http://localhost:5010/contact", {
       const response = await fetch(
-        "https://memberpanel.defencehousingsociety.com/contact",
+        // "https://memberpanel.defencehousingsociety.com/contact",
+        "http://localhost:4000/defenceWebsiteRoutes/contactus",
+
         {
           // Adjust the endpoint URL as needed
           method: "POST",
@@ -70,16 +73,19 @@ const ContactUs = () => {
 
       if (response.ok) {
         setSubmitStatus("success");
-        alert("Form submitted successfully!");
+        // alert("Form submitted successfully!");
+        toast.success("Form submitted successfully");
         reset();
       } else {
         setSubmitStatus("error");
-        alert("Error submitting form. Please try again.");
+        // alert("Error submitting form. Please try again.");
+        toast.error("error submitting form.Please try again.");
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
-      alert("Error submitting form. Please try again.");
+      // alert("Error submitting form. Please try again.");
+      toast.error("error submitting form.Please try again");
     } finally {
       setIsLoading(false);
     }

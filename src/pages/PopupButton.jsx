@@ -10,13 +10,14 @@ import { MdEmail } from "react-icons/md";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { RiMessage2Line } from "react-icons/ri";
 import { Filter } from "bad-words";
+import toast from "react-hot-toast";
 
 function PopupButton() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
-  const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState("");
   const [show, setShow] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
 
@@ -37,56 +38,67 @@ function PopupButton() {
     e.preventDefault();
     if (
       filter.isProfane(name) ||
-      filter.isProfane(message) ||
+      filter.isProfane(subject) ||
       filter.isProfane(location) ||
       filter.isProfane(email)
     ) {
-      alert("Your input contains inappropriate language.");
+      // alert("Your input contains inappropriate language.");
+      toast.error("Your input contains inappropriate language.");
       setName("");
       setEmail("");
-      setNumber("");
+      setPhone("");
       setLocation("");
-      setMessage("");
+      setSubject("");
       return;
     }
     if (
       name.trim() === "" ||
       email.trim() === "" ||
       location.trim() === "" ||
-      message.trim() === ""
+      subject.trim() === ""
     ) {
-      return alert("please fill all the fields");
+      // return alert("please fill all the fields");
+      return toast.error("please fill all the fields");
     }
-    if (number !== null && number.toString().length !== 10) {
-      return alert("Phone number must have exactly 10 digits");
+    if (phone !== null && phone.toString().length !== 10) {
+      // return alert("Phone number must have exactly 10 digits");
+      return toast.error("Phone number must have exactly 10 digits");
     }
-    const data = { name, email, number, location, message };
+    const data = { name, email, phone, location, subject };
     try {
       // const response = await axios.post(
       //   "http://localhost:5010/submitPopupData",
       //   data
       // );
+      // const response = await axios.post(
+      //   "https://memberpanel.defencehousingsociety.com/submitPopupData",
+      //   data
+      // );
       const response = await axios.post(
-        "https://memberpanel.defencehousingsociety.com/submitPopupData",
+        "http://localhost:4000/defenceWebsiteRoutes/contactus",
         data
       );
 
       if (response.status === 200) {
         setFeedbackMessage(response.data.message);
-        alert(response.data.message);
+        // alert(response.data.message);
+        toast.success("Form Submitted Successfully");
         localStorage.setItem("formSubmitted", "true");
         setTimeout(() => {
           handleClose();
         }, 2000);
       } else {
-        alert("Something went wrong, please try again.");
+        // alert("Something went wrong, please try again.");
+        toast.error("Something went wrong, please try again.");
       }
     } catch (error) {
       // Handle 500 or other errors
       if (error.response && error.response.status === 500) {
-        alert("Failed to send details. Please try again later.");
+        // alert("Failed to send details. Please try again later.");
+        toast.error("Failed to send details. Please try again later.");
       } else {
-        alert("An error occurred: " + error.message);
+        // alert("An error occurred: " + error.message);
+        toast.error("an error occured");
       }
       console.log(error);
     }
@@ -134,8 +146,8 @@ function PopupButton() {
                   <Form.Control
                     type="text"
                     placeholder="Phone Number"
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="input-field"
                     style={{ paddingLeft: "35px" }}
                   />
@@ -177,8 +189,8 @@ function PopupButton() {
                     as="textarea"
                     placeholder="Message"
                     rows={2}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="input-field"
                   />
                   <RiMessage2Line className="input-icon" />
