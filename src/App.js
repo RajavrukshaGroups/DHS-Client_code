@@ -8,6 +8,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx"
+import  NewOnlineApplication from "./pages/newOnlineApplication.jsx"
 import TapasihalliPage from "./pages/Tapasihalli/TapasihalliPage";
 import MarasandraPage from "./pages/Marasandra/MarasandraPage";
 import CustomNavbar from "./components/Header/header";
@@ -42,13 +44,18 @@ import PopupAdmin from "./pages/PopupButton";
 import Toast from "./utils/toastify";
 import Error from "./components/404";
 import Gallery from "./components/Gallery/gallery.jsx";
-import { Helmet } from "react-helmet";
+import Otpverification from "./components/OtpVerification/otpverification.jsx";
+import {Helmet} from "react-helmet";
 import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <>
-      <Toaster
+    <Router>
+      <div>
+        <PopupAdminSelector />
+        <HeaderSelector />
+        <NavBarSelector />
+         <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -59,61 +66,58 @@ function App() {
         }}
         reverseOrder={false}
       />
-      <Router>
-        <div>
-          <PopupAdminSelector />
-          <HeaderSelector />
-          <NavBarSelector />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/projects/tapasihalli" element={<TapasihalliPage />} />
-            <Route path="/projects/marasandra" element={<MarasandraPage />} />
-            <Route path="/download/brochure" element={<DownloadBrochure />} />
-            <Route
-              path="/download/application"
-              element={<DownloadApplication />}
-            />
-            <Route path="/latest-news" element={<LatestNews />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/online_application" element={<OnlineApplication />} />
-            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-            {/* Member Panel Routings */}
-            <Route path="/memberlogin" element={<MemberLogin />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/my-project" element={<Myproject />} />
-            <Route path="/project-paid-amount" element={<ReceiptList />} />
-            <Route path="/transferproject" element={<TransferProject />} />
-            <Route
-              path="/view-site-confirmation"
-              element={<ViewSiteConfirmation />}
-            />
-            <Route path="/extra-charges-amount" element={<ExtraCharges />} />
-            <Route path="/view-project-status" element={<ProjectStatus />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/ContactAdmin" element={<ContactAdmin />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-          <Footer />
-          <ScrollToTopButton />
-        </div>
-      </Router>
-    </>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/memberformwrapper" element={<MemberFormWrapper />} />
+          <Route path="/newonline_application" element={<NewOnlineApplication />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/projects/tapasihalli" element={<TapasihalliPage />} />
+          <Route path="/projects/marasandra" element={<MarasandraPage />} />
+          <Route path="/download/brochure" element={<DownloadBrochure />} />
+          <Route
+            path="/download/application"
+            element={<DownloadApplication />}
+          />
+          <Route path="/latest-news" element={<LatestNews />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/online_application" element={<OnlineApplication />} />
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+          {/* Member Panel Routings */}
+          <Route path="/memberlogin" element={<MemberLogin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my-project" element={<Myproject />} />
+          <Route path="/project-paid-amount" element={<ReceiptList />} />
+          <Route path="/transferproject" element={<TransferProject />} />
+          <Route
+            path="/view-site-confirmation"
+            element={<ViewSiteConfirmation />}
+          />
+          <Route path="/extra-charges-amount" element={<ExtraCharges />} />
+          <Route path="/view-project-status" element={<ProjectStatus />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/ContactAdmin" element={<ContactAdmin />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/otpverification" element={<Otpverification />} />
+          <Route path="*" element={<Error />} />
+        </Routes> 
+        <Footer />
+        <ScrollToTopButton />
+      </div>
+    </Router>
   );
 }
 
