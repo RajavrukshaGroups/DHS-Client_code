@@ -20,6 +20,14 @@
   margin-top: 24px;
 }
 
+.word-capitalize {
+  text-transform: capitalize;
+}
+
+.word-uppercase {
+  text-transform: uppercase;
+}
+
 .psback-icon:hover {
   color: #45a049;
 }
@@ -53,7 +61,7 @@
 }
 
 .projectstatus-tableth {
-  background-color: #20283E;
+  background-color: #20283e;
   color: white;
   font-weight: bold;
   /* border: none; */

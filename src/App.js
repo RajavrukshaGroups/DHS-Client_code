@@ -46,6 +46,7 @@ import Error from "./components/404";
 import Gallery from "./components/Gallery/gallery.jsx";
 import Otpverification from "./components/OtpVerification/otpverification.jsx";
 import {Helmet} from "react-helmet";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -54,6 +55,17 @@ function App() {
         <PopupAdminSelector />
         <HeaderSelector />
         <NavBarSelector />
+         <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+        reverseOrder={false}
+      />
         <ToastContainer 
           position="top-right"
           autoClose={3000}
@@ -163,7 +175,6 @@ function HeaderSelector() {
     "/view-project-status",
     "/reset-password",
     "/ContactAdmin",
-
   ];
 
   const isMemberRoute = memberRoutes.includes(location.pathname);
