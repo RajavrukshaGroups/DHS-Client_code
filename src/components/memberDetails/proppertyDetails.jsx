@@ -184,37 +184,37 @@ useEffect(() => {
         </div>
 
         <div>
-  <label className="block font-medium mb-1">Percentage</label>
-  <div className="flex gap-4 items-center">
-    {[25, 30].map((percent) => (
-      <label key={percent} className="flex items-center gap-1">
-        <input
-          type="radio"
-          name="percentage"
-          value={percent}
-          checked={parseInt(formData?.percentage) === percent}
-          onChange={(e) =>
-            handleChange({ target: { name: "percentage", value: e.target.value } })
-          }
-        />
-        {percent}%
-      </label>
-    ))}
-  </div>
-  {formErrors.percentage && <p className="text-red-600 text-sm">{formErrors.percentage}</p>}
-</div>
+        <label className="block font-medium mb-1">Percentage</label>
+        <div className="flex gap-4 items-center">
+          {[25, 30].map((percent) => (
+            <label key={percent} className="flex items-center gap-1">
+              <input
+                type="radio"
+                name="percentage"
+                value={percent}
+                checked={parseInt(formData?.percentage) === percent}
+                onChange={(e) =>
+                  handleChange({ target: { name: "percentage", value: e.target.value } })
+                }
+              />
+              {percent}%
+            </label>
+          ))}
+        </div>
+        {formErrors.percentage && <p className="text-red-600 text-sm">{formErrors.percentage}</p>}
+      </div>
 
-<div>
-  <label className="block font-medium mb-1">Selected Percentage Cost</label>
-  <input
-    type="text"
-    name="percentageCost"
-    value={formData?.percentageCost}
-    readOnly
-    className="w-full border px-4 py-2 rounded-md bg-gray-100"
-  />
-  {formErrors.percentageCost && <p className="text-red-600 text-sm">{formErrors.percentageCost}</p>}
-</div>
+      <div>
+        <label className="block font-medium mb-1">Selected Percentage Cost</label>
+        <input
+          type="text"
+          name="percentageCost"
+          value={formData?.percentageCost}
+          readOnly
+          className="w-full border px-4 py-2 rounded-md bg-gray-100"
+        />
+        {formErrors.percentageCost && <p className="text-red-600 text-sm">{formErrors.percentageCost}</p>}
+      </div>
 
       </div>
     </div>

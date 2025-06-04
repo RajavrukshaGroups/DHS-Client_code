@@ -5,18 +5,7 @@ function MemberShipDetails({ formData, handleChange ,formErrors }) {
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
       <h2 className="text-xl font-bold mb-4">Membership Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block font-medium mb-1">Receipt No</label>
-          <input
-            type="text"
-            name="recieptNo"
-            placeholder="Receipt No"
-            value={formData?.recieptNo}
-            onChange={handleChange}
-            className="w-full border px-4 py-2 rounded-md"
-          />
-          {formErrors.recieptNo && <p className="text-red-600 text-sm">{formErrors.recieptNo}</p>}
-        </div>
+       
         <div>
           <label className="block font-medium mb-1">Date</label>
           <input

@@ -1,27 +1,48 @@
 import React from 'react';
+import { toWords } from 'number-to-words'; 
 
 function PaymentDetails({ formData, handleChange, formErrors }) {
   const paymentMode = formData?.paymentMode;
 
-  return (
+  // ✅ convert amount to words (with fallback)
+  const amount = Number(formData?.sitedownpaymentamount || 0);
+  const amountInWords = amount ? toWords(amount) : '';
+
+
+return (
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
-      <h2 className="text-xl font-bold mb-4">Payment Details</h2>
+      <h2 className="text-xl font-bold mb-4">PURCHASE OF SITE PAYMENT DETAILS :</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Payment Type */}
+        
         <div>
           <label className="block font-medium mb-1">Payment Type:</label>
-          <input
+           <select
+            name="paymentType"
+            value={formData?.paymentType}
+            onChange={handleChange}
+            className="w-full border px-4 py-2 rounded-md"
+              >
+            <option value="">Select Payment Mode</option>
+            <option value="siteadvance">Site Advance</option>
+            <option value="1stinstallment">1st installment</option>
+            <option value="2ndinstallment">2nd installment</option>
+            <option value="3rdinstallment">3rd installment</option>
+          </select>
+          
+          {/* <input
             type="text"
             name="paymentType"
             placeholder="Payment Type"
             value={formData?.paymentType || ''}
             onChange={handleChange}
             className="w-full border px-4 py-2 rounded-md"
-          />
+          />   */}
+
           {formErrors.paymentType && <p className="text-red-500 text-sm">{formErrors.paymentType}</p>}
         </div>
-
         {/* Payment Mode */}
+
         <div>
           <label className="block font-medium mb-1">Payment Mode:</label>
           <select
@@ -31,9 +52,9 @@ function PaymentDetails({ formData, handleChange, formErrors }) {
             className="w-full border px-4 py-2 rounded-md"
           >
             <option value="">Select Payment Mode</option>
-            <option value="cash">Cash</option>
+            <option value="online">Online</option>
             <option value="cheque">Cheque</option>
-            <option value="netbanking">Netbanking/UPI</option>
+            {/* <option value="netbanking">Netbanking/UPI</option> */}
             <option value="DD">DD</option>
           </select>
           {formErrors.paymentMode && <p className="text-red-500 text-sm">{formErrors.paymentMode}</p>}
@@ -70,19 +91,33 @@ function PaymentDetails({ formData, handleChange, formErrors }) {
         )}
 
         {/* Amount for all modes */}
-        {(paymentMode === 'cash' || paymentMode === 'cheque' || paymentMode === 'netbanking' || paymentMode === 'DD') && (
-          <div>
-            <label className="block font-medium mb-1">Amount:</label>
-            <input
-              type="number"
-              name="amount"
-              placeholder="Amount"
-              value={formData?.amount || ''}
-              onChange={handleChange}
-              className="w-full border px-4 py-2 rounded-md"
-            />
-            {formErrors.amount && <p className="text-red-500 text-sm">{formErrors.amount}</p>}
-          </div>
+         {(paymentMode === 'online' || paymentMode === 'cheque' || paymentMode === 'netbanking' || paymentMode === 'DD') && (
+          <>
+            {/* Amount Input */}
+            <div>
+              <label className="block font-medium mb-1">Amount:</label>
+              <input
+                type="number"
+                name="sitedownpaymentamount"
+                placeholder="sitedownpaymentamount"
+                value={formData?.sitedownpaymentamount || ''}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded-md"
+              />
+              {formErrors.sitedownpaymentamount && <p className="text-red-500 text-sm">{formErrors.sitedownpaymentamount}</p>}
+            </div>
+
+            {/* ✅ New Column - Amount in Words */}
+            <div>
+              <label className="block font-medium mb-1">Amount in Words:</label>
+              <input
+                type="text"
+                readOnly
+                value={amountInWords}
+                className="w-full border px-4 py-2 rounded-md bg-gray-100"
+              />
+            </div>
+          </>
         )}
 
         {/* Specific Fields */}

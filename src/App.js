@@ -44,6 +44,7 @@ import PopupAdmin from "./pages/PopupButton";
 import Toast from "./utils/toastify";
 import Error from "./components/404";
 import Gallery from "./components/Gallery/gallery.jsx";
+import Otpverification from "./components/OtpVerification/otpverification.jsx";
 import {Helmet} from "react-helmet";
 
 function App() {
@@ -98,8 +99,9 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/ContactAdmin" element={<ContactAdmin />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/otpverification" element={<Otpverification />} />
           <Route path="*" element={<Error />} />
-        </Routes>
+        </Routes> 
         <Footer />
         <ScrollToTopButton />
       </div>
