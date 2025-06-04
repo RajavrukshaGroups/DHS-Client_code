@@ -30,7 +30,6 @@ const handleResend = async () => {
       const res= await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
                 email: formData.email,
               });
-
     if (res.data.success) {
       toast.success("OTP resent successfully!");
       navigate("/")
