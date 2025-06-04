@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Otpverification() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]); // 6 digits
@@ -11,6 +12,7 @@ function Otpverification() {
 
 
   const location = useLocation();
+  const navigate =useNavigate()
 
   const { formData, memberPhoto, memberSign } = location.state || {};
 
@@ -31,6 +33,7 @@ const handleResend = async () => {
 
     if (res.data.success) {
       toast.success("OTP resent successfully!");
+      navigate("/")
     } else {
       toast.error("Failed to resend OTP.");
     }
