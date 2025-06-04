@@ -94,7 +94,7 @@ function App() {
           <Route path="/latest-news" element={<LatestNews />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/online_application" element={<OnlineApplication />} />
+          <Route path="/online_application" element={<MemberFormWrapper />} />
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
           {/* Member Panel Routings */}
           <Route path="/memberlogin" element={<MemberLogin />} />
