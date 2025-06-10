@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MemberPannel_Styles/dashboard.css";
-
+import toast from "react-hot-toast";
 const Dashboard = () => {
   // const [name, setName] = useState('');
   // const [sid, setId] = useState('');
@@ -50,9 +50,24 @@ const Dashboard = () => {
 
     fetchData();
   }, [navigate]);
-  const handleViewConfirmation = (userId) => {
-    window.location.href = `http://adminpanel.defencehousingsociety.com/confirmationletterviewonly?user_pk=${userId}`;
-    // window.location.href = `http://localhost:4000/confirmationletterviewonly?user_pk=${userId}`;
+  const handleViewConfirmation = async (userId) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/receipt/view-confirmation/${userId}`
+      );
+
+      // if (!res.data || res.data.error || !res.data.confirmationLetterExists) {
+      //   toast.error("Site confirmation letter not found.");
+      //   return;
+      // }
+
+      // If letter exists, open it
+      const url = `http://localhost:4000/receipt/view-confirmation/${userId}`;
+      window.open(url, "_blank");
+    } catch (error) {
+      console.error("Error fetching site confirmation:", error);
+      toast.error("site confirmation letter is not available yet.");
+    }
   };
 
   // const handleViewShareCert = (userId) => {
@@ -95,7 +110,7 @@ const Dashboard = () => {
             <li className="dashboard-item">
               <a
                 style={{ color: "#24457b", cursor: "pointer" }}
-                onClick={() => handleViewConfirmation(userId)}
+                onClick={() => handleViewConfirmation(memberData._id)}
               >
                 View Site Confirmation
               </a>
