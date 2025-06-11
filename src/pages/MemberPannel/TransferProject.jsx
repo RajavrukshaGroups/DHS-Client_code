@@ -73,16 +73,16 @@ const TransferProject = () => {
           <tbody>
             {transferData.length > 0 ? (
               transferData.map((data, index) => (
-                <tr key={data._id}>
+                <tr key={data?._id}>
                   <td>{index + 1}</td>
-                  <td>{data.previousMemberDetails.name}</td>
-                  <td>{data.refname}</td>
-                  <td>{data.propertyDetails.projectName}</td>
-                  <td>{data.SeniorityID}</td>
+                  <td>{data?.previousMemberDetails.name}</td>
+                  <td>{data?.refname}</td>
+                  <td>{data?.propertyDetails.projectName}</td>
+                  <td>{data?.SeniorityID}</td>
                    <td>
                         {new Date().toLocaleDateString()} {/* fallback if createdAt not available */}
                       </td>
-                  <td>{data.transferReason}</td>
+                  <td>{data?.transferReason}</td>
                 </tr>
               ))
             ) : (
