@@ -21,13 +21,9 @@ const TransferProject = () => {
 
       try {
         const response = await axios.get(
-          "https://memberpanel.defencehousingsociety.com/transferproject",
-          {
-            // const response = await axios.get('http://localhost:5000/transferproject', {
-
-            params: { seniority_id: seniorityId },
-          }
-        );
+            `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+          );
+        console.log("Transfer Data in transfer project:", response);
         setTransferData(response.data);
       } catch (error) {
         setError(error.message);
@@ -77,20 +73,23 @@ const TransferProject = () => {
           <tbody>
             {transferData.length > 0 ? (
               transferData.map((data, index) => (
-                <tr key={data.transfer_id}>
+                <tr key={data?._id}>
                   <td>{index + 1}</td>
-                  <td>{data.username_from}</td>
-                  <td>{data.username_to}</td>
-                  <td>{data.pro_name}</td>
-                  <td>{data.seniority_id}</td>
-                  <td>{formatDate(data.transferdate)}</td>
-                  <td>{data.reason}</td>
+                  <td>{data?.previousMemberDetails.name}</td>
+                  <td>{data?.refname}</td>
+                  <td>{data?.propertyDetails.projectName}</td>
+                  <td>{data?.SeniorityID}</td>
+                   <td>
+                        {new Date().toLocaleDateString()} {/* fallback if createdAt not available */}
+                      </td>
+                  <td>{data?.transferReason}</td>
                 </tr>
               ))
             ) : (
               <tr className="no-records">
                 <td colSpan="7">No records found</td>
               </tr>
+              
             )}
           </tbody>
         </table>
