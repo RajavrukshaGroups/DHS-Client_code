@@ -150,12 +150,17 @@ const ReceiptList = () => {
           </thead>
           <tbody>
             {receipts.map((receipt, index) => {
-              const transactionDetails =
-                receipt.transactionId ||
-                receipt.ddNumber ||
-                receipt.chequeNumber ||
-                "-";
+              let transactionDetails = "-";
+              const mode = receipt.paymentMode?.toLowerCase();
 
+              if (mode === "netbanking") {
+                transactionDetails = receipt.transactionId || "-";
+              } else if (mode === "cheque") {
+                transactionDetails = receipt.chequeNumber || "-";
+              } else if (mode === "dd") {
+                transactionDetails = receipt.ddNumber || "-";
+              }
+              // for "cash" and anything else, it remains "-"
               return (
                 <tr key={index}>
                   <td>{formatDate(receipt.date)}</td>
