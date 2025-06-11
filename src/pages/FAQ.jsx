@@ -7,6 +7,7 @@ import ContactForm from "./ContactForm";
 import { useForm } from "react-hook-form";
 import { Filter } from "bad-words";
 import Loader from "../utils/loader";
+import toast from "react-hot-toast";
 
 const faqs = [
   {
@@ -229,7 +230,8 @@ const FAQ = () => {
       // Send form data to the backend API
       // const response = await fetch("http://localhost:5000/contact", {
       const response = await fetch(
-        "https://memberpanel.defencehousingsociety.com/contact",
+        // "https://memberpanel.defencehousingsociety.com/contact",
+        "http://localhost:4000/defenceWebsiteRoutes/contactus",
         {
           // Adjust the endpoint URL as needed
           method: "POST",
@@ -242,16 +244,19 @@ const FAQ = () => {
 
       if (response.ok) {
         setSubmitStatus("success");
-        alert("Form submitted successfully!");
+        // alert("Form submitted successfully!");
+        toast.success("form submitted successfully.");
         reset();
       } else {
         setSubmitStatus("error");
-        alert("Error submitting form. Please try again.");
+        toast.error("error submitting form.Please try again");
+        // alert("Error submitting form. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
-      alert("Error submitting form. Please try again.");
+      // alert("Error submitting form. Please try again.");
+      toast.error("error submitting form.Please try again");
     } finally {
       setIsLoading(false);
     }
