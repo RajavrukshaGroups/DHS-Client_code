@@ -89,6 +89,7 @@ const TransferProject = () => {
               <tr className="no-records">
                 <td colSpan="7">No records found</td>
               </tr>
+              
             )}
           </tbody>
         </table>
