@@ -6,8 +6,8 @@ import axios from "axios"; // Make sure you have axios installed
 import "./styles/DownloadBrochure.css";
 
 const DownloadApplication = () => {
-  const [isReadMore, setIsReadMore] = useState(false);
-  const [showMore, setShowMore] = useState(false);
+  const [ isReadMore, setIsReadMore ] = useState(false);
+  const [ showMore, setShowMore ] = useState(false);
 
   const {
     register,
@@ -15,24 +15,43 @@ const DownloadApplication = () => {
     formState: { errors },
   } = useForm();
 
+  // const onSubmit = async (data) => {
+  //   try {
+  //     // Save data to the database
+  //     // await axios.post(
+  //     //   "https://memberpanel.defencehousingsociety.com/submitApplication",
+  //     //   data
+  //     // );
+  //     await axios.post('http://localhost:4000/defenceWebsiteRoutes/download', data);
+
+  //     // Trigger the PDF download
+  //     console.log("Data Submitted Successfully:",data)
+  //     handleDownload();
+
+  //     alert("Form submitted and data saved successfully!");
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     alert("Error submitting form. Please try again.");
+  //   }
+  // };
+  
   const onSubmit = async (data) => {
-    try {
-      // Save data to the database
-      await axios.post(
-        "https://memberpanel.defencehousingsociety.com/submitApplication",
-        data
-      );
-      // await axios.post('http://localhost:5000/submitApplication', data);
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/defenceWebsiteRoutes/download",
+      data,
+      { responseType: "blob" }
+    );
 
-      // Trigger the PDF download
-      handleDownload();
+    const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+    saveAs(pdfBlob, "ApplicationForm.pdf");
 
-      alert("Form submitted and data saved successfully!");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Error submitting form. Please try again.");
-    }
-  };
+    alert("Form submitted and PDF downloaded!");
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("Error submitting form. Please try again.");
+  }
+};
 
   const handleDownload = () => {
     const pdfPath = `${process.env.PUBLIC_URL}/application.pdf`;
