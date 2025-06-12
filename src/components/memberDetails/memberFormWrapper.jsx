@@ -54,6 +54,7 @@ const MemberFormWrapper = () => {
    date: "",
    numberOfShares: "2",
    
+   
    shareFee: "2000",
    memberShipFee: "100",
    applicationFee: "200",
