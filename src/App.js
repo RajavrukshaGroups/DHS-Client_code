@@ -8,8 +8,8 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx"
-import  NewOnlineApplication from "./pages/newOnlineApplication.jsx"
+import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx";
+import  NewOnlineApplication from "./pages/newOnlineApplication.jsx";
 import TapasihalliPage from "./pages/Tapasihalli/TapasihalliPage";
 import MarasandraPage from "./pages/Marasandra/MarasandraPage";
 import CustomNavbar from "./components/Header/header";
@@ -56,15 +56,15 @@ function App() {
         <HeaderSelector />
         <NavBarSelector />
          <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: "#333",
-            color: "#fff",
-          },
-        }}
-        reverseOrder={false}
+         position="top-right"
+         toastOptions={{
+           duration: 4000,
+           style: {
+             background: "#333",
+             color: "#fff",
+           },
+         }}
+         reverseOrder={false}
       />
         <ToastContainer 
           position="top-right"
