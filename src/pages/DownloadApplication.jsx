@@ -45,7 +45,6 @@ const DownloadApplication = () => {
 
     const pdfBlob = new Blob([response.data], { type: "application/pdf" });
     saveAs(pdfBlob, "ApplicationForm.pdf");
-
     alert("Form submitted and PDF downloaded!");
   } catch (error) {
     console.error("Error submitting form:", error);

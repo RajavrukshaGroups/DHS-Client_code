@@ -15,24 +15,22 @@ const DownloadBrochure = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      // Save data to the database
-      await axios.post(
-        "https://memberpanel.defencehousingsociety.com/brochure",
-        // "http://localhost:5000/brochure",
-        data
-      );
 
-      // Trigger the PDF download
-      handleDownload();
-
-      alert("Form submitted and data saved successfully!");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Error submitting form. Please try again.");
-    }
-  };
+const onSubmit = async (data) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/defenceWebsiteRoutes/brochure",
+      data,
+      { responseType: "blob" }
+    );
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    saveAs(blob, "Brochure.pdf");
+    alert("Brochure downloaded successfully!");
+  } catch (error) {
+    console.error("Error downloading brochure:", error);
+    alert("Failed to download. Please try again.");
+  }
+};
 
   const handleDownload = () => {
     const pdfPath = `${process.env.PUBLIC_URL}/DHS_Brochure_V5.pdf`;

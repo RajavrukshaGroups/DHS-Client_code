@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { FaRegEye } from 'react-icons/fa';
 import axios from 'axios';
 import { Card, Container, Form, Row, Col, Button, Modal } from 'react-bootstrap';
+import Spinner from '../../components/common/Spinner'; // Adjust path as needed
+
 // import axiosInstance from '../../api/interceptors';
 const MemberFormWrapper = () => {
   const { id } = useParams(); // id comes from route like /edit-member/:id
@@ -52,6 +54,7 @@ const MemberFormWrapper = () => {
    date: "",
    numberOfShares: "2",
    
+   
    shareFee: "2000",
    memberShipFee: "100",
    applicationFee: "200",
@@ -72,7 +75,9 @@ const MemberFormWrapper = () => {
   const navigate = useNavigate();
   const [memberPhoto, setMemberPhoto] = useState(null);
   const [memberSign, setMemberSign] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [memberPhotoPreview, setMemberPhotoPreview] = useState(null);
+const [memberSignPreview, setMemberSignPreview] = useState(null);
   // Fetch existing member data for editing
 
   useEffect(() => {
@@ -166,39 +171,79 @@ const MemberFormWrapper = () => {
   };
   
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    if (name === 'memberPhoto') setMemberPhoto(files[0]);
-    if (name === 'memberSign') setMemberSign(files[0]);
-  };
+  // const handleFileChange = (e) => {
+  //   const { name, files } = e.target;
+  //   if (name === 'memberPhoto') setMemberPhoto(files[0]);
+  //   if (name === 'memberSign') setMemberSign(files[0]);
+  // };
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
+          const handleFileChange = (e) => {
+          const { name, files } = e.target;
+          
+          if (files && files[0]) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (name === 'memberPhoto') {
+                setMemberPhotoPreview(event.target.result);
+                setMemberPhoto(files[0]);
+              } else if (name === 'memberSign') {
+                setMemberSignPreview(event.target.result);
+                setMemberSign(files[0]);
+              }
+            };
+            reader.readAsDataURL(files[0]);
+          }
+        };
+      // const handleSubmit = async (e) => {
+      //   e.preventDefault();
+      //   const data = new FormData();
+      //   for (const key in formData) data.append(key, formData[key]);
+      //   if (memberPhoto) data.append('memberPhoto', memberPhoto);
+      //   if (memberSign) data.append('memberSign', memberSign);
 
-        const data = new FormData();
-        for (const key in formData) data.append(key, formData[key]);
-        if (memberPhoto) data.append('memberPhoto', memberPhoto);
-        if (memberSign) data.append('memberSign', memberSign);
+      //   // ✅ Send OTP
+      //   try {
+      //     await axios.post("http://localhost:4000/defenceWebsiteRoutes/send-otp", {
+      //       email: formData.email,
+      //     });
 
-        // ✅ Send OTP
-        try {
-          await axios.post("http://localhost:4000/defenceWebsiteRoutes/send-otp", {
-            email: formData.email,
-          });
+      //     // ✅ Redirect to OTP verification
+      //     navigate("/otpverification", {
+      //       state: { formData, memberPhoto, memberSign },
+      //     });
+      //   } catch (err) {
+      //     console.error("OTP send failed", err);
+      //     toast.error("Failed to send OTP. Try again.");
+      //   }
+      // };
 
-          // ✅ Redirect to OTP verification
-          navigate("/otpverification", {
-            state: { formData, memberPhoto, memberSign },
-          });
-        } catch (err) {
-          console.error("OTP send failed", err);
-          toast.error("Failed to send OTP. Try again.");
-        }
-      };
-
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          setLoading(true); // Activate spinner
+          
+          try {
+            await axios.post("http://localhost:4000/defenceWebsiteRoutes/send-otp", {
+              email: formData.email,
+            });
+            navigate("/otpverification", {
+              state: { formData, memberPhoto, memberSign },
+            });
+          } catch (err) {
+            toast.error("Failed to send OTP. Try again.");
+          } finally {
+            setLoading(false); // Deactivate spinner (even on error)
+          }
+        };
 
   return (
+    
        <Container fluid className="online-application">
+        return (
+  <Container fluid className="online-application">
+    {loading && <Spinner />} {/* Add this line */}
+    {/* Rest of your JSX */}
+  </Container>
+);
           <div className="banner">
             <div className="banner-content">
               <h1 style={{ color: 'white' }}>ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.</h1>
@@ -211,6 +256,7 @@ const MemberFormWrapper = () => {
               <div className="loading-spinner"></div>
             </div>
           )} */}
+          
     
     <div className="min-h-screen w-full" style={{ backgroundColor: 'oklch(0.92 0.04 252.1)' }}>
       <div className="p-6 max-w-5xl w-full mx-auto">
@@ -226,41 +272,118 @@ const MemberFormWrapper = () => {
 
           {/* Image Uploads */}
 
-          <div className="mb-6">
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                Member Photo
-              </label>
-              <input
-                type="file"
-                name="memberPhoto"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 p-2"
-              />
-              {formErrors.memberPhoto && <p className="text-red-500 text-sm">{formErrors.memberPhoto}</p>}
-            </div>
+        {/* Member Photo Upload with Preview */}
 
-            <div className="mb-6">
-              <label className="block mb-2 text-sm font-medium text-gray-700">
-                Member Signature
-              </label>
+           {/* Image Uploads with Previews */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+  {/* Member Photo */}
+  <div className="bg-white p-4 rounded-lg shadow-sm">
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Member Photo <span className="text-red-500">*</span>
+    </label>
+    <div className="flex items-center space-x-4">
+      <div className="flex-1">
+        <input
+          type="file"
+          name="memberPhoto"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="block w-full text-sm text-gray-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-md file:border-0
+            file:text-sm file:font-semibold
+            file:bg-blue-50 file:text-blue-700
+            hover:file:bg-blue-100"
+          required
+        />
+      </div>
+      {memberPhotoPreview && (
+        <div className="relative">
+          <img
+            src={memberPhotoPreview}
+            alt="Member Preview"
+            className="w-16 h-16 rounded-full object-cover border-2 border-blue-200 preview-image"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setMemberPhotoPreview(null);
+              setMemberPhoto(null);
+            }}
+            className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 text-xs"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+    </div>
+    <p className="mt-1 text-xs text-gray-500">
+      Upload a clear passport-size photo (Max 2MB)
+    </p>
+  </div>
+
+  {/* Member Signature */}
+  <div className="bg-white p-4 rounded-lg shadow-sm">
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Signature <span className="text-red-500">*</span>
+    </label>
+          <div className="flex items-center space-x-4">
+            <div className="flex-1">
               <input
                 type="file"
                 name="memberSign"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 p-2"
+                className="block w-full text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-blue-50 file:text-blue-700
+                  hover:file:bg-blue-100"
+                required
               />
-              {formErrors.memberSign && <p className="text-red-500 text-sm">{formErrors.memberSign}</p>}
             </div>
-
+            {memberSignPreview && (
+              <div className="relative">
+                <img
+                  src={memberSignPreview}
+                  alt="Signature Preview"
+                  className="w-20 h-12 object-contain border border-gray-200 preview-image"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMemberSignPreview(null);
+                    setMemberSign(null);
+                  }}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 text-xs"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">
+            Upload your signature (White background preferred)
+          </p>
+        </div>
+      </div>
             <div className="flex justify-start mt-6">
-              <button
-              type="submit"
-              
-            >
-             submit
-            </button>
+             <button
+                type="submit"
+                disabled={loading}
+                className={`px-4 py-2 bg-blue-600 text-white rounded-md ${
+                  loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'
+                }`}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center">
+                    <FaSpinner className="animate-spin mr-2" /> Submitting...
+                  </span>
+                ) : (
+                  'Submit'
+                )}
+              </button>
             </div>
         </form>
       </div>
