@@ -21,7 +21,7 @@ const TransferProject = () => {
 
       try {
         const response = await axios.get(
-            `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+            `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
           );
         console.log("Transfer Data in transfer project:", response);
         setTransferData(response.data);

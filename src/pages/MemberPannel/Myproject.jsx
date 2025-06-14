@@ -32,7 +32,7 @@ const MyProject = () => {
         //   "https://memberpanel.defencehousingsociety.com/fetchUserData",
         //   {
         const response = await axios.get(
-          "http://localhost:4000/defenceWebsiteRoutes/fetchUserData",
+          "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/fetchUserData",
           {
             params: { seniority_id: seniorityId },
           }
