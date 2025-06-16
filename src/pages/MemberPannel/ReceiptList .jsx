@@ -65,7 +65,7 @@ const ReceiptList = () => {
 
       try {
         const response = await axios.get(
-          "https://memberpanel.defencehousingsociety.com/defenceWebsiteRoutes/fetchReceipts",
+          "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/fetchReceipts",
           {
             params: { seniority_id: seniorityId },
           }
@@ -94,7 +94,7 @@ const ReceiptList = () => {
   }, []);
 
   const handleViewReceipt = (receiptId, paymentId) => {
-    const url = `https://memberpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
+    const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     window.open(url, "_blank");
   };
 

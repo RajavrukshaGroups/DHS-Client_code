@@ -32,7 +32,7 @@ const ExtraCharges = () => {
         //   params: { seniority_id: seniorityId }
         // });
         const response = await axios.get(
-          "https://memberpanel.defencehousingsociety.com/defenceWebsiteRoutes/extracharges",
+          "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/extracharges",
           {
             params: { seniority_id: seniorityId },
           }
@@ -59,7 +59,7 @@ const ExtraCharges = () => {
   };
 
   const handleViewReceipt = (receiptId, paymentId) => {
-    const url = `https://memberpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
+    const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     window.open(url, "_blank");
   };
 

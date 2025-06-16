@@ -19,7 +19,7 @@ const DownloadBrochure = () => {
 const onSubmit = async (data) => {
   try {
     const response = await axios.post(
-      "https://memberpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
+      "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
       data,
       { responseType: "blob" }
     );

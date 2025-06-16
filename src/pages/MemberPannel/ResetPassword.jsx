@@ -44,14 +44,14 @@ const ResetPassword = () => {
       }
 
       try {
-        const response = await axios.post('https://memberpanel.defencehousingsociety.com/resetpassword', fromData);
+        const response = await axios.post('https://adminpanel.defencehousingsociety.com/member/resetpassword', fromData);
         // const response = await axios.post('http://localhost:4000/member/resetpassword', fromData);
 
         console.log(response.data);
         toast.success('Password changed successfully');
       } catch (error) {
         console.error('Error submitting form', error);
-        alert('Error submitting form');
+        toast.error('Error submitting form');
       }
     }
   };

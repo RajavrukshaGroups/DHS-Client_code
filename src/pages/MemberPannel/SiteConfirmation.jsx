@@ -12,7 +12,7 @@ const ViewSiteConfirmation = () => {
       }
 
       try {
-        const response = await axios.get('https://memberpanel.defencehousingsociety.com/getUserPk', {
+        const response = await axios.get('https://adminpanel.defencehousingsociety.com/getUserPk', {
           params: { seniority_id: seniorityId }
         });
         const userPk = response.data.user_pk;

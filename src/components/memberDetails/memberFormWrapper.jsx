@@ -222,7 +222,7 @@ const [memberSignPreview, setMemberSignPreview] = useState(null);
           setLoading(true); // Activate spinner
           
           try {
-            await axios.post("https://memberpanel.defencehousingsociety.com/defenceWebsiteRoutes/send-otp", {
+            await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/send-otp", {
               email: formData.email,
             });
             navigate("/otpverification", {
