@@ -59,7 +59,7 @@ const ContactUs = () => {
       // const response = await fetch("http://localhost:5010/contact", {
       const response = await fetch(
         // "https://memberpanel.defencehousingsociety.com/contact",
-        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
+        "https://memberpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
 
         {
           // Adjust the endpoint URL as needed

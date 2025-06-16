@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MemberPannel_Styles/ResetPassword.css';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-hot-toast";
 
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-
   const [seniorityId, setSeniorityId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  console.log(seniorityId, "seniority id which is added to the session storage");
 
   useEffect(() => {
     // Retrieve the seniority ID from session storage
@@ -42,11 +44,11 @@ const ResetPassword = () => {
       }
 
       try {
-        // const response = await axios.post('http://localhost:5000/resetpassword', fromData);
         const response = await axios.post('https://memberpanel.defencehousingsociety.com/resetpassword', fromData);
+        // const response = await axios.post('http://localhost:4000/member/resetpassword', fromData);
 
         console.log(response.data);
-        alert('Form submitted successfully');
+        toast.success('Password changed successfully');
       } catch (error) {
         console.error('Error submitting form', error);
         alert('Error submitting form');
