@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { saveAs } from "file-saver";
 import axios from "axios"; // Make sure you have axios installed
+import { toast } from "react-hot-toast";
+
 import "./styles/DownloadBrochure.css";
 
 const DownloadApplication = () => {
@@ -15,40 +17,22 @@ const DownloadApplication = () => {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = async (data) => {
-  //   try {
-  //     // Save data to the database
-  //     // await axios.post(
-  //     //   "https://memberpanel.defencehousingsociety.com/submitApplication",
-  //     //   data
-  //     // );
-  //     await axios.post('http://localhost:4000/defenceWebsiteRoutes/download', data);
-
-  //     // Trigger the PDF download
-  //     console.log("Data Submitted Successfully:",data)
-  //     handleDownload();
-
-  //     alert("Form submitted and data saved successfully!");
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     alert("Error submitting form. Please try again.");
-  //   }
-  // };
   
   const onSubmit = async (data) => {
   try {
     const response = await axios.post(
       "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/download",
+      // "http://localhost:4000/defenceWebsiteRoutes/download",
       data,
       { responseType: "blob" }
     );
 
     const pdfBlob = new Blob([response.data], { type: "application/pdf" });
     saveAs(pdfBlob, "ApplicationForm.pdf");
-    alert("Form submitted and PDF downloaded!");
+    toast.success("Form submitted and PDF downloaded!");
   } catch (error) {
     console.error("Error submitting form:", error);
-    alert("Error submitting form. Please try again.");
+    toast.error("Error submitting form. Please try again.");
   }
 };
 

@@ -12,11 +12,8 @@ function AddConfirmationletter() {
     const [memberData, setMemberData] = useState({});
     const [loading, setLoading] = useState(false);
      const navigate = useNavigate();  
-  
 
 console.log(memberData,'memberdatasssssssssssssssssssssssss');
-
-
     useEffect(() => {
       const fetchMember = async () => {
         try {
@@ -46,7 +43,8 @@ console.log(memberData,'memberdatasssssssssssssssssssssssss');
 
         try {
           const response = await axiosInstance.post(
-            `http://localhost:3000/member/add-confirmation/${id}`,
+            // `http://localhost:3000/member/add-confirmation/${id}`,
+            `https://adminpanel.defencehousingsociety.com/member/add-confirmation/${id}`,
             data,
             { headers: { "Content-Type": "multipart/form-data" } }
           );

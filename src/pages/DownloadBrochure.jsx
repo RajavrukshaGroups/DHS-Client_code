@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import { saveAs } from "file-saver";
 import axios from "axios"; // Make sure you have axios installed
+import { toast } from "react-hot-toast";
+
 import "./styles/DownloadBrochure.css";
 
 const DownloadBrochure = () => {
@@ -20,15 +22,16 @@ const onSubmit = async (data) => {
   try {
     const response = await axios.post(
       "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
+      // "http://localhost:4000//defenceWebsiteRoutes/brochure",
       data,
-      { responseType: "blob" }
+      { responseType: "blob" }   
     );
     const blob = new Blob([response.data], { type: "application/pdf" });
     saveAs(blob, "Brochure.pdf");
-    alert("Brochure downloaded successfully!");
+    toast.success("Brochure downloaded successfully!");
   } catch (error) {
     console.error("Error downloading brochure:", error);
-    alert("Failed to download. Please try again.");
+    toast.error("Failed to download. Please try again.");
   }
 };
 
