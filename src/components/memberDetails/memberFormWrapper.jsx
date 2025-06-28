@@ -238,12 +238,12 @@ const [memberSignPreview, setMemberSignPreview] = useState(null);
   return (
     
        <Container fluid className="online-application">
-        return (
+        {/* return ( */}
   <Container fluid className="online-application">
     {loading && <Spinner />} {/* Add this line */}
     {/* Rest of your JSX */}
   </Container>
-);
+{/* ); */}
           <div className="banner">
             <div className="banner-content">
               <h1 style={{ color: 'white' }}>ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.</h1>

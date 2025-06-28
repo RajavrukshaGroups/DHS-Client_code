@@ -9,6 +9,7 @@ import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { Card, Container, Form, Row, Col, Button, Modal } from 'react-bootstrap';
 import { FaUserTie, FaAddressCard, FaBuilding, FaMoneyCheckAlt } from 'react-icons/fa';
 import './styles/OnlineApplication.css';
+import { toast } from 'react-toastify';
 
 
 
@@ -174,7 +175,7 @@ const OnlineApplication = () => {
 
   useEffect(() => {
     // Fetch project names from API
-    axios.get('https://memberpanel.defencehousingsociety.com/api/projectNames')
+    axios.get('https://adminpanel.defencehousingsociety.com/api/projectNames')
 
       // axios.get('http://localhost:5000/api/projectNames')
       .then(response => {
@@ -187,7 +188,7 @@ const OnlineApplication = () => {
 
 
   useEffect(() => {
-    axios.get('https://memberpanel.defencehousingsociety.com/api/plotDimensions')
+    axios.get('https://adminpanel.defencehousingsociety.com/api/plotDimensions')
       // axios.get('http://localhost:5000/api/plotDimensions')
       .then(response => {
         setPlotDimensions(response.data);
@@ -266,7 +267,7 @@ const OnlineApplication = () => {
 
       try {
         // const response = await axios.post('http://localhost:5000/api/submit', formData);
-        const response = await axios.post('https://memberpanel.defencehousingsociety.com/api/submit', formData);
+        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
 
         setFormId(response.data.formId);
         setOtpSent(true); // Show OTP input field
@@ -282,7 +283,7 @@ const OnlineApplication = () => {
       // Verify OTP and complete form submission
       try {
         // const response = await axios.post('http://localhost:5000/api/verify-otp-and-submit', { formId, otp });
-        const response = await axios.post('https://memberpanel.defencehousingsociety.com/api/verify-otp-and-submit', { formId, otp });
+        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/verify-otp-and-submit', { formId, otp });
 
         if (response.data.success) {
           setShowModal(true); // Show the success modal
@@ -343,17 +344,17 @@ const OnlineApplication = () => {
       };
 
       // const response = await axios.post('http://localhost:5000/api/submit', formData);
-      const response = await axios.post('https://memberpanel.defencehousingsociety.com/api/submit', formData);
+      const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
 
       if (response.data.formId) {
         setFormId(response.data.formId); // Update formId
-        alert('OTP has been resent to your email.');
+        toast.success('OTP has been resent to your email.');
       } else {
-        alert('Failed to resend OTP. Please try again.');
+        toast.error('Failed to resend OTP. Please try again.');
       }
     } catch (error) {
       console.error('Error resending OTP', error);
-      alert('Error resending OTP');
+      toast.error('Error resending OTP');
     } finally {
       setLoading(false); // Hide loading spinner
     }

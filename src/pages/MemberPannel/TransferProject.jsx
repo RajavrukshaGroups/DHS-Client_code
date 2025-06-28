@@ -9,31 +9,65 @@ const TransferProject = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   console.log("transfer project page loaded")
+  //   const fetchTransferData = async () => {
+  //     const seniorityId = sessionStorage.getItem("seniority_id");
+
+  //     if (!seniorityId) {
+  //       setError("No seniority ID found in session");
+  //       setLoading(false);
+  //       return;
+  //     }
+
+  //     try {
+  //       const response = await axios.get(
+  //           `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+  //         );
+  //       console.log("Transfer Data in transfer project:", response);
+  //       setTransferData(response.data);
+  //     } catch (error) {
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchTransferData();
+  // }, []);
+
   useEffect(() => {
-    const fetchTransferData = async () => {
-      const seniorityId = sessionStorage.getItem("seniority_id");
 
-      if (!seniorityId) {
-        setError("No seniority ID found in session");
-        setLoading(false);
-        return;
-      }
+  const fetchTransferData = async () => {
+    const seniorityId = sessionStorage.getItem("seniority_id");
 
-      try {
-        const response = await axios.get(
-            `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
-          );
-        console.log("Transfer Data in transfer project:", response);
+    if (!seniorityId) {
+      setError("No seniority ID found in session");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+      );
+      if (response.status === 200 && Array.isArray(response.data)){
         setTransferData(response.data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      } else {
+        setTransferData([]); // In case of empty or invalid data
       }
-    };
-
-    fetchTransferData();
-  }, []);
+    } catch (err) {
+      if ( err.response && err.response.status === 404 ) {
+        setTransferData([]); // No records found but not an error
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchTransferData();
+}, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -89,7 +123,6 @@ const TransferProject = () => {
               <tr className="no-records">
                 <td colSpan="7">No records found</td>
               </tr>
-              
             )}
           </tbody>
         </table>

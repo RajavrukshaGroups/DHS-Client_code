@@ -5,6 +5,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faClock, faPhone, faUser, faDesktop } from '@fortawesome/free-solid-svg-icons';
+import toast from "react-hot-toast";
 
 const MemberHeader = () => {
   // const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const MemberHeader = () => {
       const seniorityId = sessionStorage.getItem('seniority_id');
       if (!seniorityId) {
         setError('No seniority ID found in session');
-        alert('Please login');
+        toast.error('Please login');
         navigate('/memberlogin');
         setLoading(false);
         return;

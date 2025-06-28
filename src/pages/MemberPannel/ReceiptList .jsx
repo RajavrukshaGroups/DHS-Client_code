@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from "axios";
+import axios from "axios";  
 import "./MemberPannel_Styles/Receipt.css";
 
 const ReceiptList = () => {

@@ -29,14 +29,14 @@ try {
     toast.success(response.data.message)
     // Toast.success(response.data.message)
   } else {
-    alert(response.data.message); 
+    toast.error(response.data.message); 
   }
 } catch (error) {
   console.error("Login error:", error);
   if (error.response && error.response.data && error.response.data.message) {
-    alert(error.response.data.message);
+    toast.error(error.response.data.message);
   } else {
-    alert("An error occurred. Please try again.");
+    toast.error("An error occurred. Please try again.");
   }
 }
 };
