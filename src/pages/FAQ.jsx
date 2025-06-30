@@ -231,7 +231,7 @@ const FAQ = () => {
       // const response = await fetch("http://localhost:5000/contact", {
       const response = await fetch(
         // "https://memberpanel.defencehousingsociety.com/contact",
-        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
+        "http://localhost:4000/defenceWebsiteRoutes/contactus",
         {
           // Adjust the endpoint URL as needed
           method: "POST",

@@ -33,7 +33,7 @@ const Dashboard = () => {
 
       try {
         const response = await axios.get(
-          `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/dashboard/${seniorityId}`
+          `http://localhost:4000/defenceWebsiteRoutes/dashboard/${seniorityId}`
         );
         console.log("Member Data:", response.data.data);
         if (response) {
@@ -53,7 +53,7 @@ const Dashboard = () => {
   const handleViewConfirmation = async (userId) => {
     try {
       const res = await axios.get(
-        `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`
+        `http://localhost:4000/receipt/view-confirmation/${userId}`
       );
 
       // if (!res.data || res.data.error || !res.data.confirmationLetterExists) {
@@ -62,7 +62,7 @@ const Dashboard = () => {
       // }
 
       // If letter exists, open it
-      const url = `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`;
+      const url = `http://localhost:4000/receipt/view-confirmation/${userId}`;
       window.open(url, "_blank");
     } catch (error) {
       console.error("Error fetching site confirmation:", error);
@@ -77,7 +77,7 @@ const Dashboard = () => {
 
   const handleShareCertificate = (receiptId) => {
     // const url = `http://localhost:3000/receipt/get-share-certificate/${receiptId}`;
-    const url = `https://adminpanel.defencehousingsociety.com/receipt/get-share-certificate/${receiptId}`;
+    const url = `http://localhost:4000/receipt/get-share-certificate/${receiptId}`;
     window.open(url, "_blank");
   };
 

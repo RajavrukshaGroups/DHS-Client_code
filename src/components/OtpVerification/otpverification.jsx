@@ -35,7 +35,7 @@ const handleResend = async () => {
     // const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
     //   email: formData.email,
     // });
-      const res= await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/resend-otp", {
+      const res= await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
                 email: formData.email,
               });
     if (res.data.success) {
@@ -102,7 +102,7 @@ const handleResend = async () => {
       setError("");
 
       // ✅ Verify OTP first
-      const verifyRes = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp", {
+      const verifyRes = await axios.post("http://localhost:4000/defenceWebsiteRoutes/verify-otp", {
         email: formData.email,
         otp: finalOtp,
       });
@@ -121,7 +121,7 @@ const handleResend = async () => {
       if (memberPhoto) submissionData.append("memberPhoto", memberPhoto);
       if (memberSign) submissionData.append("memberSign", memberSign);
 
-      await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/add-onlinemember", submissionData, {
+      await axios.post("http://localhost:4000/defenceWebsiteRoutes/add-onlinemember", submissionData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

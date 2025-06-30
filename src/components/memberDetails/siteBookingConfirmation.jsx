@@ -5,7 +5,7 @@ export default function SiteBookingConfirmation({ member, onBack }) {
   const { userId } = member || {};
    return (
    <div className="mt-5 max-w-4xl mx-auto border border-gray-300 shadow-sm bg-white">
-        <img src="https://adminpanel.defencehousingsociety.com/img/letterheader.jpg" alt="" />
+        <img src="http://localhost:4000/img/letterheader.jpg" alt="" />
         
      
       {/* Document reference numbers */}
@@ -73,7 +73,7 @@ export default function SiteBookingConfirmation({ member, onBack }) {
         </button>
       </div>
 
-      <img src="https://adminpanel.defencehousingsociety.com/img/footerSign.jpg" alt="" />
+      <img src="http://localhost:4000/img/footerSign.jpg" alt="" />
 
       
     </div>

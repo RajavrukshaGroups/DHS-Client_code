@@ -10,13 +10,37 @@ import { toast } from "react-toastify";
 const MemberLogin = () => {
   const [seniorityId, setSeniorityId] = useState("");
   const [password, setPassword] = useState("");
+   const [email, setEmail] = useState(""); // or pass via props/context
   const navigate = useNavigate();
+
+ const handleReset = async (seniorityId) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/defenceWebsiteRoutes/forgot-password",
+      { seniority_id: seniorityId }
+    );
+
+    if (response.data.success) {
+      toast.success("OTP sent to your email");
+      sessionStorage.setItem("seniority_id", seniorityId);
+      navigate("/verify-otp"); // 👉 go to OTP page
+    } else {
+      toast.error(response.data.message || "Something went wrong");
+    }
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    toast.error(
+      error.response?.data?.message || "Something went wrong. Try again."
+    );
+  }
+};
+
 
   const handleSubmit = async (event) => {
   event.preventDefault();
 try {
   const response = await axios.post(
-    "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/memberLogin",
+    "http://localhost:4000/defenceWebsiteRoutes/memberLogin",
     {
       seniority_id: seniorityId,
       password: password,
@@ -79,18 +103,16 @@ try {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+            
               <div className="form-group message-btn">
                 <button type="submit" className="theme-btn btn-one">
                   Login
                 </button>
               </div>
+            
             </form>
-            {/* <div className="othre-text">
-              <p>
-                Have not any account?
-                <a href="signup.html">Register Now</a>
-              </p>
-            </div> */}
+              <button onClick={()=>handleReset(seniorityId)}>Forgot Password</button>
+             
           </div>
         </div>
       </div>
