@@ -33,6 +33,7 @@
     "react-bootstrap-icons": "^1.11.4",
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.5",
+    "react-feather": "^2.0.10",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.5.2",

@@ -23,7 +23,7 @@ const MemberLogin = () => {
     if (response.data.success) {
       toast.success("OTP sent to your email");
       sessionStorage.setItem("seniority_id", seniorityId);
-      navigate("/verify-otp"); // 👉 go to OTP page
+      navigate("/forgotPassword"); // 👉 go to OTP page
     } else {
       toast.error(response.data.message || "Something went wrong");
     }
@@ -111,7 +111,22 @@ try {
               </div>
             
             </form>
-              <button onClick={()=>handleReset(seniorityId)}>Forgot Password</button>
+    <div className="form-group">
+  
+<div className="form-group forgot-password-container">
+  <a
+    href="#"
+    onClick={(e) => {
+      e.preventDefault();
+      handleReset(seniorityId);
+    }}
+    className="forgot-password-link"
+  >
+    Forgot Password?
+  </a>
+</div>
+
+</div>
              
           </div>
         </div>

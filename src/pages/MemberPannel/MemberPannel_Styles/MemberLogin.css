@@ -76,6 +76,27 @@
   background-color: #0056b3;
 }
 
+
+.forgot-password-container {
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.forgot-password-link {
+  color: #2e6bdc;
+  font-size: 15px;
+  font-weight: 550;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #1a4fac;
+  text-decoration: underline;
+}
+
+
 @media screen and (max-width:767px) {
   .tabs-content {
     width: 100%;

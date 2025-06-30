@@ -48,8 +48,7 @@ const MemberFormWrapper = () => {
   nomineeAge: '',
   nomineeRelationship: '',
   nomineeAddress: '',
-   // Add these for SeniorityDetails
-
+  // Add these for SeniorityDetails
   // Membership Details
    date: "",
    numberOfShares: "2",
