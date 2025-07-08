@@ -48,8 +48,7 @@ const MemberFormWrapper = () => {
   nomineeAge: '',
   nomineeRelationship: '',
   nomineeAddress: '',
-   // Add these for SeniorityDetails
-
+  // Add these for SeniorityDetails
   // Membership Details
    date: "",
    numberOfShares: "2",
@@ -222,7 +221,7 @@ const [memberSignPreview, setMemberSignPreview] = useState(null);
           setLoading(true); // Activate spinner
           
           try {
-            await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/send-otp", {
+            await axios.post("http://localhost:4000/defenceWebsiteRoutes/send-otp", {
               email: formData.email,
             });
             navigate("/otpverification", {

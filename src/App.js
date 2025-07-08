@@ -4,8 +4,8 @@ import {
   Routes,
   Route,
   useLocation,
-  
 } from "react-router-dom";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx";
@@ -47,6 +47,7 @@ import Gallery from "./components/Gallery/gallery.jsx";
 import Otpverification from "./components/OtpVerification/otpverification.jsx";
 import {Helmet} from "react-helmet";
 import { Toaster } from "react-hot-toast";
+import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPasswordOTP.jsx"
 
 function App() {
   return (
@@ -112,7 +113,8 @@ function App() {
           <Route path="/ContactAdmin" element={<ContactAdmin />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/otpverification" element={<Otpverification />} />
-          <Route path="*" element={<Error />} />
+          <Route path="/forgotPassword" element={<VerifyForgotPassword/>} />
+            <Route path="*" element={<Error />} />
         </Routes> 
         <Footer />
         <ScrollToTopButton />
