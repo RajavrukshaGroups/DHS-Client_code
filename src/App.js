@@ -48,6 +48,7 @@ import Otpverification from "./components/OtpVerification/otpverification.jsx";
 import {Helmet} from "react-helmet";
 import { Toaster } from "react-hot-toast";
 import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPasswordOTP.jsx"
+import SlidingPopupContact from "./components/SlidingPopupContact/slidingPopupContact.jsx";
 
 function App() {
   return (
@@ -145,7 +146,7 @@ function PopupAdminSelector() {
   const shouldShowPopup = allowedRoutes.includes(location.pathname);
 
   // Conditionally render PopupAdmin
-  return shouldShowPopup ? <PopupAdmin /> : null;
+  return shouldShowPopup ? <SlidingPopupContact /> : null;
 }
 
 function NavBarSelector() {

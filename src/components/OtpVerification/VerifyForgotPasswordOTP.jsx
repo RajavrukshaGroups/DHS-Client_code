@@ -54,7 +54,7 @@ const VerifyForgotPasswordOTP = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/verify-otp", {
+      const res = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp", {
         seniority_id,
         otp: fullOtp,
       });
@@ -76,7 +76,7 @@ const VerifyForgotPasswordOTP = () => {
   const handleResend = async () => {
     try {
       setResendLoading(true);
-      const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/forgot-password", {
+      const res = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/forgot-password", {
         seniority_id,
       });
 

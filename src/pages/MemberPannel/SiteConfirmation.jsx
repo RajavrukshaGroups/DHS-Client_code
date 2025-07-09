@@ -12,14 +12,14 @@ const ViewSiteConfirmation = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:4000/getUserPk', {
+        const response = await axios.get('https://adminpanel.defencehousingsociety.com/getUserPk', {
           params: { seniority_id: seniorityId }
         });
         const userPk = response.data.user_pk;
         console.log("this is pk : ", userPk)
 
         // Redirect to the URL with user_pk as query parameter
-        window.location.href = `http://localhost:4000/confirmationletterviewonly?user_pk=${userPk}`;
+        window.location.href = `https://adminpanel.defencehousingsociety.com/confirmationletterviewonly?user_pk=${userPk}`;
       } catch (error) {
         console.error('Error fetching user_pk:', error);
       }

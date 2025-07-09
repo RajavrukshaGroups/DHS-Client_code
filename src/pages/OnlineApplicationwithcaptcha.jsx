@@ -175,7 +175,7 @@ const OnlineApplication = () => {
 
   useEffect(() => {
     // Fetch project names from API
-    axios.get('http://localhost:4000/api/projectNames')
+    axios.get('https://adminpanel.defencehousingsociety.com/api/projectNames')
 
       // axios.get('http://localhost:5000/api/projectNames')
       .then(response => {
@@ -188,7 +188,7 @@ const OnlineApplication = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/plotDimensions')
+    axios.get('https://adminpanel.defencehousingsociety.com/api/plotDimensions')
       // axios.get('http://localhost:5000/api/plotDimensions')
       .then(response => {
         setPlotDimensions(response.data);
@@ -262,7 +262,7 @@ const OnlineApplication = () => {
 
       try {
         // const response = await axios.post('http://localhost:5000/api/submit', formData);
-        const response = await axios.post('http://localhost:4000/api/submit', formData);
+        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
 
         setFormId(response.data.formId);
         setOtpSent(true); // Show OTP input field
@@ -278,7 +278,7 @@ const OnlineApplication = () => {
       // Verify OTP and complete form submission
       try {
         // const response = await axios.post('http://localhost:5000/api/verify-otp-and-submit', { formId, otp });
-        const response = await axios.post('http://localhost:4000/api/verify-otp-and-submit', { formId, otp });
+        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/verify-otp-and-submit', { formId, otp });
 
         if (response.data.success) {
           setShowModal(true); // Show the success modal
@@ -339,7 +339,7 @@ const OnlineApplication = () => {
       };
 
       // const response = await axios.post('http://localhost:5000/api/submit', formData);
-      const response = await axios.post('http://localhost:4000/api/submit', formData);
+      const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
 
       if (response.data.formId) {
         setFormId(response.data.formId); // Update formId

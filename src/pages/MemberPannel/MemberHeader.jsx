@@ -26,7 +26,7 @@ const MemberHeader = () => {
       }
       try {
         const response = await axios.get(
-          `http://localhost:4000/defenceWebsiteRoutes/dashboard/${seniorityId}`
+          `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/dashboard/${seniorityId}`
         );
         console.log('Member Data in header:', response.data.data);
         setMembersdata(response.data.data);

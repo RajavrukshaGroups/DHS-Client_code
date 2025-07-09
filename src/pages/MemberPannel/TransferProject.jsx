@@ -49,7 +49,7 @@ const TransferProject = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+        `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
       );
       if (response.status === 200 && Array.isArray(response.data)){
         setTransferData(response.data);

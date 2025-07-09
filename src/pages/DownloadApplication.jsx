@@ -21,7 +21,7 @@ const DownloadApplication = () => {
   const onSubmit = async (data) => {
   try {
     const response = await axios.post(
-      "http://localhost:4000/defenceWebsiteRoutes/download",
+      "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/download",
       // "http://localhost:4000/defenceWebsiteRoutes/download",
       data,
       { responseType: "blob" }

@@ -27,7 +27,7 @@ const ProjectStatus = () => {
         //   params: { seniority_id: seniorityId }
         // });
         const response = await axios.get(
-          "http://localhost:4000/defenceWebsiteRoutes/projectstatus",
+          "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/projectstatus",
           {
             params: { seniority_id: seniorityId },
           }
