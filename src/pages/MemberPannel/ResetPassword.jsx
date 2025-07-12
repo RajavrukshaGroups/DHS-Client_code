@@ -14,7 +14,6 @@ const ResetPassword = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  console.log(seniorityId, "seniority id which is added to the session storage");
   useEffect(() => {
     // Retrieve the seniority ID from session storage
     const storedSeniorityId = sessionStorage.getItem('seniority_id');
