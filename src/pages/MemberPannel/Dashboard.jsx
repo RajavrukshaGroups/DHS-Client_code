@@ -4,25 +4,18 @@ import axios from "axios";
 import "./MemberPannel_Styles/dashboard.css";
 import toast from "react-hot-toast";
 const Dashboard = () => {
-  // const [name, setName] = useState('');
-  // const [sid, setId] = useState('');
-  // const [img, setImg] = useState('');
+ 
   const [userId, setUserid] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [memberData, setMemberdata] = useState([]);
   const navigate = useNavigate();
 
-  console.log("members data", memberData);
 
   useEffect(() => {
     const fetchData = async () => {
       const seniorityId = sessionStorage.getItem("seniority_id");
-      console.log(
-        seniorityId,
-        "seniority id which is added to the session storage"
-      );
-      console.log(seniorityId, "this is the data");
+    
       if (!seniorityId) {
         setError("No seniority ID found in session");
         alert("Please login");
@@ -35,7 +28,6 @@ const Dashboard = () => {
         const response = await axios.get(
           `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/dashboard/${seniorityId}`
         );
-        console.log("Member Data:", response.data.data);
         if (response) {
           setMemberdata(response.data.data);
         }
