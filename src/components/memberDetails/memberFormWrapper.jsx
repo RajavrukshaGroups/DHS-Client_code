@@ -21,7 +21,6 @@ import Spinner from '../../components/common/Spinner'; // Adjust path as needed
 const MemberFormWrapper = () => {
   const { id } = useParams(); // id comes from route like /edit-member/:id
   const [formErrors, setFormErrors] = useState({});
-  console.log(id,"iddddddddddddddddddddd")
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',

@@ -15,7 +15,6 @@ const ViewReceiptHistory = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState(null);
 
-  console.log("receipts data", receiptData);
 
   useEffect(() => {
     const fetchMember = async () => {
@@ -53,7 +52,6 @@ const ViewReceiptHistory = () => {
     }
   };
 
-  console.log("receipts data", receiptData);
 
   useEffect(() => {
     if (!receiptLoading && receiptData.length > 0 && tableRef.current) {
