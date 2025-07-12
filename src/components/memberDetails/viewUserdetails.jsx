@@ -24,7 +24,6 @@ function ViewUserdetails() {
           search
         )}`
       );
-      console.logresponse);
       setMemberDetails(response.data || []);
       setCurrentPage(response.currentPage || 1);
       setTotalPages(Math.max(response.totalPages || 1, 1));
@@ -46,9 +45,7 @@ function ViewUserdetails() {
       const response = await axiosInstance.get(
         `/receipt/checkMembershipFee/${id}`
       );
-      console.log(response, "resssssssssssssssssssssssssssssssssssssssssssss");
       if (response.feeAdded) {
-        console.log(response, "ressssssssssssssssssssssss");
 
         navigate(`/addconfirmationLetter/${id}`);
       } else {
