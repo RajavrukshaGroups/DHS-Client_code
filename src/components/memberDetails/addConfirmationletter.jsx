@@ -8,17 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 function AddConfirmationletter() {
     const { id } = useParams();
-    console.log(id,'idddddddddddddddddddddddddddddd');
     const [memberData, setMemberData] = useState({});
     const [loading, setLoading] = useState(false);
      const navigate = useNavigate();  
 
-console.log(memberData,'memberdatasssssssssssssssssssssssss');
     useEffect(() => {
       const fetchMember = async () => {
         try {
           const response = await axiosInstance.get(`/member/get-confirmation/${id}`);
-            console.log("response", response);
           setMemberData(response);
         } catch (error) {
           console.error("Error fetching member data:", error);
@@ -39,7 +36,6 @@ console.log(memberData,'memberdatasssssssssssssssssssssssss');
     setLoading(true);
 
         const data = Object.fromEntries(formData.entries());
-        console.log("Form Data:", data);
 
         try {
           const response = await axiosInstance.post(
@@ -48,7 +44,6 @@ console.log(memberData,'memberdatasssssssssssssssssssssssss');
             data,
             { headers: { "Content-Type": "multipart/form-data" } }
           );
-          console.log("Response:", response);
           toast.success("Confirmation letter added successfully");
           navigate("/viewsiteBooking")
         } catch (error) {
