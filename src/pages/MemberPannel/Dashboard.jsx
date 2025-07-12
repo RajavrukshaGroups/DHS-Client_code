@@ -32,7 +32,6 @@ const Dashboard = () => {
           setMemberdata(response.data.data);
         }
         const userData = response.data.data;
-        console.log("userdata", userData);
       } catch (error) {
         setError(error.data.message);
       } finally {
@@ -48,12 +47,7 @@ const Dashboard = () => {
         `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`
       );
 
-      // if (!res.data || res.data.error || !res.data.confirmationLetterExists) {
-      //   toast.error("Site confirmation letter not found.");
-      //   return;
-      // }
-
-      // If letter exists, open it
+  
       const url = `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`;
       window.open(url, "_blank");
     } catch (error) {
@@ -62,10 +56,6 @@ const Dashboard = () => {
     }
   };
 
-  // const handleViewShareCert = (userId) => {
-  //   window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlysharecer?user_pk=${userId}`;
-  //   // window.location.href = `http://localhost:4000/viewonlysharecer?user_pk=${userId}`;
-  // };
 
   const handleShareCertificate = (receiptId) => {
     // const url = `http://localhost:3000/receipt/get-share-certificate/${receiptId}`;
