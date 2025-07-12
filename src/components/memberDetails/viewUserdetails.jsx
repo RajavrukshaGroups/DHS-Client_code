@@ -24,7 +24,7 @@ function ViewUserdetails() {
           search
         )}`
       );
-      console.log("response", response);
+      console.logresponse);
       setMemberDetails(response.data || []);
       setCurrentPage(response.currentPage || 1);
       setTotalPages(Math.max(response.totalPages || 1, 1));

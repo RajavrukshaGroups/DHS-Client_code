@@ -12,7 +12,6 @@ function ProppertyDetails({ formData, handleChange, refreshKey,formErrors }) {
     const fetchProjects = async () => {
       try {
         const res = await axiosInstance.get("https://adminpanel.defencehousingsociety.com/project/all-projects");
-        console.log(res.data,'incoming propperty details')
         setProjectOptions(res.data || []);
       } catch (err) {
         console.error(err);
