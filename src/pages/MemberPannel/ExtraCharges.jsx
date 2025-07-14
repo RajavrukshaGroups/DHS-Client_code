@@ -10,7 +10,6 @@ const ExtraCharges = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log("transfer data", transferData);
 
   const formatNumber = (number) => {
     const formatter = new Intl.NumberFormat("en-IN");

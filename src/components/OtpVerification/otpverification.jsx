@@ -106,7 +106,6 @@ const handleResend = async () => {
         email: formData.email,
         otp: finalOtp,
       });
-      console.log(verifyRes, "verifyRes.data");
 
       if (verifyRes.data.success !== true) {
         setError("Invalid OTP");

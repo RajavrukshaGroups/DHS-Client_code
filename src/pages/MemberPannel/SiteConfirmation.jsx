@@ -16,7 +16,6 @@ const ViewSiteConfirmation = () => {
           params: { seniority_id: seniorityId }
         });
         const userPk = response.data.user_pk;
-        console.log("this is pk : ", userPk)
 
         // Redirect to the URL with user_pk as query parameter
         window.location.href = `https://adminpanel.defencehousingsociety.com/confirmationletterviewonly?user_pk=${userPk}`;

@@ -8,7 +8,6 @@ function ViewInactiveMembers() {
     const fetchInactiveMembers = async () => {
       try {
         const response = await axiosInstance.get('/member/inactive-members');
-        console.log(response,'api calling');
         
         setMemberDetails(response);
       } catch (error) {

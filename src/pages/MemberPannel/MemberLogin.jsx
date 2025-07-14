@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-// import Toast from "../../utils/toastify";
 import "./MemberPannel_Styles/MemberLogin.css";
 import { toast } from "react-toastify";
 
@@ -10,7 +9,7 @@ import { toast } from "react-toastify";
 const MemberLogin = () => {
   const [seniorityId, setSeniorityId] = useState("");
   const [password, setPassword] = useState("");
-   const [email, setEmail] = useState(""); // or pass via props/context
+  //  const [email, setEmail] = useState(""); // or pass via props/context
   const navigate = useNavigate();
 
  const handleReset = async (seniorityId) => {
@@ -46,7 +45,6 @@ try {
       password: password,
     }
   );
-  console.log("Incoming data while submitting:", response.data);
   if (response.data.success) {
     sessionStorage.setItem("seniority_id", response.data.seniority_id);
     navigate("/dashboard");

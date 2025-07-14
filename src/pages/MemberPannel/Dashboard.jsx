@@ -4,25 +4,18 @@ import axios from "axios";
 import "./MemberPannel_Styles/dashboard.css";
 import toast from "react-hot-toast";
 const Dashboard = () => {
-  // const [name, setName] = useState('');
-  // const [sid, setId] = useState('');
-  // const [img, setImg] = useState('');
+ 
   const [userId, setUserid] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [memberData, setMemberdata] = useState([]);
   const navigate = useNavigate();
 
-  console.log("members data", memberData);
 
   useEffect(() => {
     const fetchData = async () => {
       const seniorityId = sessionStorage.getItem("seniority_id");
-      console.log(
-        seniorityId,
-        "seniority id which is added to the session storage"
-      );
-      console.log(seniorityId, "this is the data");
+    
       if (!seniorityId) {
         setError("No seniority ID found in session");
         alert("Please login");
@@ -35,12 +28,10 @@ const Dashboard = () => {
         const response = await axios.get(
           `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/dashboard/${seniorityId}`
         );
-        console.log("Member Data:", response.data.data);
         if (response) {
           setMemberdata(response.data.data);
         }
         const userData = response.data.data;
-        console.log("userdata", userData);
       } catch (error) {
         setError(error.data.message);
       } finally {
@@ -56,12 +47,7 @@ const Dashboard = () => {
         `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`
       );
 
-      // if (!res.data || res.data.error || !res.data.confirmationLetterExists) {
-      //   toast.error("Site confirmation letter not found.");
-      //   return;
-      // }
-
-      // If letter exists, open it
+  
       const url = `https://adminpanel.defencehousingsociety.com/receipt/view-confirmation/${userId}`;
       window.open(url, "_blank");
     } catch (error) {
@@ -70,10 +56,6 @@ const Dashboard = () => {
     }
   };
 
-  // const handleViewShareCert = (userId) => {
-  //   window.location.href = `http://adminpanel.defencehousingsociety.com/viewonlysharecer?user_pk=${userId}`;
-  //   // window.location.href = `http://localhost:4000/viewonlysharecer?user_pk=${userId}`;
-  // };
 
   const handleShareCertificate = (receiptId) => {
     // const url = `http://localhost:3000/receipt/get-share-certificate/${receiptId}`;

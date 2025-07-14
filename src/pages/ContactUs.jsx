@@ -42,17 +42,7 @@ const ContactUs = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("data", data);
-    // if (
-    //   filter.isProfane(data.name) ||
-    //   filter.isProfane(data.email) ||
-    //   filter.isProfane(data.subject) ||
-    //   filter.isProfane(data.message)
-    // ) {
-    //   alert("Your input contains inappropriate language.");
-    //   reset();
-    //   return;
-    // }
+
     setIsLoading(true);
     try {
       // Send form data to the backend API

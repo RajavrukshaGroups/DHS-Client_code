@@ -14,7 +14,6 @@ const ResetPassword = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  console.log(seniorityId, "seniority id which is added to the session storage");
   useEffect(() => {
     // Retrieve the seniority ID from session storage
     const storedSeniorityId = sessionStorage.getItem('seniority_id');
@@ -47,8 +46,6 @@ const ResetPassword = () => {
       try {
         const response = await axios.post('https://adminpanel.defencehousingsociety.com/member/resetpassword', fromData);
         // const response = await axios.post('http://localhost:4000/member/resetpassword', fromData);
-
-        console.log(response.data);
         toast.success('Password changed successfully');
         navigate("/dashboard")
       } catch (error) {

@@ -9,32 +9,6 @@ const TransferProject = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("transfer project page loaded")
-  //   const fetchTransferData = async () => {
-  //     const seniorityId = sessionStorage.getItem("seniority_id");
-
-  //     if (!seniorityId) {
-  //       setError("No seniority ID found in session");
-  //       setLoading(false);
-  //       return;
-  //     }
-
-  //     try {
-  //       const response = await axios.get(
-  //           `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
-  //         );
-  //       console.log("Transfer Data in transfer project:", response);
-  //       setTransferData(response.data);
-  //     } catch (error) {
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchTransferData();
-  // }, []);
 
   useEffect(() => {
 

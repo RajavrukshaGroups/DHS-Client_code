@@ -18,7 +18,6 @@ function ViewMemberdetails() {
           search
         )}`
       );
-      console.log("response", response);
       setMemberDetails(response.data || []);
       setCurrentPage(response.currentPage || 1);
       setTotalPages(Math.max(response.totalPages || 1, 1));
