@@ -48,7 +48,7 @@ const ContactFormPopup = () => {
         setShowPopup(true);
         setShowButton(false);
       }, 10000);
-    }, 500)6;
+    }, 500);
   };
 
   const handleButtonClick = () => {
