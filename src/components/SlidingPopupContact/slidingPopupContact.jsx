@@ -4,7 +4,8 @@ import { CiPhone } from "react-icons/ci";
 import toast from 'react-hot-toast';
 import { FaPaperPlane } from 'react-icons/fa';
 
-const ContactFormPopup = () => {
+// const ContactFormPopup = () => {
+  const ContactFormPopup = ({ isGoogleAds = false }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -58,17 +59,53 @@ const ContactFormPopup = () => {
     setShowButton(false);
   };
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true); // Start loading
+
+  //   try {
+  //     const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     if (res.ok) {
+  //       toast.success("Message sent successfully!");
+  //       setFormData({ 
+  //         name: "", 
+  //         email: "", 
+  //         phone: "", 
+  //         message: "",
+  //         subject: "Defence Housing Society web"
+  //       });
+  //       handleClose(); // Close the popup after successful submission
+  //     } else {
+  //       toast.error("Failed to send message.");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Something went wrong!");
+  //   } finally {
+  //     setLoading(false); // Stop loading regardless of success or failure
+  //   }
+  // };
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
+    setLoading(true);
 
     try {
-      const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
+      // const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
+      const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          source: isGoogleAds ? "google_ads" : "website"  // Add source to payload
+        }),
       });
 
       if (res.ok) {
@@ -78,16 +115,16 @@ const ContactFormPopup = () => {
           email: "", 
           phone: "", 
           message: "",
-          subject: "Defence Housing Society web"
+          subject: isGoogleAds ? "Google Ads Lead" : "Defence Housing Society web"  // Modify subject based on source
         });
-        handleClose(); // Close the popup after successful submission
+        handleClose();
       } else {
         toast.error("Failed to send message.");
       }
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {
-      setLoading(false); // Stop loading regardless of success or failure
+      setLoading(false);
     }
   };
 

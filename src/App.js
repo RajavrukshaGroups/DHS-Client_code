@@ -81,6 +81,7 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/googleAds" element={<Home />} />
           <Route path="/memberformwrapper" element={<MemberFormWrapper />} />
           <Route path="/newonline_application" element={<NewOnlineApplication />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -138,13 +139,15 @@ function PopupAdminSelector() {
     "/faq",
     "/online_application",
     "/PrivacyPolicy",
+    "/googleAds"
   ];
 
   // Check if current route is in the allowedRoutes list
   const shouldShowPopup = allowedRoutes.includes(location.pathname);
-
+const isGoogleAdsRoute = location.pathname === "/googleAds";
   // Conditionally render PopupAdmin
-  return shouldShowPopup ? <SlidingPopupContact /> : null;
+   return shouldShowPopup ? <SlidingPopupContact isGoogleAds={isGoogleAdsRoute} /> : null;
+  // return shouldShowPopup ? <SlidingPopupContact /> : null;
 }
 
 function NavBarSelector() {
