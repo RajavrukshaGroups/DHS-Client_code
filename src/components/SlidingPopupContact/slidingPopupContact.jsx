@@ -59,45 +59,13 @@ import { FaPaperPlane } from 'react-icons/fa';
     setShowButton(false);
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true); // Start loading
-
-  //   try {
-  //     const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     if (res.ok) {
-  //       toast.success("Message sent successfully!");
-  //       setFormData({ 
-  //         name: "", 
-  //         email: "", 
-  //         phone: "", 
-  //         message: "",
-  //         subject: "Defence Housing Society web"
-  //       });
-  //       handleClose(); // Close the popup after successful submission
-  //     } else {
-  //       toast.error("Failed to send message.");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Something went wrong!");
-  //   } finally {
-  //     setLoading(false); // Stop loading regardless of success or failure
-  //   }
-  // };
  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
-      const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
+      const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
+      // const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
