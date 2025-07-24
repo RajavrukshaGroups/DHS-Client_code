@@ -57,15 +57,15 @@ function App() {
         <HeaderSelector />
         <NavBarSelector />
          <Toaster
-         position="top-right"
-         toastOptions={{
-           duration: 4000,
-           style: {
-             background: "#333",
-             color: "#fff",
-           },
-         }}
-         reverseOrder={false}
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: "#333",
+              color: "#fff",
+            },
+          }}
+          reverseOrder={false}
       />
         <ToastContainer 
           position="top-right"
@@ -81,7 +81,7 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/googleAds" element={<Home />} />
+          <Route path="/digitalmarketing-googleAds" element={<TapasihalliPage />} />
           <Route path="/memberformwrapper" element={<MemberFormWrapper />} />
           <Route path="/newonline_application" element={<NewOnlineApplication />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -139,12 +139,12 @@ function PopupAdminSelector() {
     "/faq",
     "/online_application",
     "/PrivacyPolicy",
-    "/googleAds"
+    "/digitalmarketing-googleAds"
   ];
 
   // Check if current route is in the allowedRoutes list
   const shouldShowPopup = allowedRoutes.includes(location.pathname);
-const isGoogleAdsRoute = location.pathname === "/googleAds";
+const isGoogleAdsRoute = location.pathname === "/digitalmarketing-googleAds";
   // Conditionally render PopupAdmin
    return shouldShowPopup ? <SlidingPopupContact isGoogleAds={isGoogleAdsRoute} /> : null;
   // return shouldShowPopup ? <SlidingPopupContact /> : null;
