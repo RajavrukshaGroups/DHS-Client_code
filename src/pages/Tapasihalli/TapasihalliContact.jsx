@@ -11,10 +11,20 @@ const ContactForm = ({ onFormSubmit }) => {
     message: "",
     // subject is now handled in the submission
   });
+
+  const [formErrors, setFormErrors] = useState({
+    email: "",
+    phone: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    setFormErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -23,6 +33,23 @@ const ContactForm = ({ onFormSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const phonePattern = /^[0-9]{10}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let errors = {};
+
+    if (!phonePattern.test(formData.phone)) {
+      errors.phone = "Phone number must be exactly 10 digits.";
+    }
+
+    if (!emailPattern.test(formData.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -87,7 +114,11 @@ const ContactForm = ({ onFormSubmit }) => {
           onChange={handleChange}
           required
           disabled={isSubmitting}
+          isInvalid={!!formErrors.email}
         />
+        {formErrors.email && (
+          <Form.Text className="text-danger">{formErrors.email}</Form.Text>
+        )}
       </Form.Group>
 
       <Form.Group>
@@ -99,11 +130,15 @@ const ContactForm = ({ onFormSubmit }) => {
           onChange={handleChange}
           required
           disabled={isSubmitting}
+          isInvalid={!!formErrors.phone}
         />
+        {formErrors.phone && (
+          <Form.Text className="text-danger">{formErrors.phone}</Form.Text>
+        )}
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Message (Optional)</Form.Label>
+        <Form.Label>Message</Form.Label>
         <Form.Control
           as="textarea"
           rows={2}
@@ -111,6 +146,7 @@ const ContactForm = ({ onFormSubmit }) => {
           value={formData.message}
           onChange={handleChange}
           disabled={isSubmitting}
+          required
         />
       </Form.Group>
 
