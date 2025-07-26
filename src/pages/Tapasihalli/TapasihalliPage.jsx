@@ -10,7 +10,6 @@ import woodsImage from "../../images/woods.svg";
 import streetLightImage from "../../images/street-light.svg";
 import roadImage from "../../images/road.svg";
 import parkImage from "../../images/park.svg";
-import seal from "../../images/Seal.png";
 import Tapasihalli_seal from "../../images/Tapasihalli_seal.png";
 import BankDetails from "./BankDetails";
 import PriceChart from "./PriceChart";
@@ -163,7 +162,6 @@ const TapasihalliPage = () => {
           >
             DEFENCE HABITAT - TAPASIHALLI
           </h1>
-          {/* <h1 style={{color:'white'}}>TAPASIHALLI</h1> */}
           <h3 style={{ color: "white", fontFamily: "emoji", fontSize: "28px" }}>
             North Bangalore , Doddaballapura .
           </h3>
@@ -172,12 +170,12 @@ const TapasihalliPage = () => {
           <img
             src={Tapasihalli_seal}
             className="seals"
-            alt=""
-            title=""
+            alt="Tapasihalli Seal"
             style={{ zIndex: "-1" }}
           />
         </div>
       </div>
+
       <Marquee className="marquee" direction="left" speed={50}>
         <span className="text-capitalize">
           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"Work Will
@@ -187,7 +185,6 @@ const TapasihalliPage = () => {
           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; "Booking
           are open for phase-2."
         </span>
-        {/* <span>Change of land and conversion in progress.</span> */}
       </Marquee>
 
       <div className="subintro">
@@ -202,28 +199,17 @@ const TapasihalliPage = () => {
 
       <NearByPlaces />
 
-      {/* Amenities Section */}
       <Amenities amenities={amenities} />
 
-      {/* Price Chart Section */}
-      <section
-        style={{
-          backgroundColor: "#f8f6fe",
-          marginBottom: "40px",
-          padding: "20px",
-          borderRadius: "8px",
-        }}
-      >
+      <section className="price-chart-section">
         <PriceChart
           priceChartTableHeading={priceChartTableHeading}
           oldPriceChartData={oldPriceChartData}
           newPriceChartData={newPriceChartData}
         />
-
-        {/* Terms and Conditions Section */}
         <TermsCond />
       </section>
-      {/* Bank Details Section */}
+
       <section className="bank-details-section">
         <Container>
           <Card className="bank-details-card shadow-sm">

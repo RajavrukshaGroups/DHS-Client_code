@@ -5,11 +5,12 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MemberFormWrapper from "./components/memberDetails/memberFormWrapper.jsx";
-import  NewOnlineApplication from "./pages/newOnlineApplication.jsx";
+import NewOnlineApplication from "./pages/newOnlineApplication.jsx";
 import TapasihalliPage from "./pages/Tapasihalli/TapasihalliPage";
 import MarasandraPage from "./pages/Marasandra/MarasandraPage";
 import CustomNavbar from "./components/Header/header";
@@ -44,19 +45,28 @@ import Toast from "./utils/toastify";
 import Error from "./components/404";
 import Gallery from "./components/Gallery/gallery.jsx";
 import Otpverification from "./components/OtpVerification/otpverification.jsx";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { Toaster } from "react-hot-toast";
-import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPasswordOTP.jsx"
+import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPasswordOTP.jsx";
 import SlidingPopupContact from "./components/SlidingPopupContact/slidingPopupContact.jsx";
+import ContactForm from "./pages/Tapasihalli/TapasihalliContact.jsx";
 
-function App() {
+function MainApp() {
+  const location = useLocation();
+  const isGoogleAdsRoute = location.pathname === "/digitalmarketing-googleAds";
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormSubmit = () => {
+    setFormSubmitted(true);
+  };
+
   return (
-    <Router>
-      <div>
+    <>
+      <div className={isGoogleAdsRoute && !formSubmitted ? "app-blur" : ""}>
         <PopupAdminSelector />
         <HeaderSelector />
         <NavBarSelector />
-         <Toaster
+        <Toaster
           position="top-right"
           toastOptions={{
             duration: 4000,
@@ -66,8 +76,8 @@ function App() {
             },
           }}
           reverseOrder={false}
-      />
-        <ToastContainer 
+        />
+        <ToastContainer
           position="top-right"
           autoClose={3000}
           hideProgressBar={false}
@@ -81,9 +91,15 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/digitalmarketing-googleAds" element={<TapasihalliPage />} />
+          <Route
+            path="/digitalmarketing-googleAds"
+            element={<TapasihalliPage onFormSubmit={handleFormSubmit} />}
+          />
           <Route path="/memberformwrapper" element={<MemberFormWrapper />} />
-          <Route path="/newonline_application" element={<NewOnlineApplication />} />
+          <Route
+            path="/newonline_application"
+            element={<NewOnlineApplication />}
+          />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/projects/tapasihalli" element={<TapasihalliPage />} />
           <Route path="/projects/marasandra" element={<MarasandraPage />} />
@@ -113,12 +129,101 @@ function App() {
           <Route path="/ContactAdmin" element={<ContactAdmin />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/otpverification" element={<Otpverification />} />
-          <Route path="/forgotPassword" element={<VerifyForgotPassword/>} />
-            <Route path="*" element={<Error />} />
-        </Routes> 
+          <Route path="/forgotPassword" element={<VerifyForgotPassword />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
         <Footer />
         <ScrollToTopButton />
       </div>
+      {isGoogleAdsRoute && !formSubmitted && (
+        <div className="global-contact-modal">
+          <div className="contact-form-header" style={{ display: "block" }}>
+            <h3
+              className="text-center"
+              style={{
+                color: "#24457b",
+                fontSize: "1.3rem",
+                fontWeight: "600",
+              }}
+            >
+              Contact Our Team
+            </h3>
+            <p
+              className="text-center text-muted"
+              style={{
+                color: "#6c757d",
+                fontSize: "0.95rem",
+                fontStyle: "italic",
+              }}
+            >
+              Fill out this form to view project specifications.
+            </p>{" "}
+          </div>
+          {/* <div
+            className="contact-form-header"
+            style={{
+              display: "block",
+              background: "linear-gradient(to right, #f8f9fa, #ffffff)",
+              padding: "1.25rem",
+              borderRadius: "8px",
+              marginBottom: "1.5rem",
+              borderLeft: "4px solid #24457b",
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+            }}
+          >
+            <h3
+              className="text-center"
+              style={{
+                color: "#24457b",
+                fontSize: "1.4rem",
+                fontWeight: "600",
+                marginBottom: "0.5rem",
+                letterSpacing: "0.3px",
+                position: "relative",
+                paddingBottom: "0.75rem",
+              }}
+            >
+              Contact Our Team
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: "0",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: "50px",
+                  height: "3px",
+                  background: "linear-gradient(to right, #24457b, #3a7bd5)",
+                  borderRadius: "3px",
+                }}
+              ></span>
+            </h3>
+            <p
+              className="text-center"
+              style={{
+                color: "#6c757d",
+                fontSize: "0.95rem",
+                lineHeight: "1.5",
+                margin: "0.5rem 0 0",
+                fontStyle: "italic",
+              }}
+            >
+              Fill out this form to view complete project specifications and
+              pricing details.
+            </p>
+          </div> */}
+          <ContactForm onFormSubmit={handleFormSubmit} />
+        </div>
+      )}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <>
+        <MainApp />
+      </>
     </Router>
   );
 }
@@ -139,15 +244,15 @@ function PopupAdminSelector() {
     "/faq",
     "/online_application",
     "/PrivacyPolicy",
-    "/digitalmarketing-googleAds"
   ];
 
   // Check if current route is in the allowedRoutes list
   const shouldShowPopup = allowedRoutes.includes(location.pathname);
-const isGoogleAdsRoute = location.pathname === "/digitalmarketing-googleAds";
-  // Conditionally render PopupAdmin
-   return shouldShowPopup ? <SlidingPopupContact isGoogleAds={isGoogleAdsRoute} /> : null;
-  // return shouldShowPopup ? <SlidingPopupContact /> : null;
+  const isGoogleAdsRoute = location.pathname === "/digitalmarketing-googleAds";
+
+  return shouldShowPopup ? (
+    <SlidingPopupContact isGoogleAds={isGoogleAdsRoute} />
+  ) : null;
 }
 
 function NavBarSelector() {

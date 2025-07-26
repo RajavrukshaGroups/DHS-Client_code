@@ -2,6 +2,42 @@
   text-align: center;
 }
 
+/* App.css */
+.app-blur {
+  filter: blur(5px);
+  pointer-events: none;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.global-contact-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 1rem; /* Tight padding */
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  width: 90%;
+  max-width: 380px; /* More compact width */
+  filter: none !important;
+  overflow: visible; /* No scrolling */
+}
+
+.global-contact-modal .contact-form-header {
+  text-align: center;
+  margin-bottom: 0.8rem; /* Reduced spacing */
+}
+
+.global-contact-modal h3 {
+  color: #333;
+  font-size: 1.2rem; /* Slightly smaller heading */
+  margin: 0;
+  padding: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -26,6 +62,24 @@
 
 .App-link {
   color: #61dafb;
+}
+
+@media (max-width: 768px) {
+  .global-contact-modal {
+    max-width: 350px;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .global-contact-modal {
+    max-width: 320px;
+    padding: 0.7rem;
+  }
+
+  .global-contact-modal h3 {
+    font-size: 1.1rem;
+  }
 }
 
 @keyframes App-logo-spin {
