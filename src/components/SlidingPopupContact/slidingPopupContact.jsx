@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FiUser, FiMail, FiMessageSquare, FiX } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from "react";
+import { FiUser, FiMail, FiMessageSquare, FiX } from "react-icons/fi";
 import { CiPhone } from "react-icons/ci";
-import toast from 'react-hot-toast';
-import { FaPaperPlane } from 'react-icons/fa';
+import toast from "react-hot-toast";
+import { FaPaperPlane } from "react-icons/fa";
 
 // const ContactFormPopup = () => {
-  const ContactFormPopup = ({ isGoogleAds = false }) => {
+const ContactFormPopup = ({ isGoogleAds = false }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -14,7 +14,7 @@ import { FaPaperPlane } from 'react-icons/fa';
     email: "",
     phone: "",
     message: "",
-    subject: "Defence Housing Society web"
+    subject: "Defence Housing Society web",
   });
   const [loading, setLoading] = useState(false);
   const popupRef = useRef(null);
@@ -43,7 +43,7 @@ import { FaPaperPlane } from 'react-icons/fa';
       setShowPopup(false);
       setIsClosing(false);
       setShowButton(true); // Show button after closing
-      
+
       // Set timer to reopen after 10 seconds
       reopenTimerRef.current = setTimeout(() => {
         setShowPopup(true);
@@ -59,31 +59,37 @@ import { FaPaperPlane } from 'react-icons/fa';
     setShowButton(false);
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await fetch("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus", {
-      // const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: isGoogleAds ? "google_ads" : "website"  // Add source to payload
-        }),
-      });
+      const res = await fetch(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
+        // "http://localhost:4000/defenceWebsiteRoutes/contactus",
+        {
+          // const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            source: isGoogleAds ? "google_ads" : "website", // Add source to payload
+          }),
+        }
+      );
 
       if (res.ok) {
         toast.success("Message sent successfully!");
-        setFormData({ 
-          name: "", 
-          email: "", 
-          phone: "", 
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
           message: "",
-          subject: isGoogleAds ? "Google Ads Lead" : "Defence Housing Society web"  // Modify subject based on source
+          subject: isGoogleAds
+            ? "Google Ads Lead"
+            : "Defence Housing Society web", // Modify subject based on source
         });
         handleClose();
       } else {
@@ -98,14 +104,14 @@ import { FaPaperPlane } from 'react-icons/fa';
 
   return (
     // <div className="fixed bottom-4 right-4 z-50">
-    <div className="fixed bottom-4 short:top-[70px] right-4 z-[9999]"> 
+    <div className="fixed bottom-4 short:top-[70px] right-4 z-[9999]">
       {/* Contact Button - Only shows after popup is closed */}
       {showButton && !showPopup && !isClosing && (
         <button
           onClick={handleButtonClick}
           className="bg-[#24447c] text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 transition-all duration-300 flex items-center justify-center"
           style={{
-            boxShadow: '0 4px 15px rgba(59, 130, 246, 0.5)'
+            boxShadow: "0 4px 15px rgba(59, 130, 246, 0.5)",
           }}
         >
           <FaPaperPlane className="mr-2" />
@@ -115,13 +121,13 @@ import { FaPaperPlane } from 'react-icons/fa';
 
       {/* Contact Form Popup */}
       {showPopup && (
-        <div 
+        <div
           ref={popupRef}
           className={`bg-white rounded-xl shadow-xl w-80 overflow-hidden transition-all duration-500 transform ${
-            isClosing ? 'animate-slideOut' : 'animate-slideIn'
+            isClosing ? "animate-slideOut" : "animate-slideIn"
           }`}
           style={{
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
+            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
           }}
         >
           <div className="flex justify-between items-center p-4 bg-gradient-to-r from-[#24447c] to-blue-600">
@@ -151,9 +157,11 @@ import { FaPaperPlane } from 'react-icons/fa';
                   />
                 </div>
               </div>
-              
+
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">Email</label>
+                <label className="block text-sm text-gray-600 mb-1">
+                  Email
+                </label>
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -169,7 +177,9 @@ import { FaPaperPlane } from 'react-icons/fa';
               </div>
 
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">Mobile No</label>
+                <label className="block text-sm text-gray-600 mb-1">
+                  Mobile No
+                </label>
                 <div className="relative">
                   <CiPhone className="text-1xl absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800" />
                   <input
@@ -183,9 +193,11 @@ import { FaPaperPlane } from 'react-icons/fa';
                   />
                 </div>
               </div>
-              
+
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">Message</label>
+                <label className="block text-sm text-gray-600 mb-1">
+                  Message
+                </label>
                 <div className="relative">
                   <FiMessageSquare className="absolute left-3 top-3 text-gray-400" />
                   <textarea
@@ -199,7 +211,7 @@ import { FaPaperPlane } from 'react-icons/fa';
                   ></textarea>
                 </div>
               </div>
-              
+
               {/* <button
                 type="submit"
                 disabled={loading}
@@ -222,36 +234,42 @@ import { FaPaperPlane } from 'react-icons/fa';
                 )}
               </button> */}
               <button
-  type="submit"
-  disabled={loading}
-  className={`w-full bg-[#24447c] text-white py-2 rounded-md hover:bg-sky-700 transition-colors duration-200 flex items-center justify-center ${
-    loading ? 'opacity-75 cursor-not-allowed' : ''
-  }`}
->
-  {loading ? (
-    <>
-      <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
-      Sending...
-    </>
-  ) : (
-    <span className="inline-flex items-center gap-2">
-      Submit <FaPaperPlane />
-    </span>
-  )}
-</button>
-
+                type="submit"
+                disabled={loading}
+                className={`w-full bg-[#24447c] text-white py-2 rounded-md hover:bg-sky-700 transition-colors duration-200 flex items-center justify-center ${
+                  loading ? "opacity-75 cursor-not-allowed" : ""
+                }`}
+              >
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <span className="inline-flex items-center gap-2">
+                    Submit <FaPaperPlane />
+                  </span>
+                )}
+              </button>
             </form>
           </div>
         </div>
@@ -268,7 +286,7 @@ import { FaPaperPlane } from 'react-icons/fa';
             opacity: 1;
           }
         }
-        
+
         @keyframes slideOut {
           from {
             transform: translateX(0);
@@ -279,11 +297,11 @@ import { FaPaperPlane } from 'react-icons/fa';
             opacity: 0;
           }
         }
-        
+
         .animate-slideIn {
           animation: slideIn 0.5s ease-out forwards;
         }
-        
+
         .animate-slideOut {
           animation: slideOut 0.5s ease-in forwards;
         }
