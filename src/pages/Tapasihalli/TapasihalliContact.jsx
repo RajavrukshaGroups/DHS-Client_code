@@ -80,7 +80,7 @@ const ContactForm = ({ onFormSubmit }) => {
       }
 
       const result = await response.json();
-      console.log("Form submitted successfully:", result);
+      console.log("Form submitted successfully;", result);
       toast.success("Thank you for contacting us!");
       onFormSubmit(); // Close modal and remove blur
     } catch (error) {
