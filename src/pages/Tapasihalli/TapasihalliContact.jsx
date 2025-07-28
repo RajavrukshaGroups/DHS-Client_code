@@ -78,9 +78,32 @@ const ContactForm = ({ onFormSubmit }) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      //   const result = await response.json();
+      //   console.log("Form submitted successfully;", result);
 
-      const result = await response.json();
-      console.log("Form submitted successfully;", result);
+      const crmResponse = await fetch(
+        "https://account.solidperformers.com/leadsapi/data/cf54615781356ea54f263d2f37eae61c",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            comments: formData.message,
+          }),
+        }
+      );
+
+      if (!crmResponse.ok) {
+        const crmText = await crmResponse.text();
+        console.warn("Solid Performers CRM submission failed:", crmText);
+        // You may still consider the form a success locally
+      } else {
+        console.log("Solid Performers CRM submission successful.");
+      }
       toast.success("Thank you for contacting us!");
       onFormSubmit(); // Close modal and remove blur
     } catch (error) {
