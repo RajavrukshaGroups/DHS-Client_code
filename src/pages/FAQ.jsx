@@ -146,7 +146,7 @@ const faqs = [
   {
     question: "What happens if I cancel my Plot?",
     answer:
-      "You can cancel your plot, full amount will be returned within 65-75 days without interest from the date of written request for the cancellation.",
+      "You can cancel your plot, full amount will be returned within 60-90 working days without interest from the date of written request for the cancellation.",
   },
   {
     question:
@@ -214,10 +214,8 @@ const FAQ = () => {
   };
 
   const onSubmit = async (data) => {
-  
     setIsLoading(true);
     try {
-    
       const response = await fetch(
         // "https://memberpanel.defencehousingsociety.com/contact",
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
