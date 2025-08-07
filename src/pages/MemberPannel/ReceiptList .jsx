@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from "axios";  
+import axios from "axios";
 import "./MemberPannel_Styles/Receipt.css";
 
 const ReceiptList = () => {
@@ -66,6 +66,7 @@ const ReceiptList = () => {
       try {
         const response = await axios.get(
           "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/fetchReceipts",
+          // "http://localhost:4000/defenceWebsiteRoutes/fetchReceipts",
           {
             params: { seniority_id: seniorityId },
           }
@@ -95,6 +96,7 @@ const ReceiptList = () => {
 
   const handleViewReceipt = (receiptId, paymentId) => {
     const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
+    // const url = `http://localhost:4000/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     window.open(url, "_blank");
   };
 

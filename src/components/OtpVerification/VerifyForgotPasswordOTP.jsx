@@ -54,10 +54,13 @@ const VerifyForgotPasswordOTP = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp", {
-        seniority_id,
-        otp: fullOtp,
-      });
+      const res = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp",
+        {
+          seniority_id,
+          otp: fullOtp,
+        }
+      );
 
       if (res.data.success) {
         toast.success("OTP verified successfully!");
@@ -76,9 +79,12 @@ const VerifyForgotPasswordOTP = () => {
   const handleResend = async () => {
     try {
       setResendLoading(true);
-      const res = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/forgot-password", {
-        seniority_id,
-      });
+      const res = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/forgot-password",
+        {
+          seniority_id,
+        }
+      );
 
       if (res.data.success) {
         toast.success("OTP resent to your email.");
@@ -124,7 +130,9 @@ const VerifyForgotPasswordOTP = () => {
               ))}
             </div>
 
-            {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
+            {error && (
+              <p className="text-red-500 text-sm text-center mt-2">{error}</p>
+            )}
 
             <div className="mt-6 flex flex-col space-y-4">
               <button

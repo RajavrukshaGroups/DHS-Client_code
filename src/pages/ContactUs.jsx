@@ -42,7 +42,6 @@ const ContactUs = () => {
   };
 
   const onSubmit = async (data) => {
-
     setIsLoading(true);
     try {
       // Send form data to the backend API

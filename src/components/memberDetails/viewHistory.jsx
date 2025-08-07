@@ -15,7 +15,6 @@ const ViewReceiptHistory = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState(null);
 
-
   useEffect(() => {
     const fetchMember = async () => {
       try {
@@ -52,7 +51,6 @@ const ViewReceiptHistory = () => {
     }
   };
 
-
   useEffect(() => {
     if (!receiptLoading && receiptData.length > 0 && tableRef.current) {
       tableRef.current.scrollIntoView({ behavior: "smooth" });
@@ -83,6 +81,7 @@ const ViewReceiptHistory = () => {
   // };
   const handleViewReceipt = (receiptId, paymentId) => {
     const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
+    // const url = `http://localhost:4000/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     window.open(url, "_blank");
   };
 
@@ -242,7 +241,9 @@ const ViewReceiptHistory = () => {
                   <th className="px-3 py-2 border text-center">Payment Type</th>
                   <th className="px-3 py-2 border text-center">Payment Mode</th>
                   <th className="px-3 py-2 border text-center">Bank</th>
-                  <th className="px-3 py-2 border text-center">Ref / Cheque / DD No</th>
+                  <th className="px-3 py-2 border text-center">
+                    Ref / Cheque / DD No
+                  </th>
                   <th className="px-3 py-2 border text-center">Amount</th>
                   <th className="px-3 py-2 border text-center">Date</th>
                   <th className="px-3 py-2 border text-center">Action</th>

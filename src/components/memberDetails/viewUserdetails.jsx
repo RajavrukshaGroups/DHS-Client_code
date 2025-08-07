@@ -46,7 +46,6 @@ function ViewUserdetails() {
         `/receipt/checkMembershipFee/${id}`
       );
       if (response.feeAdded) {
-
         navigate(`/addconfirmationLetter/${id}`);
       } else {
         alert(response.message || "Membership fee condition not met.");
