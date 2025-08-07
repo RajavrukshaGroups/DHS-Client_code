@@ -28,6 +28,7 @@ const ProjectStatus = () => {
         // });
         const response = await axios.get(
           "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/projectstatus",
+          // "http://localhost:4000/defenceWebsiteRoutes/projectstatus",
           {
             params: { seniority_id: seniorityId },
           }

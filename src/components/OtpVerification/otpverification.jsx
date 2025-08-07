@@ -1,60 +1,61 @@
-import React, { useState ,useEffect,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 
 function Otpverification() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]); // 6 digits
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resendLoading, setResendLoading] = useState(false);
-   const inputRefs = useRef([]);
-
+  const inputRefs = useRef([]);
 
   const location = useLocation();
-  const navigate =useNavigate()
+  const navigate = useNavigate();
 
   const { formData, memberPhoto, memberSign } = location.state || {};
-    // Auto-focus first input on mount
+  // Auto-focus first input on mount
   useEffect(() => {
     if (inputRefs.current[0]) {
       inputRefs.current[0].focus();
     }
   }, []);
 
-const handleResend = async () => {
-  if (!formData?.email) {
-    toast.error("Email not available.");
-    return;
-  }
-  try {
-    setResendLoading(true);
-    setError("");
-    // const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
-    //   email: formData.email,
-    // });
-      const res= await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/resend-otp", {
-                email: formData.email,
-              });
-    if (res.data.success) {
-      toast.success("OTP resent successfully!");
-      navigate("/")
-    } else {
-      toast.error("Failed to resend OTP.");
+  const handleResend = async () => {
+    if (!formData?.email) {
+      toast.error("Email not available.");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    toast.error("Something went wrong while resending OTP.");
-  } finally {
-    setResendLoading(false);
-  }
-};
+    try {
+      setResendLoading(true);
+      setError("");
+      // const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
+      //   email: formData.email,
+      // });
+      const res = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/resend-otp",
+        {
+          email: formData.email,
+        }
+      );
+      if (res.data.success) {
+        toast.success("OTP resent successfully!");
+        navigate("/");
+      } else {
+        toast.error("Failed to resend OTP.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong while resending OTP.");
+    } finally {
+      setResendLoading(false);
+    }
+  };
 
- const handleChange = (value, index) => {
+  const handleChange = (value, index) => {
     if (isNaN(value)) return;
-    
+
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
@@ -64,7 +65,7 @@ const handleResend = async () => {
       inputRefs.current[index + 1].focus();
     }
   };
-   const handlePaste = (e) => {
+  const handlePaste = (e) => {
     e.preventDefault();
     const pasteData = e.clipboardData.getData("text/plain").slice(0, 6);
     if (/^\d+$/.test(pasteData)) {
@@ -73,7 +74,7 @@ const handleResend = async () => {
         if (i < 6) newOtp[i] = digit;
       });
       setOtp(newOtp);
-      
+
       // Focus the last entered digit
       const lastFilledIndex = Math.min(pasteData.length - 1, 5);
       inputRefs.current[lastFilledIndex].focus();
@@ -86,7 +87,6 @@ const handleResend = async () => {
       inputRefs.current[index - 1].focus();
     }
   };
-
 
   const handleVerify = async (e) => {
     e.preventDefault();
@@ -102,10 +102,13 @@ const handleResend = async () => {
       setError("");
 
       // ✅ Verify OTP first
-      const verifyRes = await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp", {
-        email: formData.email,
-        otp: finalOtp,
-      });
+      const verifyRes = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/verify-otp",
+        {
+          email: formData.email,
+          otp: finalOtp,
+        }
+      );
 
       if (verifyRes.data.success !== true) {
         setError("Invalid OTP");
@@ -120,27 +123,30 @@ const handleResend = async () => {
       if (memberPhoto) submissionData.append("memberPhoto", memberPhoto);
       if (memberSign) submissionData.append("memberSign", memberSign);
 
-      await axios.post("https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/add-onlinemember", submissionData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/add-onlinemember",
+        submissionData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       toast.success("Application submitted successfully!");
-         // ✅ Redirect to homepage after 2 seconds
-    setTimeout(() => {
-      navigate("/"); // Redirect to homepage
-    }, 1000);
-
-    }catch (err) {
-    // ✅ Check for custom error message
-    if (err.response && err.response.data && err.response.data.message) {
-      setError(err.response.data.message);
-    } else {
-      setError("Something went wrong.");
+      // ✅ Redirect to homepage after 2 seconds
+      setTimeout(() => {
+        navigate("/"); // Redirect to homepage
+      }, 1000);
+    } catch (err) {
+      // ✅ Check for custom error message
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Something went wrong.");
+      }
+      console.error("OTP verification error:", err);
+    } finally {
+      setLoading(false);
     }
-    console.error("OTP verification error:", err);
-  } finally {
-    setLoading(false);
-  }
   };
 
   return (
@@ -172,7 +178,9 @@ const handleResend = async () => {
               ))}
             </div>
 
-            {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
+            {error && (
+              <p className="text-red-500 text-sm text-center mt-2">{error}</p>
+            )}
 
             <div className="mt-6 flex flex-col space-y-4">
               <button
@@ -201,7 +209,7 @@ const handleResend = async () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Otpverification
+export default Otpverification;

@@ -17,23 +17,22 @@ const DownloadBrochure = () => {
     formState: { errors },
   } = useForm();
 
-
-const onSubmit = async (data) => {
-  try {
-    const response = await axios.post(
-      "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
-      // "http://localhost:4000//defenceWebsiteRoutes/brochure",
-      data,
-      { responseType: "blob" }   
-    );
-    const blob = new Blob([response.data], { type: "application/pdf" });
-    saveAs(blob, "Brochure.pdf");
-    toast.success("Brochure downloaded successfully!");
-  } catch (error) {
-    console.error("Error downloading brochure:", error);
-    toast.error("Failed to download. Please try again.");
-  }
-};
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
+        // "http://localhost:4000//defenceWebsiteRoutes/brochure",
+        data,
+        { responseType: "blob" }
+      );
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      saveAs(blob, "Brochure.pdf");
+      toast.success("Brochure downloaded successfully!");
+    } catch (error) {
+      console.error("Error downloading brochure:", error);
+      toast.error("Failed to download. Please try again.");
+    }
+  };
 
   const handleDownload = () => {
     const pdfPath = `${process.env.PUBLIC_URL}/DHS_Brochure_V5.pdf`;

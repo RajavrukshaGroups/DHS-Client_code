@@ -8,8 +8,8 @@ import { toast } from "react-hot-toast";
 import "./styles/DownloadBrochure.css";
 
 const DownloadApplication = () => {
-  const [ isReadMore, setIsReadMore ] = useState(false);
-  const [ showMore, setShowMore ] = useState(false);
+  const [isReadMore, setIsReadMore] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   const {
     register,
@@ -17,24 +17,23 @@ const DownloadApplication = () => {
     formState: { errors },
   } = useForm();
 
-  
   const onSubmit = async (data) => {
-  try {
-    const response = await axios.post(
-      "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/download",
-      // "http://localhost:4000/defenceWebsiteRoutes/download",
-      data,
-      { responseType: "blob" }
-    );
+    try {
+      const response = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/download",
+        // "http://localhost:4000/defenceWebsiteRoutes/download",
+        data,
+        { responseType: "blob" }
+      );
 
-    const pdfBlob = new Blob([response.data], { type: "application/pdf" });
-    saveAs(pdfBlob, "ApplicationForm.pdf");
-    toast.success("Form submitted and PDF downloaded!");
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    toast.error("Error submitting form. Please try again.");
-  }
-};
+      const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+      saveAs(pdfBlob, "ApplicationForm.pdf");
+      toast.success("Form submitted and PDF downloaded!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Error submitting form. Please try again.");
+    }
+  };
 
   const handleDownload = () => {
     const pdfPath = `${process.env.PUBLIC_URL}/application.pdf`;

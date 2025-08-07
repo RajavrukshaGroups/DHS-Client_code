@@ -10,7 +10,6 @@ const ExtraCharges = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   const formatNumber = (number) => {
     const formatter = new Intl.NumberFormat("en-IN");
     return formatter.format(number);
@@ -32,6 +31,7 @@ const ExtraCharges = () => {
         // });
         const response = await axios.get(
           "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/extracharges",
+          // "http://localhost:4000/defenceWebsiteRoutes/extracharges",
           {
             params: { seniority_id: seniorityId },
           }
@@ -59,6 +59,7 @@ const ExtraCharges = () => {
 
   const handleViewReceipt = (receiptId, paymentId) => {
     const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
+    // const url = `http://localhost:4000/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     window.open(url, "_blank");
   };
 

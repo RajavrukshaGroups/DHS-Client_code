@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './MemberPannel_Styles/ResetPassword.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./MemberPannel_Styles/ResetPassword.css";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 // import { EyeIcon, EyeOffIcon } from 'react-feather';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const [seniorityId, setSeniorityId] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [seniorityId, setSeniorityId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   useEffect(() => {
     // Retrieve the seniority ID from session storage
-    const storedSeniorityId = sessionStorage.getItem('seniority_id');
+    const storedSeniorityId = sessionStorage.getItem("seniority_id");
     if (storedSeniorityId) {
       setSeniorityId(storedSeniorityId);
     }
@@ -24,14 +24,14 @@ const ResetPassword = () => {
 
   const validatePassword = () => {
     if (password !== confirmPassword) {
-      setError('Password and Confirm Password do not match.');
+      setError("Password and Confirm Password do not match.");
       return false;
     }
     if (password.length < 3) {
-      setError('Password must be at least 3 characters long.');
+      setError("Password must be at least 3 characters long.");
       return false;
     }
-    setError('');
+    setError("");
     return true;
   };
 
@@ -40,33 +40,43 @@ const ResetPassword = () => {
     if (validatePassword()) {
       const fromData = {
         seniorityId,
-        password
-      }
+        password,
+      };
 
       try {
-        const response = await axios.post('https://adminpanel.defencehousingsociety.com/member/resetpassword', fromData);
-        // const response = await axios.post('http://localhost:4000/member/resetpassword', fromData);
-        toast.success('Password changed successfully');
-        navigate("/dashboard")
+        const response = await axios.post(
+          "https://adminpanel.defencehousingsociety.com/member/resetpassword",
+          fromData
+        );
+        // const response = await axios.post(
+        //   "http://localhost:4000/member/resetpassword",
+        //   fromData
+        // );
+        toast.success("Password changed successfully");
+        navigate("/dashboard");
       } catch (error) {
-        console.error('Error submitting form', error);
-        toast.error('Error submitting form');
+        console.error("Error submitting form", error);
+        toast.error("Error submitting form");
       }
     }
   };
 
   return (
     <div className="rscontainer">
-      <i className="bi bi-arrow-left-circle back-icon1"
-        onClick={() => navigate('/dashboard')}
-        title="Back to Dashboard"></i>
+      <i
+        className="bi bi-arrow-left-circle back-icon1"
+        onClick={() => navigate("/dashboard")}
+        title="Back to Dashboard"
+      ></i>
 
       <div className="formWrapper">
         <h2 className="title">Reset Password</h2>
         {error && <div className="error">{error}</div>}
         <form className="form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="seniorityId" className="label">Seniority ID</label>
+            <label htmlFor="seniorityId" className="label">
+              Seniority ID
+            </label>
             <input
               type="text"
               id="seniorityId"
@@ -77,7 +87,9 @@ const ResetPassword = () => {
           </div>
 
           <div className="form-group password-group">
-            <label htmlFor="password" className="label">New Password</label>
+            <label htmlFor="password" className="label">
+              New Password
+            </label>
             <div className="input-with-icon">
               <input
                 type={showPassword ? "text" : "password"}
@@ -101,7 +113,9 @@ const ResetPassword = () => {
           </div>
 
           <div className="form-group password-group">
-            <label htmlFor="confirmPassword" className="label">Confirm New Password</label>
+            <label htmlFor="confirmPassword" className="label">
+              Confirm New Password
+            </label>
             <div className="input-with-icon">
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -117,14 +131,22 @@ const ResetPassword = () => {
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="password-toggle"
-                aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                aria-label={
+                  showConfirmPassword ? "Hide password" : "Show password"
+                }
               >
-                {showConfirmPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                {showConfirmPassword ? (
+                  <FiEyeOff size={18} />
+                ) : (
+                  <FiEye size={18} />
+                )}
               </button>
             </div>
           </div>
 
-          <button type="submit" className="button">Reset Password</button>
+          <button type="submit" className="button">
+            Reset Password
+          </button>
         </form>
       </div>
     </div>

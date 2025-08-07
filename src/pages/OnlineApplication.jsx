@@ -1,72 +1,82 @@
 // src/pages/MarasandraPage/MarasandraPage.js
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
-import { faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { Card, Container, Form, Row, Col, Button, Modal } from 'react-bootstrap';
-import { FaUserTie, FaAddressCard, FaBuilding, FaMoneyCheckAlt } from 'react-icons/fa';
-import './styles/OnlineApplication.css';
-
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckCircle,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  Card,
+  Container,
+  Form,
+  Row,
+  Col,
+  Button,
+  Modal,
+} from "react-bootstrap";
+import {
+  FaUserTie,
+  FaAddressCard,
+  FaBuilding,
+  FaMoneyCheckAlt,
+} from "react-icons/fa";
+import "./styles/OnlineApplication.css";
 
 const OnlineApplication = () => {
-
   const navigate = useNavigate();
 
-  const [referenceName, setReferenceName] = useState('');
-  const [referenceRank, setReferenceRank] = useState('');
-  const [referenceServiceId, setReferenceServiceId] = useState('');
-  const [referenceRelationship, setReferenceRelationship] = useState('');
+  const [referenceName, setReferenceName] = useState("");
+  const [referenceRank, setReferenceRank] = useState("");
+  const [referenceServiceId, setReferenceServiceId] = useState("");
+  const [referenceRelationship, setReferenceRelationship] = useState("");
 
   // State variables for Personal Details
-  const [dob, setDob] = useState('');
-  const [age, setAge] = useState('');
-  const [personalName, setPersonalName] = useState('');
-  const [fatherSpouseName, setFatherSpouseName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [paddress, setpAddress] = useState('');
-  const [caddress, setcAddress] = useState('');
-  const [waddress, setwAddress] = useState('');
-  const [remark, setRemark] = useState('');
-  const [propertyName] = useState('DEFENCE HABITAT');
-  const [propertyType, setpropertyType] = useState('');
-  const [propertySize, setPropertySize] = useState('');
+  const [dob, setDob] = useState("");
+  const [age, setAge] = useState("");
+  const [personalName, setPersonalName] = useState("");
+  const [fatherSpouseName, setFatherSpouseName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [paddress, setpAddress] = useState("");
+  const [caddress, setcAddress] = useState("");
+  const [waddress, setwAddress] = useState("");
+  const [remark, setRemark] = useState("");
+  const [propertyName] = useState("DEFENCE HABITAT");
+  const [propertyType, setpropertyType] = useState("");
+  const [propertySize, setPropertySize] = useState("");
   const [projectNames, setProjectNames] = useState([]);
   const [plotDimensions, setPlotDimensions] = useState([]);
 
-  // nominee credentials 
+  // nominee credentials
 
-  const [nomineeName, setnomineeName] = useState('');
-  const [nomineeAge, setnomineeAge] = useState('');
-  const [nomineeRelationship, setnomineeRelationship] = useState('');
-  const [nomineeAddress, setnomineeAddress] = useState('');
-
-
+  const [nomineeName, setnomineeName] = useState("");
+  const [nomineeAge, setnomineeAge] = useState("");
+  const [nomineeRelationship, setnomineeRelationship] = useState("");
+  const [nomineeAddress, setnomineeAddress] = useState("");
 
   // Membership payment Details
-  const [mempaymentMode, setmempaymentMode] = useState('');
-  const [memBankname, setmemBankname] = useState('');
-  const [memBranch, setmemBranch] = useState('');
-  const [memPaydate, setmemPaydate] = useState('');
-  const [memAmount] = useState('2500')
-  const [memRefnum, setmemRefnum] = useState('');
-
-
+  const [mempaymentMode, setmempaymentMode] = useState("");
+  const [memBankname, setmemBankname] = useState("");
+  const [memBranch, setmemBranch] = useState("");
+  const [memPaydate, setmemPaydate] = useState("");
+  const [memAmount] = useState("2500");
+  const [memRefnum, setmemRefnum] = useState("");
 
   // State variables for Payment Details
-  const [paymentMode, setPaymentMode] = useState('');
-  const [bankName, setBankName] = useState('');
-  const [branchName, setBranchName] = useState('');
-  const [amount, setAmount] = useState('');
-  const [amountInWords, setAmountInWords] = useState('');
-  const [ddChequeRefNumber, setDdChequeRefNumber] = useState('');
-  const [place, setPlace] = useState('');
-  const [currentDate, setCurrentDate] = useState('');
+  const [paymentMode, setPaymentMode] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [branchName, setBranchName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [amountInWords, setAmountInWords] = useState("");
+  const [ddChequeRefNumber, setDdChequeRefNumber] = useState("");
+  const [place, setPlace] = useState("");
+  const [currentDate, setCurrentDate] = useState("");
 
-  const [paymentType, setPaymentType] = useState('');
+  const [paymentType, setPaymentType] = useState("");
 
   // This will run once when the component mounts
   // useEffect(() => {
@@ -77,98 +87,95 @@ const OnlineApplication = () => {
 
   useEffect(() => {
     const today = new Date();
-    const formattedDate = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+    const formattedDate = `${today.getDate()}/${
+      today.getMonth() + 1
+    }/${today.getFullYear()}`;
     setCurrentDate(formattedDate);
   }, []);
 
-
-  // otp setup 
-  const [otp, setOtp] = useState('');
-  const [formId, setFormId] = useState('');
+  // otp setup
+  const [otp, setOtp] = useState("");
+  const [formId, setFormId] = useState("");
   const [step, setStep] = useState(1); // 1: Form, 2: OTP Verification
-  const [otpError, setOtpError] = useState('');
+  const [otpError, setOtpError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [showModal, setShowModal] = useState(false); // State for modal visibility
   const [showErrorModal, setShowErrorModal] = useState(false); // State for error modal visibility
-  const [errorMessage, setErrorMessage] = useState(''); // State for error message
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
 
-
-
-  // captcha 
-  const [captcha, setCaptcha] = useState('');
-  const [captchaInput, setCaptchaInput] = useState('');
+  // captcha
+  const [captcha, setCaptcha] = useState("");
+  const [captchaInput, setCaptchaInput] = useState("");
   const [isCaptchaValid, setIsCaptchaValid] = useState(null);
 
-
-  const [personalPhotoBase64, setPersonalPhotoBase64] = useState('');
-  const [signaturePhotoBase64, setSignaturePhotoBase64] = useState('');
-
+  const [personalPhotoBase64, setPersonalPhotoBase64] = useState("");
+  const [signaturePhotoBase64, setSignaturePhotoBase64] = useState("");
 
   const [formData, setFormData] = useState({
-    referenceName: '',
-    referenceRank: '',
-    referenceServiceId: '',
-    referenceRelationship: '',
-    personalName: '',
-    dob: '',
-    age: '',
-    fatherSpouseName: '',
-    phone: '',
-    email: '',
-    paddress: '',
-    caddress: '',
-    waddress: '',
-    remark: '',
-    propertyName: '',
-    propertyType: '',
-    propertySize: '',
-    nomineeName: '',
-    nomineeAge: '',
-    nomineeRelationship: '',
-    nomineeAddress: '',
-    mempaymentMode: '',
-    memBankname: '',
-    memBranch: '',
-    memPaydate: '',
-    memAmount: '',
-    memRefnum: '',
-    paymentType: '',
-    paymentMode: '',
-    bankName: '',
-    branchName: '',
-    amount: '',
-    amountInWords: '',
-    ddChequeRefNumber: '',
-    place: '',
-    currentdate: '',
+    referenceName: "",
+    referenceRank: "",
+    referenceServiceId: "",
+    referenceRelationship: "",
+    personalName: "",
+    dob: "",
+    age: "",
+    fatherSpouseName: "",
+    phone: "",
+    email: "",
+    paddress: "",
+    caddress: "",
+    waddress: "",
+    remark: "",
+    propertyName: "",
+    propertyType: "",
+    propertySize: "",
+    nomineeName: "",
+    nomineeAge: "",
+    nomineeRelationship: "",
+    nomineeAddress: "",
+    mempaymentMode: "",
+    memBankname: "",
+    memBranch: "",
+    memPaydate: "",
+    memAmount: "",
+    memRefnum: "",
+    paymentType: "",
+    paymentMode: "",
+    bankName: "",
+    branchName: "",
+    amount: "",
+    amountInWords: "",
+    ddChequeRefNumber: "",
+    place: "",
+    currentdate: "",
   });
 
   useEffect(() => {
     generateCaptcha();
   }, []);
 
-
-
   const handleFileChange = (event, setBase64) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setBase64(reader.result.split(',')[1]); // Strip the metadata
+        setBase64(reader.result.split(",")[1]); // Strip the metadata
       };
       reader.readAsDataURL(file);
     }
   };
 
   const generateCaptcha = () => {
-    let generatedCaptcha = '';
+    let generatedCaptcha = "";
     for (let i = 0; i < 6; i++) {
-      generatedCaptcha += String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+      generatedCaptcha += String.fromCharCode(
+        Math.floor(Math.random() * 26) + 65
+      );
     }
     setCaptcha(generatedCaptcha);
-    setCaptchaInput('');
+    setCaptchaInput("");
     setIsCaptchaValid(null);
   };
 
@@ -182,13 +189,9 @@ const OnlineApplication = () => {
   //   return result;
   // };
 
-
   useEffect(() => {
     setCaptcha(generateCaptcha());
   }, []);
-
-
-
 
   const handleCaptchaChange = (e) => {
     setCaptchaInput(e.target.value);
@@ -205,25 +208,27 @@ const OnlineApplication = () => {
 
   useEffect(() => {
     // Fetch project names from API
-    axios.get('https://adminpanel.defencehousingsociety.com/api/projectNames')
-      // axios.get('http://localhost:5000/api/projectNames')
-      .then(response => {
+    axios
+      .get("https://adminpanel.defencehousingsociety.com/api/projectNames")
+      // axios
+      //   .get("http://localhost:4000/api/projectNames")
+      .then((response) => {
         setProjectNames(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching project names:', error);
+      .catch((error) => {
+        console.error("Error fetching project names:", error);
       });
   }, []);
 
-
   useEffect(() => {
-    axios.get('https://adminpanel.defencehousingsociety.com/api/plotDimensions')
-      // axios.get('http://localhost:5000/api/plotDimensions')
-      .then(response => {
+    axios
+      .get("https://adminpanel.defencehousingsociety.com/api/plotDimensions")
+      // .get("http://localhost:4000/api/plotDimensions")
+      .then((response) => {
         setPlotDimensions(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching plot dimensions:', error);
+      .catch((error) => {
+        console.error("Error fetching plot dimensions:", error);
       });
   }, []);
 
@@ -231,17 +236,14 @@ const OnlineApplication = () => {
     const { name, value } = event.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
-
 
   const CaphandleInputChange = (e) => {
     setCaptchaInput(e.target.value);
     setIsCaptchaValid(null);
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -288,17 +290,21 @@ const OnlineApplication = () => {
         place,
         currentDate,
       };
-      console.log("This is size : ", propertySize)
+      console.log("This is size : ", propertySize);
 
       try {
-        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
+        const response = await axios.post(
+          "https://adminpanel.defencehousingsociety.com/api/submit",
+          // "http://localhost:4000/api/submit",
+          formData
+        );
         // const response = await axios.post('http://localhost:5000/api/submit', formData);
         setFormId(response.data.formId);
         setOtpSent(true); // Show OTP input field
         setStep(2); // Move to OTP verification step
       } catch (error) {
-        console.error('Error submitting form', error);
-        setErrorMessage('Error submitting form. Please try again.');
+        console.error("Error submitting form", error);
+        setErrorMessage("Error submitting form. Please try again.");
         setShowErrorModal(true); // Show error modal
       } finally {
         setLoading(false); // Hide the loading spinner
@@ -306,23 +312,28 @@ const OnlineApplication = () => {
     } else if (step === 2) {
       // Verify OTP and complete form submission
       try {
-        const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/verify-otp-and-submit', { formId, otp });
+        const response = await axios.post(
+          "https://adminpanel.defencehousingsociety.com/api/verify-otp-and-submit",
+          { formId, otp }
+        );
         // const response = await axios.post('http://localhost:5000/api/verify-otp-and-submit', { formId, otp });
-        setFormId(response.data.formId);  // Store the formId for later use
+        setFormId(response.data.formId); // Store the formId for later use
         if (response.data.success) {
           setShowModal(true); // Show the success modal
           setTimeout(() => {
-            navigate('/'); // Navigate to home screen after showing the modal
+            navigate("/"); // Navigate to home screen after showing the modal
           }, 2000);
         } else {
-          setOtpError('Thank you for submitting the form our tem will get in touch with you shortly');
+          setOtpError(
+            "Thank you for submitting the form our tem will get in touch with you shortly"
+          );
           setTimeout(() => {
-            navigate('/'); // Navigate to home screen after showing the OTP error message
+            navigate("/"); // Navigate to home screen after showing the OTP error message
           }, 2000);
         }
       } catch (error) {
-        console.error('Error verifying OTP', error);
-        setErrorMessage('Error verifying OTP. Please try again.');
+        console.error("Error verifying OTP", error);
+        setErrorMessage("Error verifying OTP. Please try again.");
         setShowErrorModal(true); // Show error modal
       } finally {
         setLoading(false); // Hide the loading spinner
@@ -375,36 +386,35 @@ const OnlineApplication = () => {
         currentDate,
       };
 
-
-
-      const response = await axios.post('https://adminpanel.defencehousingsociety.com/api/submit', formData);
+      const response = await axios.post(
+        "https://adminpanel.defencehousingsociety.com/api/submit",
+        formData
+      );
       // const response = await axios.post('http://localhost:5000/api/submit', formData);
       // const response = await axios.post('https://memberpanel.defencehousingsociety.com//')
       if (response.data.formId) {
         setFormId(response.data.formId); // Update formId
-        alert('OTP has been resent to your email.');
+        alert("OTP has been resent to your email.");
       } else {
-        alert('Failed to resend OTP. Please try again.');
+        alert("Failed to resend OTP. Please try again.");
       }
     } catch (error) {
-      console.error('Error resending OTP', error);
-      alert('Error resending OTP');
+      console.error("Error resending OTP", error);
+      alert("Error resending OTP");
     } finally {
       setLoading(false); // Hide loading spinner
     }
   };
 
-
   const handleCloseModal = () => {
     setShowModal(false);
     // Redirect to home screen or reset form
-    window.location.href = '/'; // Redirects to the home screen
+    window.location.href = "/"; // Redirects to the home screen
   };
 
   const handleCloseErrorModal = () => {
     setShowErrorModal(false);
   };
-
 
   const handleAmountChange = (e) => {
     const amount = e.target.value;
@@ -414,20 +424,43 @@ const OnlineApplication = () => {
     setAmountInWords(convertAmountToWords(amount));
   };
 
-
   const ones = [
-    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
-    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen",
-    "Seventeen", "Eighteen", "Nineteen"
+    "",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Eleven",
+    "Twelve",
+    "Thirteen",
+    "Fourteen",
+    "Fifteen",
+    "Sixteen",
+    "Seventeen",
+    "Eighteen",
+    "Nineteen",
   ];
 
   const tens = [
-    "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    "",
+    "Ten",
+    "Twenty",
+    "Thirty",
+    "Forty",
+    "Fifty",
+    "Sixty",
+    "Seventy",
+    "Eighty",
+    "Ninety",
   ];
 
-  const scales = [
-    "", "Thousand", "Lakh", "Crore"
-  ];
+  const scales = ["", "Thousand", "Lakh", "Crore"];
 
   const getHundreds = (num) => {
     let hundredPart = Math.floor(num / 100);
@@ -507,14 +540,16 @@ const OnlineApplication = () => {
     setpropertyType(event.target.value);
   };
 
-
-
   return (
     <Container fluid className="online-application">
       <div className="banner">
         <div className="banner-content">
-          <h1 style={{ color: 'white' }}>ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.</h1>
-          <h1 style={{ color: 'white' }}>DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD. </h1>
+          <h1 style={{ color: "white" }}>
+            ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.
+          </h1>
+          <h1 style={{ color: "white" }}>
+            DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD.{" "}
+          </h1>
           <h3>Reg. No.:- HSG-3/64/HHS/53744.</h3>
         </div>
       </div>
@@ -523,7 +558,6 @@ const OnlineApplication = () => {
           <div className="loading-spinner"></div>
         </div>
       )}
-
 
       <Form onSubmit={handleSubmit}>
         {/* Form Details */}
@@ -538,34 +572,60 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formReferenceName">
-                      <Form.Label className='form-fields'>Name</Form.Label>
-                      <Form.Control type="text" placeholder="Enter name"
+                      <Form.Label className="form-fields">Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter name"
                         value={referenceName}
                         onChange={(e) => setReferenceName(e.target.value)}
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formReferenceRank">
-                      <Form.Label className='form-fields'>Rank/Designation</Form.Label>
-                      <Form.Control type="text" value={referenceRank} onChange={(e) => setReferenceRank(e.target.value)} placeholder="Enter rank/designation" required />
+                      <Form.Label className="form-fields">
+                        Rank/Designation
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={referenceRank}
+                        onChange={(e) => setReferenceRank(e.target.value)}
+                        placeholder="Enter rank/designation"
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formReferenceServiceId">
-                      <Form.Label className='form-fields'>Service/ID No</Form.Label>
-                      <Form.Control type="text" value={referenceServiceId} onChange={(e) => setReferenceServiceId(e.target.value)} placeholder="Enter service/ID no" required />
+                      <Form.Label className="form-fields">
+                        Service/ID No
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={referenceServiceId}
+                        onChange={(e) => setReferenceServiceId(e.target.value)}
+                        placeholder="Enter service/ID no"
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formReferenceRelationship">
-                      <Form.Label className='form-fields'>Relationship With Applicant</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">
+                        Relationship With Applicant
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
                         value={referenceRelationship}
-                        onChange={(e) => setReferenceRelationship(e.target.value)}
-                        placeholder="Enter relationship" required />
+                        onChange={(e) =>
+                          setReferenceRelationship(e.target.value)
+                        }
+                        placeholder="Enter relationship"
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
@@ -581,23 +641,32 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalName">
-                      <Form.Label className='form-fields'>Name</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Name</Form.Label>
+                      <Form.Control
+                        type="text"
                         value={personalName}
                         onChange={(e) => setPersonalName(e.target.value)}
-                        placeholder="Enter name" required />
+                        placeholder="Enter name"
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalDob">
-                      <Form.Label className='form-fields'>Date of Birth</Form.Label>
-                      <Form.Control type="date" value={dob}
-                        onChange={handleDobChange} required />
+                      <Form.Label className="form-fields">
+                        Date of Birth
+                      </Form.Label>
+                      <Form.Control
+                        type="date"
+                        value={dob}
+                        onChange={handleDobChange}
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalAge">
-                      <Form.Label className='form-fields'>Age</Form.Label>
+                      <Form.Label className="form-fields">Age</Form.Label>
                       <Form.Control type="text" value={age} readOnly />
                     </Form.Group>
                   </Col>
@@ -605,104 +674,137 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalFatherSpouse">
-                      <Form.Label className='form-fields'>Father's/Spouse Name</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">
+                        Father's/Spouse Name
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
                         value={fatherSpouseName}
                         onChange={(e) => setFatherSpouseName(e.target.value)}
-
                         placeholder="Enter father's/spouse name"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalPhone">
-                      <Form.Label className='form-fields'>Phone No</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Phone No</Form.Label>
+                      <Form.Control
+                        type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Enter phone number"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPersonalEmail">
-                      <Form.Label className='form-fields'>Email ID</Form.Label>
-                      <Form.Control type="email"
+                      <Form.Label className="form-fields">Email ID</Form.Label>
+                      <Form.Control
+                        type="email"
                         placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        required />
-
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalPermanentAddress">
-                      <Form.Label className='form-fields'>Permanent Address</Form.Label>
-                      <Form.Control as="textarea" rows={3}
+                      <Form.Label className="form-fields">
+                        Permanent Address
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
                         value={paddress}
                         onChange={(e) => setpAddress(e.target.value)}
-                        style={{ resize: 'none' }}
-
+                        style={{ resize: "none" }}
                         placeholder="Enter permanent address"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalCorrespondenceAddress">
-                      <Form.Label className='form-fields'>Correspondence Address</Form.Label>
-                      <Form.Control as="textarea" rows={3}
+                      <Form.Label className="form-fields">
+                        Correspondence Address
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
                         value={caddress}
                         onChange={(e) => setcAddress(e.target.value)}
-                        style={{ resize: 'none' }}
+                        style={{ resize: "none" }}
                         placeholder="Enter correspondence address"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalWorkingAddress">
-                      <Form.Label className='form-fields'>Working Address</Form.Label>
-                      <Form.Control as="textarea" rows={3}
+                      <Form.Label className="form-fields">
+                        Working Address
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
                         value={waddress}
                         onChange={(e) => setwAddress(e.target.value)}
-                        style={{ resize: 'none' }}
-                        placeholder="Enter working address" required />
-
+                        style={{ resize: "none" }}
+                        placeholder="Enter working address"
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalRemark">
-                      <Form.Label className='form-fields'>Remark, If Any</Form.Label>
-                      <Form.Control as="textarea" rows={3}
+                      <Form.Label className="form-fields">
+                        Remark, If Any
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={3}
                         value={remark}
                         onChange={(e) => setRemark(e.target.value)}
-                        style={{ resize: 'none' }}
-                        placeholder="Enter remark" />
+                        style={{ resize: "none" }}
+                        placeholder="Enter remark"
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalPhoto">
-                      <Form.Label className="form-fields">Member Photo</Form.Label>
+                      <Form.Label className="form-fields">
+                        Member Photo
+                      </Form.Label>
                       <Form.Control
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleFileChange(e, setPersonalPhotoBase64)}
+                        onChange={(e) =>
+                          handleFileChange(e, setPersonalPhotoBase64)
+                        }
                         required
                       />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formPersonalSignaturePhoto">
-                      <Form.Label className="form-fields">Member Signature Photo</Form.Label>
+                      <Form.Label className="form-fields">
+                        Member Signature Photo
+                      </Form.Label>
                       <Form.Control
                         type="file"
                         accept="image/*"
-                        onChange={(e) => handleFileChange(e, setSignaturePhotoBase64)}
+                        onChange={(e) =>
+                          handleFileChange(e, setSignaturePhotoBase64)
+                        }
                         required
                       />
                     </Form.Group>
@@ -722,19 +824,36 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPropertyName">
-                      <Form.Label className='form-fields'>Property Name</Form.Label>
-                      <Form.Control type="text" value="DEFENCE HABITAT" readOnly />
+                      <Form.Label className="form-fields">
+                        Property Name
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        value="DEFENCE HABITAT"
+                        readOnly
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
-
                     <Form.Group controlId="formPropertyType">
-                      <Form.Label className='form-fields'>Property Location </Form.Label>
+                      <Form.Label className="form-fields">
+                        Property Location{" "}
+                      </Form.Label>
                       <div className="dropdown-input">
-                        <Form.Control as="select" defaultValue="" value={propertyType} onChange={handlePropertylocation}>
-                          <option value="" disabled>Select Property Location </option>
+                        <Form.Control
+                          as="select"
+                          defaultValue=""
+                          value={propertyType}
+                          onChange={handlePropertylocation}
+                        >
+                          <option value="" disabled>
+                            Select Property Location{" "}
+                          </option>
                           {projectNames.map((project) => (
-                            <option key={project.project_pk} value={project.address2}>
+                            <option
+                              key={project.project_pk}
+                              value={project.address2}
+                            >
                               {project.address2}
                             </option>
                           ))}
@@ -747,16 +866,23 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPropertyLocation">
-                      <Form.Label className='form-fields'>Property Size </Form.Label>
+                      <Form.Label className="form-fields">
+                        Property Size{" "}
+                      </Form.Label>
                       <div className="dropdown-input">
                         <Form.Control
                           as="select"
                           value={propertySize}
                           onChange={handlePropertySizeChange}
                         >
-                          <option value="" disabled>Select Property Size</option>
-                          {plotDimensions.map(plot => (
-                            <option key={plot.plotsize_pk} value={plot.dimension}>
+                          <option value="" disabled>
+                            Select Property Size
+                          </option>
+                          {plotDimensions.map((plot) => (
+                            <option
+                              key={plot.plotsize_pk}
+                              value={plot.dimension}
+                            >
                               {plot.dimension}
                             </option>
                           ))}
@@ -771,7 +897,6 @@ const OnlineApplication = () => {
               </Card.Body>
             </Card>
 
-
             <Card className="property-card shadow-sm">
               <Card.Body>
                 <div className="card-title application">
@@ -781,46 +906,54 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formnomineeName">
-                      <Form.Label className='form-fields'>Name</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Name</Form.Label>
+                      <Form.Control
+                        type="text"
                         value={nomineeName}
                         onChange={(e) => setnomineeName(e.target.value)}
-
                         placeholder="Enter name"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formnomineeAge">
-                      <Form.Label className='form-fields'>Age</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Age</Form.Label>
+                      <Form.Control
+                        type="text"
                         value={nomineeAge}
                         onChange={(e) => setnomineeAge(e.target.value)}
                         placeholder="Enter Age"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={6}>
                     <Form.Group controlId="formnomineeRelationship">
-                      <Form.Label className='form-fields'>Relationship </Form.Label>
+                      <Form.Label className="form-fields">
+                        Relationship{" "}
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         value={nomineeRelationship}
                         onChange={(e) => setnomineeRelationship(e.target.value)}
                         placeholder="Enter Relationship"
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
                     <Form.Group controlId="formnomineeAddress">
-                      <Form.Label className='form-fields'>Address </Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Address </Form.Label>
+                      <Form.Control
+                        type="text"
                         value={nomineeAddress}
                         onChange={(e) => setnomineeAddress(e.target.value)}
                         placeholder="Enter Address "
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
@@ -836,13 +969,19 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPaymentMode">
-                      <Form.Label className='form-fields'>Payment Mode</Form.Label>
+                      <Form.Label className="form-fields">
+                        Payment Mode
+                      </Form.Label>
                       <div className="dropdown-input">
-                        <Form.Control as="select"
+                        <Form.Control
+                          as="select"
                           value={mempaymentMode}
                           onChange={(e) => setmempaymentMode(e.target.value)}
-                          required>
-                          <option value="" disabled>Select payment mode</option>
+                          required
+                        >
+                          <option value="" disabled>
+                            Select payment mode
+                          </option>
                           <option value="DD">DD</option>
                           <option value="Cheque">Cheque</option>
                           <option value="Online">Online</option>
@@ -855,49 +994,61 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formBankName">
-                      <Form.Label className='form-fields'>Bank Name</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Bank Name</Form.Label>
+                      <Form.Control
+                        type="text"
                         placeholder="Enter bank name"
                         value={memBankname}
                         onChange={(e) => setmemBankname(e.target.value)}
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formBranch">
-                      <Form.Label className='form-fields'>Branch</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">Branch</Form.Label>
+                      <Form.Control
+                        type="text"
                         placeholder="Enter branch"
                         value={memBranch}
                         onChange={(e) => setmemBranch(e.target.value)}
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPaymentDate">
-                      <Form.Label className='form-fields'>Payment Date</Form.Label>
-                      <Form.Control type="date"
+                      <Form.Label className="form-fields">
+                        Payment Date
+                      </Form.Label>
+                      <Form.Control
+                        type="date"
                         value={memPaydate}
                         onChange={(e) => setmemPaydate(e.target.value)}
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formAmount">
-                      <Form.Label className='form-fields'>Amount</Form.Label>
+                      <Form.Label className="form-fields">Amount</Form.Label>
                       <Form.Control type="text" value={2500} readOnly />
                     </Form.Group>
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formReferenceNumber">
-                      <Form.Label className='form-fields'>DD/Cheque/Reference Number</Form.Label>
-                      <Form.Control type="text"
+                      <Form.Label className="form-fields">
+                        DD/Cheque/Reference Number
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
                         placeholder="Enter DD/Cheque/Reference number"
                         value={memRefnum}
                         onChange={(e) => setmemRefnum(e.target.value)}
-                        required />
+                        required
+                      />
                     </Form.Group>
                   </Col>
                 </Row>
@@ -913,7 +1064,9 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formPaymentType">
-                      <Form.Label className='form-fields'>Payment Type</Form.Label>
+                      <Form.Label className="form-fields">
+                        Payment Type
+                      </Form.Label>
                       <div className="dropdown-input">
                         <Form.Control
                           as="select"
@@ -935,7 +1088,9 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formPaymentMode">
-                      <Form.Label className='form-fields'>Payment Mode</Form.Label>
+                      <Form.Label className="form-fields">
+                        Payment Mode
+                      </Form.Label>
                       <div className="dropdown-input">
                         <Form.Control
                           as="select"
@@ -956,7 +1111,7 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formBankName">
-                      <Form.Label className='form-fields'>Bank Name</Form.Label>
+                      <Form.Label className="form-fields">Bank Name</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter bank name"
@@ -970,7 +1125,9 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formBranchName">
-                      <Form.Label className='form-fields'>Branch Name</Form.Label>
+                      <Form.Label className="form-fields">
+                        Branch Name
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter branch name"
@@ -982,7 +1139,9 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formAmount">
-                      <Form.Label className='form-fields'>Enter Amount</Form.Label>
+                      <Form.Label className="form-fields">
+                        Enter Amount
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter amount"
@@ -994,7 +1153,9 @@ const OnlineApplication = () => {
                   </Col>
                   <Col md={4}>
                     <Form.Group controlId="formAmountInWords">
-                      <Form.Label className='form-fields'>Amount in Words</Form.Label>
+                      <Form.Label className="form-fields">
+                        Amount in Words
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Amount in words"
@@ -1007,7 +1168,9 @@ const OnlineApplication = () => {
                 <Row>
                   <Col md={4}>
                     <Form.Group controlId="formDdChequeRefNumber">
-                      <Form.Label className='form-fields'>DD/Cheque/Reference Number</Form.Label>
+                      <Form.Label className="form-fields">
+                        DD/Cheque/Reference Number
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter DD/Cheque/Reference number"
@@ -1020,7 +1183,7 @@ const OnlineApplication = () => {
 
                   <Col md={4}>
                     <Form.Group controlId="formDdChequeRefNumber">
-                      <Form.Label className='form-fields'>Place</Form.Label>
+                      <Form.Label className="form-fields">Place</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Entet Place"
@@ -1031,26 +1194,21 @@ const OnlineApplication = () => {
                     </Form.Group>
                   </Col>
 
-
                   <Col md={4}>
                     <Form.Group controlId="formDate">
-                      <Form.Label className='form-fields'>Date</Form.Label>
+                      <Form.Label className="form-fields">Date</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Current Date"
-                        value={currentDate}  // Default date from state
-                        readOnly  // Make it read-only
+                        value={currentDate} // Default date from state
+                        readOnly // Make it read-only
                       />
                     </Form.Group>
                   </Col>
-
-
                 </Row>
               </Card.Body>
 
               {/* captcha */}
-
-
 
               {/* <div className="captchaBox card">
       <div className="captcha-box">
@@ -1084,25 +1242,27 @@ const OnlineApplication = () => {
 
               <Row className="mt-3">
                 <Col md={6} className="d-flex justify-content-between">
-                  <Button variant="primary" type="submit">Submit</Button>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
                   {/* <Button variant="secondary" type="submit">Preview</Button> */}
                 </Col>
               </Row>
             </Card>
-
           </>
         )}
-
-
 
         {step === 2 && (
           <Card className="property-card shadow-sm">
             <Card.Body>
               <div className="card-title application">
-                <h2>We've sent an OTP to {email}. Please input the code to continue.</h2>
+                <h2>
+                  We've sent an OTP to {email}. Please input the code to
+                  continue.
+                </h2>
               </div>
               <Form.Group controlId="formOtp">
-                <Form.Label className='form-fields'>OTP</Form.Label>
+                <Form.Label className="form-fields">OTP</Form.Label>
                 <Form.Control
                   type="text"
                   value={otp}
@@ -1112,7 +1272,9 @@ const OnlineApplication = () => {
                 />
                 {otpError && <p className="text-danger">{otpError}</p>}
               </Form.Group>
-              <Button variant="primary" type="submit">Verify OTP</Button>
+              <Button variant="primary" type="submit">
+                Verify OTP
+              </Button>
               <Button
                 variant="link"
                 className="mt-2"
@@ -1126,14 +1288,21 @@ const OnlineApplication = () => {
         )}
 
         {/* <Button variant="primary" type="submit">Submit</Button> */}
-        {loading && <div className="spinner-border text-primary" role="status"><span className="sr-only">Loading...</span></div>}
+        {loading && (
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        )}
       </Form>
       {/* Success Modal */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Thank you for submitting the form. Our team will be in touch with you shortly.</Modal.Body>
+        <Modal.Body>
+          Thank you for submitting the form. Our team will be in touch with you
+          shortly.
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleCloseModal}>
             Back to Home

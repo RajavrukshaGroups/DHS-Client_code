@@ -9,39 +9,40 @@ const TransferProject = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  console.log("transferdate", transferData);
 
   useEffect(() => {
+    const fetchTransferData = async () => {
+      const seniorityId = sessionStorage.getItem("seniority_id");
 
-  const fetchTransferData = async () => {
-    const seniorityId = sessionStorage.getItem("seniority_id");
-
-    if (!seniorityId) {
-      setError("No seniority ID found in session");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.get(
-        `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
-      );
-      if (response.status === 200 && Array.isArray(response.data)){
-        setTransferData(response.data);
-      } else {
-        setTransferData([]); // In case of empty or invalid data
+      if (!seniorityId) {
+        setError("No seniority ID found in session");
+        setLoading(false);
+        return;
       }
-    } catch (err) {
-      if ( err.response && err.response.status === 404 ) {
-        setTransferData([]); // No records found but not an error
-      } else {
-        setError("Something went wrong. Please try again later.");
+
+      try {
+        const response = await axios.get(
+          `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+          // `http://localhost:4000/defenceWebsiteRoutes/get-transferred-history/${seniorityId}`
+        );
+        if (response.status === 200 && Array.isArray(response.data)) {
+          setTransferData(response.data);
+        } else {
+          setTransferData([]); // In case of empty or invalid data
+        }
+      } catch (err) {
+        if (err.response && err.response.status === 404) {
+          setTransferData([]); // No records found but not an error
+        } else {
+          setError("Something went wrong. Please try again later.");
+        }
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchTransferData();
-}, []);
+    };
+    fetchTransferData();
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -87,9 +88,10 @@ const TransferProject = () => {
                   <td>{data?.refname}</td>
                   <td>{data?.propertyDetails.projectName}</td>
                   <td>{data?.SeniorityID}</td>
-                   <td>
-                        {new Date().toLocaleDateString()} {/* fallback if createdAt not available */}
-                      </td>
+                  <td>
+                    {/* {new Date().toLocaleDateString()}{" "} */}
+                    {data?.transferDate ? formatDate(data.transferDate) : "N/A"}
+                  </td>
                   <td>{data?.transferReason}</td>
                 </tr>
               ))
