@@ -231,7 +231,8 @@ const ContactUs = () => {
                 <div>
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+                    // sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+                    sitekey="6LfarqkrAAAAAFUBBVCodI4OdoTheC6uB1hdtITz"
                     onChange={(value) => setCaptchaValue(value)}
                   />
                 </div>
