@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./tapContact.css";
 import { toast } from "react-toastify";
+import { FiUser, FiMail, FiMessageSquare, FiX } from "react-icons/fi";
+import { CiPhone } from "react-icons/ci";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = ({ onFormSubmit }) => {
   const [formData, setFormData] = useState({
@@ -17,6 +20,8 @@ const ContactForm = ({ onFormSubmit }) => {
     phone: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const recaptchaRef = useRef();
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +38,11 @@ const ContactForm = ({ onFormSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaValue) {
+      toast.error("Please verify that you are not a robot!");
+      return;
+    }
 
     const phonePattern = /^[0-9]{10}$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -65,13 +75,13 @@ const ContactForm = ({ onFormSubmit }) => {
 
       const response = await fetch(
         // "http://localhost:4000/defenceWebsiteRoutes/contactus",
-        " https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
+        "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({ ...payload, captchaValue }),
         }
       );
 
@@ -117,7 +127,6 @@ const ContactForm = ({ onFormSubmit }) => {
   return (
     <Form onSubmit={handleSubmit} className="compact-form">
       <Form.Group>
-        <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
           name="name"
@@ -125,11 +134,12 @@ const ContactForm = ({ onFormSubmit }) => {
           onChange={handleChange}
           required
           disabled={isSubmitting}
+          placeholder="Name"
         />
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Email</Form.Label>
+        {/* <Form.Label>Email</Form.Label> */}
         <Form.Control
           type="email"
           name="email"
@@ -138,6 +148,7 @@ const ContactForm = ({ onFormSubmit }) => {
           required
           disabled={isSubmitting}
           isInvalid={!!formErrors.email}
+          placeholder="email"
         />
         {formErrors.email && (
           <Form.Text className="text-danger">{formErrors.email}</Form.Text>
@@ -145,7 +156,7 @@ const ContactForm = ({ onFormSubmit }) => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Phone</Form.Label>
+        {/* <Form.Label>Phone</Form.Label> */}
         <Form.Control
           type="tel"
           name="phone"
@@ -154,6 +165,7 @@ const ContactForm = ({ onFormSubmit }) => {
           required
           disabled={isSubmitting}
           isInvalid={!!formErrors.phone}
+          placeholder="phone"
         />
         {formErrors.phone && (
           <Form.Text className="text-danger">{formErrors.phone}</Form.Text>
@@ -161,7 +173,7 @@ const ContactForm = ({ onFormSubmit }) => {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Message</Form.Label>
+        {/* <Form.Label>Message</Form.Label> */}
         <Form.Control
           as="textarea"
           rows={2}
@@ -170,8 +182,16 @@ const ContactForm = ({ onFormSubmit }) => {
           onChange={handleChange}
           disabled={isSubmitting}
           required
+          placeholder="message"
         />
       </Form.Group>
+      <div>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+          onChange={(value) => setCaptchaValue(value)}
+        />
+      </div>
 
       <Button
         variant="primary"

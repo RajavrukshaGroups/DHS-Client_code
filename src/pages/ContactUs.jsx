@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import toast, { Toaster } from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   faMapMarkerAlt,
   faEnvelope,
@@ -23,6 +24,8 @@ const ContactUs = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // Track submission status
   const [fieldErrors, setFieldErrors] = useState({});
+  const [captchaValue, setCaptchaValue] = useState(null); // 👈 store captcha token
+  const recaptchaRef = useRef();
 
   const filter = new Filter();
 
@@ -42,6 +45,10 @@ const ContactUs = () => {
   };
 
   const onSubmit = async (data) => {
+    if (!captchaValue) {
+      toast.error("Please verify that you are not a robot!");
+      return;
+    }
     setIsLoading(true);
     try {
       // Send form data to the backend API
@@ -49,14 +56,14 @@ const ContactUs = () => {
       const response = await fetch(
         // "https://memberpanel.defencehousingsociety.com/contact",
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
-
+        // "http://localhost:4000/defenceWebsiteRoutes/contactus",
         {
           // Adjust the endpoint URL as needed
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, captchaValue }),
         }
       );
 
@@ -64,12 +71,17 @@ const ContactUs = () => {
         setSubmitStatus("success");
         // alert("Form submitted successfully!");
         toast.success("Form submitted successfully");
+        setCaptchaValue(null);
         reset();
       } else {
         setSubmitStatus("error");
-        // alert("Error submitting form. Please try again.");
-        toast.error("error submitting form.Please try again.");
+        const errorData = await response.json();
+        toast.error(
+          errorData.error || "Error submitting form. Please try again."
+        );
       }
+      recaptchaRef.current.reset();
+      setCaptchaValue(null);
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
@@ -214,6 +226,14 @@ const ContactUs = () => {
                   {fieldErrors.message && (
                     <p className="error-message">{fieldErrors.message}</p>
                   )}
+                </div>
+
+                <div>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+                    onChange={(value) => setCaptchaValue(value)}
+                  />
                 </div>
 
                 <div className="form-group checkbox-group">

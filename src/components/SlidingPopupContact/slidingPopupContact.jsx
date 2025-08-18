@@ -3,6 +3,7 @@ import { FiUser, FiMail, FiMessageSquare, FiX } from "react-icons/fi";
 import { CiPhone } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { FaPaperPlane } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // const ContactFormPopup = () => {
 const ContactFormPopup = ({ isGoogleAds = false }) => {
@@ -19,6 +20,8 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
   const [loading, setLoading] = useState(false);
   const popupRef = useRef(null);
   const reopenTimerRef = useRef(null);
+  const recaptchaRef = useRef();
+  const [captchaValue, setCaptchaValue] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,6 +64,12 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!captchaValue) {
+      toast.error("Please verify that you are not a robot!");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -75,6 +84,7 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
           },
           body: JSON.stringify({
             ...formData,
+            captchaValue,
             source: isGoogleAds ? "google_ads" : "website", // Add source to payload
           }),
         }
@@ -91,10 +101,13 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
             ? "Google Ads Lead"
             : "Defence Housing Society web", // Modify subject based on source
         });
+        setCaptchaValue(null);
         handleClose();
       } else {
         toast.error("Failed to send message.");
       }
+      recaptchaRef.current.reset();
+      setCaptchaValue(null);
     } catch (error) {
       toast.error("Something went wrong!");
     } finally {
@@ -130,7 +143,7 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
             boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <div className="flex justify-between items-center p-4 bg-gradient-to-r from-[#24447c] to-blue-600">
+          <div className="flex justify-between items-center p-2 bg-gradient-to-r from-[#24447c] to-blue-600">
             <h2 className="text-lg font-semibold text-white">Contact Us</h2>
             <button
               onClick={handleClose}
@@ -143,7 +156,7 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
           <div className="p-4">
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">Name</label>
+                {/* <label className="block text-sm text-gray-600 mb-1">Name</label> */}
                 <div className="relative">
                   <FiUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -159,9 +172,9 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
               </div>
 
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">
+                {/* <label className="block text-sm text-gray-600 mb-1">
                   Email
-                </label>
+                </label> */}
                 <div className="relative">
                   <FiMail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
@@ -177,9 +190,9 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
               </div>
 
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">
+                {/* <label className="block text-sm text-gray-600 mb-1">
                   Mobile No
-                </label>
+                </label> */}
                 <div className="relative">
                   <CiPhone className="text-1xl absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-800" />
                   <input
@@ -195,13 +208,13 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
               </div>
 
               <div className="relative">
-                <label className="block text-sm text-gray-600 mb-1">
+                {/* <label className="block text-sm text-gray-600 mb-1">
                   Message
-                </label>
+                </label> */}
                 <div className="relative">
                   <FiMessageSquare className="absolute left-3 top-3 text-gray-400" />
                   <textarea
-                    rows="2"
+                    rows="1"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -211,28 +224,13 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
                   ></textarea>
                 </div>
               </div>
-
-              {/* <button
-                type="submit"
-                disabled={loading}
-                className={`w-full bg-[#24447c] text-white py-2 rounded-md hover:bg-sky-700 transition-colors duration-200 flex items-center justify-center ${
-                  loading ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
-              >
-                {loading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending....
-                  </>
-                ) : (
-                  <>
-                    Submit <FaPaperPlane className="ml-2 " />
-                  </>
-                )}
-              </button> */}
+              <div className="scale-75 origin-left -mt-3 mb-1">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+                  onChange={(value) => setCaptchaValue(value)}
+                />
+              </div>
               <button
                 type="submit"
                 disabled={loading}

@@ -59,8 +59,8 @@ const Dashboard = () => {
   };
 
   const handleShareCertificate = (receiptId) => {
-    const url = `http://localhost:4000/receipt/get-share-certificate/${receiptId}`;
-    // const url = `https://adminpanel.defencehousingsociety.com/receipt/get-share-certificate/${receiptId}`;
+    // const url = `http://localhost:4000/receipt/get-share-certificate/${receiptId}`;
+    const url = `https://adminpanel.defencehousingsociety.com/receipt/get-share-certificate/${receiptId}`;
     window.open(url, "_blank");
   };
 
