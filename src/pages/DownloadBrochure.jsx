@@ -4,33 +4,39 @@ import { Form, Button, Container, Card } from "react-bootstrap";
 import { saveAs } from "file-saver";
 import axios from "axios"; // Make sure you have axios installed
 import { toast } from "react-hot-toast";
+import Loader from "../utils/loader";
 
 import "./styles/DownloadBrochure.css";
 
 const DownloadBrochure = () => {
   const [isReadMore, setIsReadMore] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/brochure",
-        // "http://localhost:4000//defenceWebsiteRoutes/brochure",
+        // "http://localhost:4000/defenceWebsiteRoutes/brochure",
         data,
         { responseType: "blob" }
       );
       const blob = new Blob([response.data], { type: "application/pdf" });
       saveAs(blob, "Brochure.pdf");
       toast.success("Brochure downloaded successfully!");
+      reset();
     } catch (error) {
       console.error("Error downloading brochure:", error);
       toast.error("Failed to download. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,6 +50,7 @@ const DownloadBrochure = () => {
       className="d-flex justify-content-center"
       style={{ marginBottom: "2rem", marginTop: "3rem" }}
     >
+      {isLoading && <Loader />}
       <Card className="download-brochure-card">
         <Card.Body>
           <h1>Download Brochure</h1>
