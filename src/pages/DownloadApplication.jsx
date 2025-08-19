@@ -4,34 +4,47 @@ import { Form, Button, Container, Card } from "react-bootstrap";
 import { saveAs } from "file-saver";
 import axios from "axios"; // Make sure you have axios installed
 import { toast } from "react-hot-toast";
-
 import "./styles/DownloadBrochure.css";
+import Loader from "../utils/loader";
 
 const DownloadApplication = () => {
   const [isReadMore, setIsReadMore] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/download",
         // "http://localhost:4000/defenceWebsiteRoutes/download",
-        data,
-        { responseType: "blob" }
+        data
+        // { responseType: "blob" }
       );
 
-      const pdfBlob = new Blob([response.data], { type: "application/pdf" });
-      saveAs(pdfBlob, "ApplicationForm.pdf");
-      toast.success("Form submitted and PDF downloaded!");
+      if (response.status === 200) {
+        window.open(
+          "https://res.cloudinary.com/den0iz8zn/image/upload/v1755582287/DEFENCE_HABITAT_SOCIETY__Application_ztkc0q.pdf",
+          "_blank"
+        );
+        toast.success("Form submitted and PDF downloaded!");
+        reset();
+      }
+
+      // const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+      // saveAs(pdfBlob, "ApplicationForm.pdf");
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Error submitting form. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -45,6 +58,7 @@ const DownloadApplication = () => {
       className="d-flex justify-content-center"
       style={{ marginBottom: "2rem", marginTop: "3rem" }}
     >
+      {isLoading && <Loader />}
       <Card className="download-brochure-card">
         <Card.Body>
           <h1>Download Application</h1>
