@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Filter } from "bad-words";
 import Loader from "../utils/loader";
 import toast from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const faqs = [
   {
@@ -183,6 +184,8 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [showMore, setShowMore] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState(null);
+  const recaptchaRef = useRef();
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -214,18 +217,24 @@ const FAQ = () => {
   };
 
   const onSubmit = async (data) => {
+    if (!captchaValue) {
+      toast.error("Please verify that you are not a robot!");
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await fetch(
         // "https://memberpanel.defencehousingsociety.com/contact",
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
+        // "http://localhost:4000/defenceWebsiteRoutes/contactus",
+
         {
           // Adjust the endpoint URL as needed
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, captchaValue }),
         }
       );
 
@@ -233,12 +242,19 @@ const FAQ = () => {
         setSubmitStatus("success");
         // alert("Form submitted successfully!");
         toast.success("form submitted successfully.");
+        setCaptchaValue(null);
         reset();
       } else {
         setSubmitStatus("error");
-        toast.error("error submitting form.Please try again");
+        const errorData = await response.json();
+        toast.error(
+          errorData.error || "error submiting form.Please try again."
+        );
+        // toast.error("error submitting form.Please try again");
         // alert("Error submitting form. Please try again.");
       }
+      recaptchaRef.current.reset();
+      setCaptchaValue(null);
     } catch (error) {
       console.error("Error submitting contact form:", error);
       setSubmitStatus("error");
@@ -411,6 +427,14 @@ const FAQ = () => {
                     {fieldErrors.message && (
                       <p className="error-message">{fieldErrors.message}</p>
                     )}
+                  </div>
+                  <div>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      // sitekey="6LequKcrAAAAAKR_okRav96T4sMTa5FBs9s9JURL"
+                      sitekey="6LfarqkrAAAAAFUBBVCodI4OdoTheC6uB1hdtITz"
+                      onChange={(value) => setCaptchaValue(value)}
+                    />
                   </div>
 
                   <div className="form-group checkbox-group">
