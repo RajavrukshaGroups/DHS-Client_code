@@ -88,7 +88,8 @@ const Footer = () => {
               className="copyright"
               style={{ marginTop: "0rem", marginBottom: "1rem" }}
             >
-              Designed by Rajavruskha Groups.
+              {/* Designed by Rajavruskha Groups. */}
+              Designed by Digital Elite Services
             </p>
           </div>
           <div className="col-md-4 col-sm-12 col-xs-12">
