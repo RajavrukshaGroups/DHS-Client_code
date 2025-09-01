@@ -97,7 +97,7 @@ const Footer = () => {
               className="copyright"
               style={{ marginTop: "0rem", marginBottom: "1rem" }}
             >
-              © 2024 DEFENCE HABITAT ALL RIGHT RESERVED.
+              © {new Date().getFullYear()} DEFENCE HABITAT ALL RIGHT RESERVED.
             </p>
           </div>
           <div
