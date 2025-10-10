@@ -50,6 +50,7 @@ import { Toaster } from "react-hot-toast";
 import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPasswordOTP.jsx";
 import SlidingPopupContact from "./components/SlidingPopupContact/slidingPopupContact.jsx";
 import ContactForm from "./pages/Tapasihalli/TapasihalliContact.jsx";
+import TermsAndConditions from "./pages/TermsAndCondtions.jsx";
 
 function MainApp() {
   const location = useLocation();
@@ -112,7 +113,8 @@ function MainApp() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/online_application" element={<MemberFormWrapper />} />
-          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
           {/* Member Panel Routings */}
           <Route path="/memberlogin" element={<MemberLogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -243,7 +245,8 @@ function PopupAdminSelector() {
     "/contact-us",
     "/faq",
     "/online_application",
-    "/PrivacyPolicy",
+    "/privacy-policy",
+    "/terms-conditions",
   ];
 
   // Check if current route is in the allowedRoutes list

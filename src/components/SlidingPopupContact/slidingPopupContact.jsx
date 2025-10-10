@@ -23,6 +23,9 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
   const recaptchaRef = useRef();
   const [captchaValue, setCaptchaValue] = useState(null);
 
+  const [agreed, setAgreed] = useState(false);
+  const [agreeError, setAgreeError] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -62,6 +65,18 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
     setShowButton(false);
   };
 
+  const validateAgreement = () => {
+    if (!agreed) {
+      setAgreeError(
+        "You must agree to the Terms and Privacy Policy to continue."
+      );
+      toast.error("Please accept Terms and Privacy Policy.");
+      return false;
+    }
+    setAgreeError("");
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,6 +84,8 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
       toast.error("Please verify that you are not a robot!");
       return;
     }
+
+    if (!validateAgreement()) return;
 
     setLoading(true);
 
@@ -102,6 +119,7 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
             : "Defence Housing Society web", // Modify subject based on source
         });
         setCaptchaValue(null);
+        setAgreed(false);
         handleClose();
       } else {
         toast.error("Failed to send message.");
@@ -117,7 +135,7 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
 
   return (
     // <div className="fixed bottom-4 right-4 z-50">
-    <div className="fixed bottom-4 short:top-[70px] right-4 z-[9999]">
+    <div className="fixed bottom-1 short:top-[70px] right-4 z-[9999]">
       {/* Contact Button - Only shows after popup is closed */}
       {showButton && !showPopup && !isClosing && (
         <button
@@ -232,6 +250,46 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
                   onChange={(value) => setCaptchaValue(value)}
                 />
               </div>
+
+              <div className="form-group checkbox-group text-sm">
+                <label className="inline-flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => {
+                      setAgreed(e.target.checked);
+                      if (e.target.checked) setAgreeError("");
+                    }}
+                    className="mt-1"
+                    aria-required="true"
+                  />
+                  <span className="ml-1 text-gray-700">
+                    I agree to the{" "}
+                    <a
+                      href="/terms-conditions"
+                      // target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Terms and Conditions
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="/privacy-policy"
+                      // target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Privacy Policy
+                    </a>
+                    .
+                  </span>
+                </label>
+                {agreeError && (
+                  <p className="text-xs text-red-600 mt-1">{agreeError}</p>
+                )}
+              </div>
+
               <button
                 type="submit"
                 disabled={loading}

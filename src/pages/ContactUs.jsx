@@ -237,7 +237,7 @@ const ContactUs = () => {
                   />
                 </div>
 
-                <div className="form-group checkbox-group">
+                {/* <div className="form-group checkbox-group">
                   <label className="checkbox-label">
                     <input
                       style={{ marginTop: "5px" }}
@@ -280,6 +280,29 @@ const ContactUs = () => {
                           </button>
                         </span>
                       )}
+                    </span>
+                  </label>
+                  {errors.declaration && (
+                    <p className="error-message">
+                      {errors.declaration.message}
+                    </p>
+                  )}
+                </div> */}
+
+                <div className="form-group checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      style={{ marginTop: "5px" }}
+                      type="checkbox"
+                      name="declaration"
+                      {...register("declaration", {
+                        required: "You must declare",
+                      })}
+                    />
+                    <span className="checkbox-text">
+                      I accept the{" "}
+                      <a href="/terms-conditions">Terms and Conditions</a> and{" "}
+                      <a href="privacy-policy">Privacy Policy</a>.
                     </span>
                   </label>
                   {errors.declaration && (

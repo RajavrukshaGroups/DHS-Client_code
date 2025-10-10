@@ -10,6 +10,8 @@ import {
   faPhone,
   faEnvelope,
   faMapMarkerAlt,
+  faShieldAlt,
+  faFileContract,
 } from "@fortawesome/free-solid-svg-icons";
 import "./footer.css"; // Custom CSS for additional styling
 
@@ -66,6 +68,15 @@ const Footer = () => {
                 info@defencehousingsociety.com
               </a>
             </p>
+            <div style={{ marginTop: "1.5rem" }}>
+              <a href="/terms-conditions" className="footer-link">
+                <FontAwesomeIcon icon={faFileContract} /> Terms and Conditions
+              </a>
+              <br />
+              <a href="/privacy-policy" className="footer-link">
+                <FontAwesomeIcon icon={faShieldAlt} /> Privacy Policy
+              </a>
+            </div>
           </div>
           <div className="col-md-4" style={{ marginBottom: "2rem" }}>
             <h4 style={{ fontWeight: "900" }}>Office Timings</h4>
@@ -99,15 +110,6 @@ const Footer = () => {
             >
               © {new Date().getFullYear()} DEFENCE HABITAT ALL RIGHT RESERVED.
             </p>
-          </div>
-          <div
-            className="col-md-4 col-sm-12 col-xs-12"
-            style={{ marginTop: "-1rem" }}
-          >
-            <a href="/PrivacyPolicy" className="copyright">
-              {" "}
-              Privacy Policy
-            </a>
           </div>
         </div>
         {/* Social Media Icons */}
