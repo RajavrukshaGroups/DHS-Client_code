@@ -75,6 +75,7 @@ const MyProject = () => {
               <th>Sq Ft Price </th>
               <th>Project Amount</th>
               <th>Project Paid Amount</th>
+              <th>Balance Amount</th>
             </tr>
           </thead>
           {/* <tbody>
@@ -108,6 +109,13 @@ const MyProject = () => {
                 <td>₹{formatNumber(user.propertyDetails?.pricePerSqft)}/-</td>
                 <td>₹{formatNumber(user.propertyDetails?.propertyCost)}/-</td>
                 <td>₹{formatNumber(user.propertyDetails?.paidAmount)}/-</td>
+                <td>
+                  ₹
+                  {formatNumber(
+                    user.propertyDetails?.propertyCost -
+                      user.propertyDetails?.paidAmount
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

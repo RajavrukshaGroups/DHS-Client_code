@@ -21,7 +21,11 @@ const ViewReceiptHistory = () => {
         const response = await axios.get(
           `https://adminpanel.defencehousingsociety.com/member/get-member/${id}`
         );
-        setTimeout(() => {
+        // const response = await axios.get(
+        //   `http://localhost:4000/member/get-member/${id}`
+        // );
+        //http://localhost:4000
+        http: setTimeout(() => {
           setMemberData(response.data);
           setLoading(false);
         }, 500);
@@ -41,6 +45,10 @@ const ViewReceiptHistory = () => {
       const res = await axios.get(
         `https://adminpanel.defencehousingsociety.com/receipt/receipts/member/${id}`
       );
+      // const res = await axios.get(
+      //   `http://localhost:4000/receipt/receipts/member/${id}`
+      // );
+
       setTimeout(() => {
         setReceiptData(res.data);
         setReceiptLoading(false);
@@ -90,6 +98,8 @@ const ViewReceiptHistory = () => {
       const { receiptId, paymentType, installmentNumber } = selectedReceipt;
       await axios.delete(
         `https://adminpanel.defencehousingsociety.com/member/delete-member-receipt-payment/${membersData._id}`,
+        // `http://localhost:4000/member/delete-member-receipt-payment/${membersData._id}`,
+        // http://localhost:4000
         {
           data: { paymentType, installmentNumber },
         }

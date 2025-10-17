@@ -15,6 +15,7 @@ function ViewMemberdetails() {
     try {
       const response = await axiosInstance.get(
         `https://adminpanel.defencehousingsociety.com/member/view-member-details?page=${page}&search=${encodeURIComponent(
+        // `http://localhost:4000/member/view-member-details?page=${page}&search=${encodeURIComponent(
           search
         )}`
       );
@@ -42,6 +43,7 @@ function ViewMemberdetails() {
     try {
       await axiosInstance.put(
         `https://adminpanel.defencehousingsociety.com/member/update-status/${memberId}`,
+        // `http://localhost:4000/member/update-status/${memberId}`,
         { isActive: !currentStatus }
       );
       setMemberDetails((prev) =>
@@ -59,6 +61,7 @@ function ViewMemberdetails() {
     try {
       const response = await axiosInstance.post(
         "https://adminpanel.defencehousingsociety.com/member/membercredentials",
+        // "http://localhost:4000/member/membercredentials",
         {
           name: member.name,
           email: member.email,

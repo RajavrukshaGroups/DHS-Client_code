@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../../api/interceptors";
 
-function ProppertyDetails({ formData, handleChange, refreshKey,formErrors }) {
+function ProppertyDetails({ formData, handleChange, refreshKey, formErrors }) {
   const [projectOptions, setProjectOptions] = useState([]);
   const [dimensions, setDimensions] = useState([]);
 
@@ -11,7 +11,12 @@ function ProppertyDetails({ formData, handleChange, refreshKey,formErrors }) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axiosInstance.get("https://adminpanel.defencehousingsociety.com/project/all-projects");
+        const res = await axiosInstance.get(
+          "https://adminpanel.defencehousingsociety.com/project/all-projects"
+        );
+        // const res = await axiosInstance.get(
+        //   "http://localhost:4000/project/all-projects"
+        // );
         setProjectOptions(res.data || []);
       } catch (err) {
         console.error(err);
@@ -24,7 +29,9 @@ function ProppertyDetails({ formData, handleChange, refreshKey,formErrors }) {
 
   // Update dimensions when projectName changes
   useEffect(() => {
-    const selected = projectOptions.find((p) => p.projectName === formData?.projectName);
+    const selected = projectOptions.find(
+      (p) => p.projectName === formData?.projectName
+    );
     if (selected?.dimensions?.length) {
       setDimensions(selected.dimensions);
     } else {
@@ -34,35 +41,43 @@ function ProppertyDetails({ formData, handleChange, refreshKey,formErrors }) {
 
   useEffect(() => {
     if (formData?.PropertySize && formData?.perSqftPropertyPrice) {
-      const cost = parseFloat(formData.PropertySize) * parseFloat(formData.perSqftPropertyPrice);
+      const cost =
+        parseFloat(formData.PropertySize) *
+        parseFloat(formData.perSqftPropertyPrice);
       const formatted = isNaN(cost)
         ? ""
         : new Intl.NumberFormat("en-IN", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(cost);
-      handleChange({ target: { name: "selectedPropertyCost", value: formatted } });
+      handleChange({
+        target: { name: "selectedPropertyCost", value: formatted },
+      });
     } else {
       handleChange({ target: { name: "selectedPropertyCost", value: "" } });
     }
   }, [formData?.PropertySize, formData?.perSqftPropertyPrice]);
 
-useEffect(() => {
+  useEffect(() => {
     if (formData?.selectedPropertyCost && formData?.percentage) {
-      const numericCost = parseFloat(formData.selectedPropertyCost.replace(/,/g, ""));
-      const percentageCost = (numericCost * parseFloat(formData.percentage)) / 100;
-  
+      const numericCost = parseFloat(
+        formData.selectedPropertyCost.replace(/,/g, "")
+      );
+      const percentageCost =
+        (numericCost * parseFloat(formData.percentage)) / 100;
+
       const formattedPercentage = new Intl.NumberFormat("en-IN", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }).format(percentageCost);
-  
-      handleChange({ target: { name: "percentageCost", value: formattedPercentage } });
+
+      handleChange({
+        target: { name: "percentageCost", value: formattedPercentage },
+      });
     } else {
       handleChange({ target: { name: "percentageCost", value: "" } });
     }
   }, [formData?.selectedPropertyCost, formData?.percentage]);
-  
 
   // Handle project selection
   const handleProjectSelect = (e) => {
@@ -95,18 +110,26 @@ useEffect(() => {
     const selectedDim = dimensions.find((dim) => dim._id === dimId);
     if (selectedDim) {
       const size = selectedDim.length * selectedDim.breadth;
-  
+
       handleChange({ target: { name: "PropertySize", value: size } });
-      handleChange({ target: { name: "perSqftPropertyPrice", value: selectedDim.pricePerSqft?.toString() || "" } });
-  
+      handleChange({
+        target: {
+          name: "perSqftPropertyPrice",
+          value: selectedDim.pricePerSqft?.toString() || "",
+        },
+      });
+
       // ADD THESE:
-      handleChange({ target: { name: "plotLength", value: selectedDim.length.toString() } });
-      handleChange({ target: { name: "plotBreadth", value: selectedDim.breadth.toString() } });
+      handleChange({
+        target: { name: "plotLength", value: selectedDim.length.toString() },
+      });
+      handleChange({
+        target: { name: "plotBreadth", value: selectedDim.breadth.toString() },
+      });
     }
   };
 
   return (
-    
     <div className="bg-white p-6 rounded-xl shadow-md mb-6">
       <h2 className="text-xl font-bold mb-4">Property Details</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,7 +148,9 @@ useEffect(() => {
               </option>
             ))}
           </select>
-          {formErrors.projectName && <p className="text-red-600 text-sm">{formErrors.projectName}</p>}  
+          {formErrors.projectName && (
+            <p className="text-red-600 text-sm">{formErrors.projectName}</p>
+          )}
         </div>
 
         <div>
@@ -142,21 +167,17 @@ useEffect(() => {
               </option>
             ))}
           </select>
-          {formErrors.PropertySize && <p className="text-red-600 text-sm">{formErrors.PropertySize}</p>}
+          {formErrors.PropertySize && (
+            <p className="text-red-600 text-sm">{formErrors.PropertySize}</p>
+          )}
         </div>
-                <input
-          type="hidden"
-          name="plotLength"
-          value={formData?.plotLength}
-        />
+        <input type="hidden" name="plotLength" value={formData?.plotLength} />
 
-        <input
-          type="hidden"
-          name="plotBreadth"
-          value={formData?.plotBreadth}
-        />
+        <input type="hidden" name="plotBreadth" value={formData?.plotBreadth} />
         <div>
-          <label className="block font-medium mb-1">Per Sqft Property Price</label>
+          <label className="block font-medium mb-1">
+            Per Sqft Property Price
+          </label>
           <input
             type="number"
             min={0}
@@ -166,11 +187,17 @@ useEffect(() => {
             onChange={handleChange}
             className="w-full border px-4 py-2 rounded-md"
           />
-          {formErrors.perSqftPropertyPrice && <p className="text-red-600 text-sm">{formErrors.perSqftPropertyPrice}</p>}
+          {formErrors.perSqftPropertyPrice && (
+            <p className="text-red-600 text-sm">
+              {formErrors.perSqftPropertyPrice}
+            </p>
+          )}
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Selected Property Cost</label>
+          <label className="block font-medium mb-1">
+            Selected Property Cost
+          </label>
           <input
             type="text"
             name="selectedPropertyCost"
@@ -179,48 +206,56 @@ useEffect(() => {
             readOnly
             className="w-full border px-4 py-2 rounded-md bg-gray-100"
           />
-          {formErrors.selectedPropertyCost && <p className="text-red-600 text-sm">{formErrors.selectedPropertyCost}</p>}
+          {formErrors.selectedPropertyCost && (
+            <p className="text-red-600 text-sm">
+              {formErrors.selectedPropertyCost}
+            </p>
+          )}
         </div>
 
         <div>
-        <label className="block font-medium mb-1">Percentage</label>
-        <div className="flex gap-4 items-center">
-          {[25, 30].map((percent) => (
-            <label key={percent} className="flex items-center gap-1">
-              <input
-                type="radio"
-                name="percentage"
-                value={percent}
-                checked={parseInt(formData?.percentage) === percent}
-                onChange={(e) =>
-                  handleChange({ target: { name: "percentage", value: e.target.value } })
-                }
-              />
-              {percent}%
-            </label>
-          ))}
+          <label className="block font-medium mb-1">Percentage</label>
+          <div className="flex gap-4 items-center">
+            {[25, 30].map((percent) => (
+              <label key={percent} className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  name="percentage"
+                  value={percent}
+                  checked={parseInt(formData?.percentage) === percent}
+                  onChange={(e) =>
+                    handleChange({
+                      target: { name: "percentage", value: e.target.value },
+                    })
+                  }
+                />
+                {percent}%
+              </label>
+            ))}
+          </div>
+          {formErrors.percentage && (
+            <p className="text-red-600 text-sm">{formErrors.percentage}</p>
+          )}
         </div>
-        {formErrors.percentage && <p className="text-red-600 text-sm">{formErrors.percentage}</p>}
-      </div>
 
-      <div>
-        <label className="block font-medium mb-1">Selected Percentage Cost</label>
-        <input
-          type="text"
-          name="percentageCost"
-          value={formData?.percentageCost}
-          readOnly
-          className="w-full border px-4 py-2 rounded-md bg-gray-100"
-        />
-        {formErrors.percentageCost && <p className="text-red-600 text-sm">{formErrors.percentageCost}</p>}
-      </div>
-
+        <div>
+          <label className="block font-medium mb-1">
+            Selected Percentage Cost
+          </label>
+          <input
+            type="text"
+            name="percentageCost"
+            value={formData?.percentageCost}
+            readOnly
+            className="w-full border px-4 py-2 rounded-md bg-gray-100"
+          />
+          {formErrors.percentageCost && (
+            <p className="text-red-600 text-sm">{formErrors.percentageCost}</p>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
 export default ProppertyDetails;
-
-
-

@@ -21,6 +21,7 @@ function ViewUserdetails() {
     try {
       const response = await axiosInstance.get(
         `https://adminpanel.defencehousingsociety.com/member/view-member-details?page=${page}&search=${encodeURIComponent(
+        // `http://localhost:4000/member/view-member-details?page=${page}&search=${encodeURIComponent(
           search
         )}`
       );
@@ -61,6 +62,7 @@ function ViewUserdetails() {
     try {
       await axiosInstance.delete(
         `https://adminpanel.defencehousingsociety.com/member/delete-member/${id}`
+        // `http://localhost:4000/member/delete-member/${id}`
       );
       toast.success("Member deleted successfully");
 

@@ -46,6 +46,7 @@ const ResetPassword = () => {
       try {
         const response = await axios.post(
           "https://adminpanel.defencehousingsociety.com/member/resetpassword",
+          // "http://localhost:4000/member/resetpassword",
           fromData
         );
         // const response = await axios.post(
