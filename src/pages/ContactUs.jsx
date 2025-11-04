@@ -331,9 +331,13 @@ const ContactUs = () => {
                     Address
                   </h3>
                   <p style={{ textAlign: "center" }}>
-                    Defence Habitat Housing Co-Operative Society Ltd. Behind
-                    Swathi Garden Hotel, E Block, Sahakarnagar, Bangalore.
-                    Karnataka - 560092
+                    Defence Habitat Housing Co-Operative Society Ltd.
+                    <br />
+                    {/* Behind Swathi Garden Hotel, E Block, Sahakarnagar,
+                    Bangalore. Karnataka - 560092 */}
+                    Behind Swathi Gardenia Hotel, Sahakarnagar E Block
+                    <br />
+                    Bangalore - 560092
                   </p>
                 </div>
 

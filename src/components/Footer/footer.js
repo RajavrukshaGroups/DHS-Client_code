@@ -33,9 +33,14 @@ const Footer = () => {
           <div className="col-md-4" style={{ marginBottom: "2rem" }}>
             <h4 style={{ fontWeight: "900" }}>Contact Us</h4>
             <p style={{ marginTop: "1rem", color: "white" }}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} /> Behind Swathi Garden
-              Hotel, E Block, Sahakarnagar, Bangalore - 560092, Karnataka
+              <FontAwesomeIcon icon={faMapMarkerAlt} style={{marginRight:"8px"}}/>
+              {/* Behind Swathi Garden
+              Hotel, E Block, Sahakarnagar, Bangalore - 560092, Karnataka */}
+              Behind Swathi Gardenia Hotel
+              <br />
+              Sahakarnagar E Block, Bangalore - 560092
             </p>
+
             <p style={{ marginTop: "1rem", color: "white" }}>
               <FontAwesomeIcon icon={faPhone} />{" "}
               <a href="tel:+918884735735" style={{ color: "white" }}>
