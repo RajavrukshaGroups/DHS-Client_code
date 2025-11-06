@@ -51,6 +51,8 @@ import VerifyForgotPassword from "./components/OtpVerification/VerifyForgotPassw
 import SlidingPopupContact from "./components/SlidingPopupContact/slidingPopupContact.jsx";
 import ContactForm from "./pages/Tapasihalli/TapasihalliContact.jsx";
 import TermsAndConditions from "./pages/TermsAndCondtions.jsx";
+ import CopyrightPolicy from "./pages/CopyrightPolicy.jsx";
+
 
 function MainApp() {
   const location = useLocation();
@@ -115,6 +117,7 @@ function MainApp() {
           <Route path="/online_application" element={<MemberFormWrapper />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          {/* <Route path="/copy-right-policy" element={<TermsAndConditions />} /> */}
           {/* Member Panel Routings */}
           <Route path="/memberlogin" element={<MemberLogin />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -132,6 +135,7 @@ function MainApp() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/otpverification" element={<Otpverification />} />
           <Route path="/forgotPassword" element={<VerifyForgotPassword />} />
+          <Route path="/copy-right-policy" element={<CopyrightPolicy />} />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
@@ -247,6 +251,7 @@ function PopupAdminSelector() {
     "/online_application",
     "/privacy-policy",
     "/terms-conditions",
+    "/copy-right-policy",
   ];
 
   // Check if current route is in the allowedRoutes list

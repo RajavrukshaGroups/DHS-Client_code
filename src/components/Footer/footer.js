@@ -12,6 +12,7 @@ import {
   faMapMarkerAlt,
   faShieldAlt,
   faFileContract,
+  faCopyright, 
 } from "@fortawesome/free-solid-svg-icons";
 import "./footer.css"; // Custom CSS for additional styling
 
@@ -80,6 +81,10 @@ const Footer = () => {
               <br />
               <a href="/privacy-policy" className="footer-link">
                 <FontAwesomeIcon icon={faShieldAlt} /> Privacy Policy
+              </a>
+              <br />
+              <a href="/copy-right-policy" className="footer-link">
+                <FontAwesomeIcon icon={faCopyright} /> Copy Right Policy
               </a>
             </div>
           </div>
