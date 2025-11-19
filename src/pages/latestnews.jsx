@@ -34,140 +34,82 @@ const LatestNews = () => {
 
       <Card className="property-card-latest shadow-sm">
         <Card.Body>
-          <h2 className="ct">Latest News</h2>
-          <div className="title-divider"></div>
-          <div className="title-divider"></div>
+          <div className="latest-news-layout">
+            <div className="latest-news-left">
+              <h2 className="ct">Latest News</h2>
+              <div className="title-divider"></div>
+              <div className="title-divider"></div>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            Defence Habitat Marasandra - Rs.1,399/- sqft (Booking Closed)
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                Defence Habitat Marasandra - Rs.1,399/- sqft (Booking Closed)
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            Defence Habitat Tapasihalli - Rs.949/- sqft (Booking Closed)
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                Defence Habitat Tapasihalli - Rs.949/- sqft (Booking Closed)
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            Good News..!!! Applications for new membership are open now, Hurry
-            up! Contact us for more information.
-            <span className="latest-badge">New</span>
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                Good News..!!! Applications for new membership are open now, Hurry
+                up! Contact us for more information.
+                <span className="latest-badge">New</span>
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            Defence Habitat Marasandra Phase-2 has launched - Rs.1,399/- sqft
-            (Booking Opened)
-            <span className="latest-badge">New</span>
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                Defence Habitat Marasandra Phase-2 has launched - Rs.1,399/- sqft
+                (Booking Opened)
+                <span className="latest-badge">New</span>
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            Defence Habitat Tapasihalli Phase-2 has launched - Rs.1099/- sqft
-            (Booking Opened)
-            <span className="latest-badge">New</span>
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                Defence Habitat Tapasihalli Phase-2 has launched - Rs.1099/- sqft
+                (Booking Opened)
+                <span className="latest-badge">New</span>
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            DHS-Tapasihalli: DPA/BMRDA approval received{" "}
-            <a
-              href={siteapproval}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pdf-link"
-              style={{color:"blue"}}
-            >
-              (View Site Approval)
-            </a>
-            .
-          </h5>
+              <h5 className="custom-bullet latest-news-line">
+                DHS-Tapasihalli: DPA/BMRDA approval received{" "}
+                <a
+                  href={siteapproval}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pdf-link"
+                >
+                  (View Site Approval)
+                </a>
+                .
+              </h5>
 
-          <h5
-            className="custom-bullet"
-            style={{ marginTop: "15px", fontSize: "1rem" }}
-          >
-            With the launch of Phase 2, we are adding even more to our project,
-            and new amenities await our cherished members!
-          </h5>
-
-          {/* -------------------------
-              Press Coverage (Times Now - Property Focus)
-              ------------------------- */}
-          <div className="press-coverage" style={{ marginTop: "28px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                marginBottom: 8,
-              }}
-            >
-              <span style={{ fontSize: 12, color: "#888" }}>Featured in</span>
-              <strong style={{ fontSize: 14 }}>Times Now</strong>
-              <span style={{ fontSize: 12, color: "#888" }}>—</span>
-              <em style={{ fontSize: 13, color: "#444" }}>Property Focus</em>
+              <h5 className="custom-bullet latest-news-line">
+                With the launch of Phase 2, we are adding even more to our project,
+                and new amenities await our cherished members!
+              </h5>
             </div>
 
-            <div
-              className="press-content"
-              style={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "flex-start",
-                flexWrap: "wrap",
-              }}
-            >
-              {/* Left: text excerpt */}
-              <div style={{ flex: "1 1 360px", minWidth: 280 }}>
-                <p
-                  style={{
-                    whiteSpace: "pre-line",
-                    lineHeight: 1.6,
-                    color: "#222",
-                  }}
-                >
-                  {timesExpoText}
-                </p>
+            <div className="latest-news-right">
+              <div className="press-coverage">
+                <div className="press-meta">
+                  <span>Featured in</span>
+                  <strong>Times Now</strong>
+                  <span>—</span>
+                  <em>Property Focus</em>
+                </div>
 
-                {/* <p style={{ fontSize: 13, color: "#555", marginTop: 8 }}>
-                  <strong>Read more in:</strong> Times Now — Property Focus.
-                </p> */}
-              </div>
-
-              {/* Right: thumbnail image */}
-              <div style={{ width: 300, cursor: "pointer" }}>
-                <img
-                  src={timesexpo}
-                  alt="Times Now - Property Focus"
-                  className="img-fluid times-expo-thumb"
-                  onClick={() => setLightboxOpen(true)}
-                  style={{
-                    width: "100%",
-                    borderRadius: 6,
-                    boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
-                  }}
-                />
-                <p style={{ fontSize: "12px", color: "#666", marginTop: 8 }}>
-                  Click the image to view larger
-                </p>
+                <div className="press-content">
+                  <div className="press-stack">
+                    <p className="press-stack-text">{timesExpoText}</p>
+                    <div className="press-thumbnail" onClick={() => setLightboxOpen(true)}>
+                      <img
+                        src={timesexpo}
+                        alt="Times Now - Property Focus"
+                        className="img-fluid times-expo-thumb h-56 pl-6 pr-6 "
+                      />
+                      <p className="press-thumbnail-note">Click the image to view larger</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          {/* end press coverage */}
         </Card.Body>
       </Card>
 

@@ -19,7 +19,6 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
   });
   const [loading, setLoading] = useState(false);
   const popupRef = useRef(null);
-  const reopenTimerRef = useRef(null);
   const recaptchaRef = useRef();
   const [captchaValue, setCaptchaValue] = useState(null);
 
@@ -39,7 +38,6 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
 
     return () => {
       clearTimeout(timer);
-      clearTimeout(reopenTimerRef.current);
     };
   }, []);
 
@@ -49,18 +47,10 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
       setShowPopup(false);
       setIsClosing(false);
       setShowButton(true); // Show button after closing
-
-      // Set timer to reopen after 10 seconds
-      reopenTimerRef.current = setTimeout(() => {
-        setShowPopup(true);
-        setShowButton(false);
-      }, 10000);
     }, 500);
   };
 
   const handleButtonClick = () => {
-    // Clear any pending reopen timer when manually opening
-    clearTimeout(reopenTimerRef.current);
     setShowPopup(true);
     setShowButton(false);
   };
