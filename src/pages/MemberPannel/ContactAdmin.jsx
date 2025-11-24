@@ -26,7 +26,6 @@ const ContactAdmin = () => {
     setResponseStatus(null);
 
     try {
-      // const response = await axios.post(`http://localhost:5000/contactadmin`, {
       const response = await axios.post(
         `https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/dashboard-contact-admin`,
         {
@@ -35,6 +34,15 @@ const ContactAdmin = () => {
           message,
         }
       );
+
+      // const response = await axios.post(
+      //   `http://localhost:4000/defenceWebsiteRoutes/dashboard-contact-admin`,
+      //   {
+      //     seniorityId,
+      //     subject,
+      //     message,
+      //   }
+      // );
 
       setResponseMessage("Message sent successfully");
       setSubject("");

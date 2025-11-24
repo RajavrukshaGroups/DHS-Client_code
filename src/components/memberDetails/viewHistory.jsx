@@ -24,8 +24,7 @@ const ViewReceiptHistory = () => {
         // const response = await axios.get(
         //   `http://localhost:4000/member/get-member/${id}`
         // );
-        //http://localhost:4000
-        http: setTimeout(() => {
+        setTimeout(() => {
           setMemberData(response.data);
           setLoading(false);
         }, 500);
@@ -99,7 +98,6 @@ const ViewReceiptHistory = () => {
       await axios.delete(
         `https://adminpanel.defencehousingsociety.com/member/delete-member-receipt-payment/${membersData._id}`,
         // `http://localhost:4000/member/delete-member-receipt-payment/${membersData._id}`,
-        // http://localhost:4000
         {
           data: { paymentType, installmentNumber },
         }

@@ -55,13 +55,13 @@ return (
             <option value="online">Online</option>
             <option value="cheque">Cheque</option>
             {/* <option value="netbanking">Netbanking/UPI</option> */}
-            <option value="DD">DD</option>
+            <option value="dd">DD</option>
           </select>
           {formErrors.paymentMode && <p className="text-red-500 text-sm">{formErrors.paymentMode}</p>}
         </div>
 
         {/* Common Inputs for cheque, netbanking, DD */}
-        {(paymentMode === 'cheque' || paymentMode === 'netbanking' || paymentMode === 'DD') && (
+        {(paymentMode === 'cheque' || paymentMode === 'netbanking/upi' || paymentMode === 'dd') && (
           <>
             <div>
               <label className="block font-medium mb-1">Bank Name:</label>
@@ -91,7 +91,7 @@ return (
         )}
 
         {/* Amount for all modes */}
-         {(paymentMode === 'online' || paymentMode === 'cheque' || paymentMode === 'netbanking' || paymentMode === 'DD') && (
+         {(paymentMode === 'online' || paymentMode === 'cheque' || paymentMode === 'netbanking/upi' || paymentMode === 'dd') && (
           <>
             {/* Amount Input */}
             <div>
@@ -136,7 +136,7 @@ return (
           </div>
         )}
 
-        {paymentMode === 'netbanking' && (
+        {paymentMode === 'netbanking/upi' && (
           <div>
             <label className="block font-medium mb-1">Transaction ID:</label>
             <input
@@ -151,7 +151,7 @@ return (
           </div>
         )}
 
-        {paymentMode === 'DD' && (
+        {paymentMode === 'dd' && (
           <div>
             <label className="block font-medium mb-1">DD Number:</label>
             <input
