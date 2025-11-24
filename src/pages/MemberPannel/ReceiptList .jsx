@@ -113,7 +113,7 @@ const ReceiptList = () => {
     }
 
     const mapping = {
-      siteAdvance: "Site Advance",
+      siteadvance: "Site Advance",
       siteDownPayment: "Site Down Payment",
     };
 

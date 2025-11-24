@@ -84,7 +84,6 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
         // "http://localhost:4000/defenceWebsiteRoutes/contactus",
         {
-          // const res = await fetch("http://localhost:4000/defenceWebsiteRoutes/contactus", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

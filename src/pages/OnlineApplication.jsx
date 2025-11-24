@@ -210,8 +210,8 @@ const OnlineApplication = () => {
     // Fetch project names from API
     axios
       .get("https://adminpanel.defencehousingsociety.com/api/projectNames")
-    // axios
-    //   .get("http://localhost:4000/api/projectNames")
+      // axios
+      //   .get("http://localhost:4000/api/projectNames")
       .then((response) => {
         setProjectNames(response.data);
       })
