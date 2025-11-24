@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./MemberPannel_Styles/dashboard.css";
 import toast from "react-hot-toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import User from "../../images/user.png";
+import "./dashboard.css";
 const Dashboard = () => {
   const [userId, setUserid] = useState("");
   const [error, setError] = useState(null);
@@ -145,7 +149,14 @@ const Dashboard = () => {
                 className="user-photo"
               />
             ) : (
-              <p>No photo available</p>
+              // <p>No photo available</p>
+              // <FontAwesomeIcon icon={faUser} size="3x"/>
+              // <FontAwesomeIcon icon={faUser} style={{ fontSize: "48px" }} />
+              <img
+                src={User}
+                alt="Default User"
+                className="default-user-photo"
+              />
             )}
 
             <p>

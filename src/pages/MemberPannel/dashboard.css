@@ -1,0 +1,16 @@
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* horizontal center */
+  justify-content: center; /* vertical center (if needed) */
+  text-align: center;
+}
+
+.default-user-photo {
+  width: 280px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0.9;
+  margin-bottom: 15px; /* adds spacing below image */
+}

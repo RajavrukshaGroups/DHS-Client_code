@@ -155,7 +155,7 @@ const ReceiptList = () => {
               let transactionDetails = "-";
               const mode = receipt.paymentMode?.toLowerCase();
 
-              if (mode === "netbanking") {
+              if (mode === "netbanking/upi") {
                 transactionDetails = receipt.transactionId || "-";
               } else if (mode === "cheque") {
                 transactionDetails = receipt.chequeNumber || "-";

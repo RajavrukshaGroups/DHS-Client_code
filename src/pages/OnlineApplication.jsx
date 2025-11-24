@@ -210,8 +210,8 @@ const OnlineApplication = () => {
     // Fetch project names from API
     axios
       .get("https://adminpanel.defencehousingsociety.com/api/projectNames")
-      // axios
-      //   .get("http://localhost:4000/api/projectNames")
+    // axios
+    //   .get("http://localhost:4000/api/projectNames")
       .then((response) => {
         setProjectNames(response.data);
       })
@@ -314,6 +314,8 @@ const OnlineApplication = () => {
       try {
         const response = await axios.post(
           "https://adminpanel.defencehousingsociety.com/api/verify-otp-and-submit",
+          // "http://localhost:4000/api/verify-otp-and-submit",
+
           { formId, otp }
         );
         // const response = await axios.post('http://localhost:5000/api/verify-otp-and-submit', { formId, otp });
@@ -388,6 +390,7 @@ const OnlineApplication = () => {
 
       const response = await axios.post(
         "https://adminpanel.defencehousingsociety.com/api/submit",
+        // "http://localhost:4000/api/submit",
         formData
       );
       // const response = await axios.post('http://localhost:5000/api/submit', formData);
@@ -982,7 +985,7 @@ const OnlineApplication = () => {
                           <option value="" disabled>
                             Select payment mode
                           </option>
-                          <option value="DD">DD</option>
+                          <option value="dd">DD</option>
                           <option value="Cheque">Cheque</option>
                           <option value="Online">Online</option>
                         </Form.Control>
