@@ -249,12 +249,9 @@ const MemberFormWrapper = () => {
           email: formData.email,
         }
       );
-      // await axios.post(
-      //   "http://localhost:4000/defenceWebsiteRoutes/send-otp",
-      //   {
-      //     email: formData.email,
-      //   }
-      // );
+      // await axios.post("http://localhost:4000/defenceWebsiteRoutes/send-otp", {
+      //   email: formData.email,
+      // });
       navigate("/otpverification", {
         state: { formData, memberPhoto, memberSign },
       });

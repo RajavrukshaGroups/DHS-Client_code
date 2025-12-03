@@ -80,12 +80,6 @@ const ViewReceiptHistory = () => {
     );
   }
 
-  // const handleViewReceipt = (receiptId, paymentType, installmentNumber) => {
-  //   const url = `http://localhost:3000/receipt/get-receipt-details/${receiptId}?paymentType=${paymentType}${
-  //     installmentNumber ? `&installmentNumber=${installmentNumber}` : ""
-  //   }`;
-  //   window.open(url, "_blank");
-  // };
   const handleViewReceipt = (receiptId, paymentId) => {
     const url = `https://adminpanel.defencehousingsociety.com/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
     // const url = `http://localhost:4000/receipt/get-receipt-details/${receiptId}?paymentId=${paymentId}`;
