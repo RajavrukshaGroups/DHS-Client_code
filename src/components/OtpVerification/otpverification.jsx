@@ -30,9 +30,7 @@ function Otpverification() {
     try {
       setResendLoading(true);
       setError("");
-      // const res = await axios.post("http://localhost:4000/defenceWebsiteRoutes/resend-otp", {
-      //   email: formData.email,
-      // });
+
       const res = await axios.post(
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/resend-otp",
         // "http://localhost:4000/defenceWebsiteRoutes/resend-otp",

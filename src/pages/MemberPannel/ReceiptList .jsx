@@ -114,7 +114,8 @@ const ReceiptList = () => {
 
     const mapping = {
       siteadvance: "Site Advance",
-      siteDownPayment: "Site Down Payment",
+      // siteDownPayment: "Site Down Payment",
+      sitedownpayment: "Site Down Payment",
     };
 
     return mapping[type] || type;

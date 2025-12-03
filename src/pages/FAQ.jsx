@@ -227,7 +227,6 @@ const FAQ = () => {
         // "https://memberpanel.defencehousingsociety.com/contact",
         "https://adminpanel.defencehousingsociety.com/defenceWebsiteRoutes/contactus",
         // "http://localhost:4000/defenceWebsiteRoutes/contactus",
-
         {
           // Adjust the endpoint URL as needed
           method: "POST",
