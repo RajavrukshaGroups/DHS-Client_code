@@ -49,13 +49,13 @@ const Footer = () => {
                 +91-8884 735 735{" "}
               </a>
             </p>
-            <p style={{ marginTop: "1rem", color: "white" }}>
+            {/* <p style={{ marginTop: "1rem", color: "white" }}>
               <FontAwesomeIcon icon={faPhone} />{" "}
               <a href="tel:+918884735735" style={{ color: "white" }}>
                 {" "}
                 +91 8188 992 266{" "}
               </a>
-            </p>
+            </p> */}
             <p style={{ marginTop: "1rem", color: "white" }}>
               <FontAwesomeIcon icon={faEnvelope} />{" "}
               <a
