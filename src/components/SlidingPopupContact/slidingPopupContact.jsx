@@ -31,7 +31,26 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
   };
 
   // Auto-show popup on initial load
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowPopup(true);
+  //   }, 3000);
+
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
+
   useEffect(() => {
+    const dismissed = localStorage.getItem("contactPopupDismissed");
+
+    // If user already closed popup before
+    if (dismissed === "true") {
+      setShowPopup(false);
+      setShowButton(true);
+      return;
+    }
+
     const timer = setTimeout(() => {
       setShowPopup(true);
     }, 3000);
@@ -43,6 +62,10 @@ const ContactFormPopup = ({ isGoogleAds = false }) => {
 
   const handleClose = () => {
     setIsClosing(true);
+
+    // Save dismissal across pages
+    localStorage.setItem("contactPopupDismissed", "true");
+
     setTimeout(() => {
       setShowPopup(false);
       setIsClosing(false);
