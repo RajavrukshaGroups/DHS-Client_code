@@ -261,7 +261,7 @@ const Home = () => {
                             Defence Habitat Tapasihalli{" "}
                             <span className="squarefit">
                               <span style={{ fontSize: "16px" }}>Rs.</span>
-                              1099
+                              1399
                               <span style={{ fontSize: "16px" }}>/-sqft*</span>
                             </span>
                             <p className="booking-text blink">
@@ -324,7 +324,7 @@ const Home = () => {
                               Defence Habitat Marasandra{" "}
                               <span className="squarefit">
                                 <span style={{ fontSize: "16px" }}>Rs.</span>
-                                1399
+                                1699
                                 <span style={{ fontSize: "16px" }}>
                                   /-sqft*{" "}
                                 </span>
