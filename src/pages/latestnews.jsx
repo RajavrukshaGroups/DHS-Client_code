@@ -45,24 +45,24 @@ const LatestNews = () => {
               </h5>
 
               <h5 className="custom-bullet latest-news-line">
-                Defence Habitat Tapasihalli - Rs.949/- sqft (Booking Closed)
+                Defence Habitat Tapasihalli - Rs.1099/- sqft (Booking Closed)
               </h5>
 
               <h5 className="custom-bullet latest-news-line">
-                Good News..!!! Applications for new membership are open now, Hurry
-                up! Contact us for more information.
+                Good News..!!! Applications for new membership are open now,
+                Hurry up! Contact us for more information.
                 <span className="latest-badge">New</span>
               </h5>
 
               <h5 className="custom-bullet latest-news-line">
-                Defence Habitat Marasandra Phase-2 has launched - Rs.1,399/- sqft
-                (Booking Opened)
+                Defence Habitat Marasandra Phase-2 has launched - Rs.1,699/-
+                sqft (Booking Opened)
                 <span className="latest-badge">New</span>
               </h5>
 
               <h5 className="custom-bullet latest-news-line">
-                Defence Habitat Tapasihalli Phase-2 has launched - Rs.1099/- sqft
-                (Booking Opened)
+                Defence Habitat Tapasihalli Phase-2 has launched - Rs.1399/-
+                sqft (Booking Opened)
                 <span className="latest-badge">New</span>
               </h5>
 
@@ -80,8 +80,8 @@ const LatestNews = () => {
               </h5>
 
               <h5 className="custom-bullet latest-news-line">
-                With the launch of Phase 2, we are adding even more to our project,
-                and new amenities await our cherished members!
+                With the launch of Phase 2, we are adding even more to our
+                project, and new amenities await our cherished members!
               </h5>
             </div>
 
@@ -97,13 +97,18 @@ const LatestNews = () => {
                 <div className="press-content">
                   <div className="press-stack">
                     <p className="press-stack-text">{timesExpoText}</p>
-                    <div className="press-thumbnail" onClick={() => setLightboxOpen(true)}>
+                    <div
+                      className="press-thumbnail"
+                      onClick={() => setLightboxOpen(true)}
+                    >
                       <img
                         src={timesexpo}
                         alt="Times Now - Property Focus"
                         className="img-fluid times-expo-thumb h-56 pl-6 pr-6 "
                       />
-                      <p className="press-thumbnail-note">Click the image to view larger</p>
+                      <p className="press-thumbnail-note">
+                        Click the image to view larger
+                      </p>
                     </div>
                   </div>
                 </div>
