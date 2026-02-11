@@ -69,6 +69,7 @@ const ContactForm = ({ onFormSubmit }) => {
         subject: "Google Ads Lead", // Explicitly set subject
         source: "google_ads", // Explicitly set source
         location: "Google Ads Campaign", // Add location if needed
+        acceptTerms: true,
       };
 
       console.log("Sending payload:", payload); // Debug log
@@ -82,7 +83,7 @@ const ContactForm = ({ onFormSubmit }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ ...payload, captchaValue }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -104,7 +105,7 @@ const ContactForm = ({ onFormSubmit }) => {
             phone: formData.phone,
             comments: formData.message,
           }),
-        }
+        },
       );
 
       if (!crmResponse.ok) {
